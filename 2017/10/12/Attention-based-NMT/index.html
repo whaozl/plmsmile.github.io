@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Attention-based NMT 阅读笔记 | PLM&#39;s Notes | 好好学习，天天笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="论文笔记,Attention,自然语言处理,深度学习">
+    <meta name="description" content="Effective Approaches to Attention-based Neural Machine Translation  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时">
+<meta name="keywords" content="论文笔记,Attention,自然语言处理,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attention-based NMT 阅读笔记">
+<meta property="og:url" content="http://plmsmile.github.io/2017/10/12/Attention-based-NMT/index.html">
+<meta property="og:site_name" content="PLM&#39;s Notes">
+<meta property="og:description" content="Effective Approaches to Attention-based Neural Machine Translation  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时，都选择关注所有的单词。和Bahdanau的方式 有点相似，但是更简单些。简">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/01-encoder-decoder-n">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/01_nmt.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/02_global_attention.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/03_local_attention.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/04_input_feed.png">
+<meta property="og:updated_time" content="2017-10-15T02:52:44.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Attention-based NMT 阅读笔记">
+<meta name="twitter:description" content="Effective Approaches to Attention-based Neural Machine Translation  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时，都选择关注所有的单词。和Bahdanau的方式 有点相似，但是更简单些。简">
+<meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/01-encoder-decoder-n">
+    
+        <link rel="alternate" type="application/atom+xml" title="PLM&#39;s Notes" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="https://plmsmile.github.io/about" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">PLM</h5>
+          <a href="mailto:plmsmile@126.com" title="plmsmile@126.com" class="mail">plmsmile@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/plmsmile" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Attention-based NMT 阅读笔记</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Attention-based NMT 阅读笔记</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-12T08:12:39.000Z" itemprop="datePublished" class="page-time">
+  2017-10-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#attention介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Attention介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用范围"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">应用范围</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经机器翻译"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经机器翻译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思想"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概率计算"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">概率计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本论文的模型"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">本论文的模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#注意力模型"><span class="post-toc-number">3.</span> <span class="post-toc-text">注意力模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#global-attention"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Global Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#local-attention"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Local Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#input-feeding"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Input-feeding</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#pytorch实现global"><span class="post-toc-number">4.</span> <span class="post-toc-text">PyTorch实现Global</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算对齐向量"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">计算对齐向量</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Attention-based-NMT"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Attention-based NMT 阅读笔记</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-12 16:12:39" datetime="2017-10-12T08:12:39.000Z"  itemprop="datePublished">2017-10-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p><a href="https://arxiv.org/pdf/1508.04025.pdf" target="_blank" rel="noopener">Effective Approaches to Attention-based Neural Machine Translation</a></p>
+</blockquote>
+<h1 id="简介">简介</h1>
+<p><img src="" style="display:block; margin:auto" width="70%"></p>
+<h2 id="attention介绍">Attention介绍</h2>
+<p>在翻译的时候，选择性的选择一些重要信息。<a href="https://plmsmile.github.io/2017/10/10/attention-model/">详情看这篇文章</a> 。</p>
+<p>本着简单和有效的原则，本论文提出了两种<code>注意力机制</code>。</p>
+<p><strong>Global</strong></p>
+<p>每次翻译时，都选择关注所有的单词。和<a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Bahdanau的方式</a> 有点相似，但是更简单些。<a href="https://plmsmile.github.io/2017/10/10/attention-model/#思想">简单原理介绍</a>。</p>
+<p><strong>Local</strong></p>
+<p>每次翻译时，只选择关注一部分的单词。介于soft和hard注意力之间。(soft和hard见别的论文)。</p>
+<p>优点有下面几个</p>
+<ul>
+<li>比Global和Soft<strong>更好计算</strong></li>
+<li>局部注意力 随处可见、可微，<strong>更好实现和训练</strong>。</li>
+</ul>
+<h2 id="应用范围">应用范围</h2>
+<p>在训练神经网络的时候，注意力机制应用十分广泛。让模型在不同的形式之间，学习<strong>对齐</strong>等等。有下面一些领域：</p>
+<ul>
+<li>机器翻译</li>
+<li>语音识别</li>
+<li>图片描述</li>
+<li>between image objects and agent actions in the dynamic control problem (不懂，以后再说吧)</li>
+</ul>
+<h1 id="神经机器翻译">神经机器翻译</h1>
+<h2 id="思想">思想</h2>
+<p>输入句子<span class="math inline">\(x = (x_1, x_2, \cdots, x_n)\)</span> ，输出目标句子<span class="math inline">\(y = (y_1, y_2, \cdots, y_m)\)</span> 。</p>
+<p>神经机器翻译(Neural machine translation, NMT)，利用神经网络，直接对<span class="math inline">\(\color{blue} {p(y \mid x)}\)</span> 进行建模。一般由Encoder和Decoder构成。<a href="https://plmsmile.github.io/2017/10/10/attention-model/#encoder-decoder">Encoder-Decoder介绍文章链接</a> 。</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/01-encoder-decoder-n" style="display:block; margin:auto" width="70%"></p>
+<p>Encoder把输入句子<span class="math inline">\(x\)</span> 编码成一个<strong>语义向量<span class="math inline">\(s\)</span></strong> (c表示也可以)，然后由Decoder 一个一个产生目标单词 <span class="math inline">\(y_i\)</span> <span class="math display">\[
+\log p(y \mid x) 
+= \sum_{j=1}^m \log \color{red} {p(y_j \mid y _{&lt;j}, s) }
+=  \sum_{j=1}^m \log p(y_j \mid y_1, \cdots, y_{j-1}, s)
+\]</span> 但是怎么选择Encoder和Decoder（RNN, CNN, GRU, LSTM），怎么去生成语义<span class="math inline">\(s\)</span>却有很多选择。</p>
+<h2 id="概率计算">概率计算</h2>
+<p>结合Dncoder上一时刻的隐状态<span class="math inline">\(\color{blue}{h_{j-1}}\)</span>和encoder给的语义向量<span class="math inline">\(\color{blue}{s}\)</span>，通过函数<span class="math inline">\(\color{blue}{f}\)</span> ，就可以计算出<strong>当前的隐状态</strong><span class="math inline">\(\color{blue}{h_j}\)</span> ： <span class="math display">\[
+h_j = f(h_{j-1}, s)
+\]</span> 通过<strong>函数</strong><span class="math inline">\(\color{blue}{g}\)</span>对当前隐状态<strong><span class="math inline">\(h_j\)</span>进行转换</strong>，再<code>softmax</code>，就可以得到翻译的目标单词<span class="math inline">\(y_i\)</span>了（选概率最大的那个）。</p>
+<p><span class="math inline">\(g\)</span>一般是<strong>线性变换</strong>，维数变化是<span class="math inline">\([1, h] \to [1, vocab\_size]\)</span>。 <span class="math display">\[
+p(y_j \mid y _{&lt;j}, s) =  \mathrm{softmax}  \; g(h_j)
+\]</span> <strong>语义向量<span class="math inline">\(s​\)</span> 会贯穿整个翻译的过程，每一步翻译都会使用到语义向量的内容</strong>，这就是<code>注意力机制</code>。</p>
+<h2 id="本论文的模型">本论文的模型</h2>
+<p>本论文采用stack LSTM的构建NMT系统。如下所示：</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/image/paper/01_nmt.png" style="display:block; margin:auto" width="60%"></p>
+<p>训练目标是 <span class="math display">\[
+J_t = \sum_{(x, y)} - \log p(y \mid x)
+\]</span></p>
+<h1 id="注意力模型">注意力模型</h1>
+<p>注意力模型广义上分为<code>global</code>和<code>local</code>。Global的attention来自于整个序列，而local的只来自于序列的一部分。</p>
+<p><strong>解码总体流程</strong></p>
+<p>Decoder时，在时刻<span class="math inline">\(t\)</span>，要翻译出单词<span class="math inline">\(y_t\)</span> ，如下步骤：</p>
+<ul>
+<li>最顶层<strong>LSTM的隐状态 <span class="math inline">\(h_t\)</span></strong></li>
+<li>计算带有原句子信息<strong>语义向量<span class="math inline">\(c_t\)</span></strong>。Global和Local的区别在于<span class="math inline">\(c_t\)</span>的计算方式不同</li>
+<li><strong>串联<span class="math inline">\(h_t, c_t\)</span></strong>，计算得到带有<strong>注意力的隐状态</strong> <span class="math inline">\(\hat {h}_t = \tanh (W_c [c_t; h_t])\)</span></li>
+<li>通过注意力隐状态得到预测概率 <span class="math inline">\(p(y_t \mid y_{&lt;t}, x) = \rm {softmax} (W_s \hat h _t)\)</span></li>
+</ul>
+<h2 id="global-attention">Global Attention</h2>
+<p><strong>总体思路</strong></p>
+<p>在计算<span class="math inline">\(c_t\)</span> 的时候，<strong>会考虑整个encoder的隐状态</strong>。Decoder当前隐状态<span class="math inline">\(h_t\)</span>， Encoder时刻s的隐状态<span class="math inline">\(\bar h _s\)</span>。</p>
+<p><strong>对齐向量</strong><span class="math inline">\(\color{blue}{\alpha_t}\)</span>代表时刻<span class="math inline">\(t\)</span> <strong>输入序列中的单词对当前单词<span class="math inline">\(y_t\)</span> 的对齐概率</strong>，长度是<span class="math inline">\(T_x\)</span>， 随着输入句子的长度而改变 。<span class="math inline">\(x_s\)</span>与<span class="math inline">\(y_t\)</span> 的对齐概率如下： <span class="math display">\[
+\alpha_t(s) = \mathrm {align} (h_t, \bar h_s) = \frac {score(h_t, \bar h_s)}{ \sum_{i=1}^{T_x} score(h_t, \bar h_i)}, \quad 实际上\mathrm{softmax}
+\]</span> 结合上面的解码总体流程，有下面的流程 <span class="math display">\[
+all (\bar h_s) ,  h_t \to \alpha_t \to c_t . \quad 
+c_t , h_t \to \hat h_t .\quad 
+\hat h_t \to y_t \quad
+\]</span> 简单来说是<span class="math inline">\(h_t \to \alpha_t \to c_t \to \hat h_t \to y_t\)</span> 。</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/image/paper/02_global_attention.png" style="display:block; margin:auto" width="50%"></p>
+<p><strong>score计算</strong></p>
+<p><span class="math inline">\(score(h_t, \bar h_s)\)</span> 是一种基于内容<code>content-based</code>的函数，有3种实现方式 <span class="math display">\[
+\color{blue}{score(h_t, \bar h_s)} = 
+\begin{cases}
+h_t^T \bar h_s &amp; dot \\
+h_t^T W_a \bar h_s  &amp; general \\
+v_a^T \tanh (W_a [h_t; \bar h_s]) &amp; concat \\
+\end{cases}
+\]</span> <strong>缺点</strong></p>
+<p>生成每个目标单词的时候，都<strong>必须注意所有的原单词</strong>， 这样<strong>计算量很大</strong>，<strong>翻译长序列可能很难</strong>，比如段落或者文章。</p>
+<h2 id="local-attention">Local Attention</h2>
+<p>在生成目标单词的时候，Local会选择性地关注一小部分原单词去计算<span class="math inline">\(\alpha_t, c_t\)</span>，这样就解决了Global的问题。如下图</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/image/paper/03_local_attention.png" style="display:block; margin:auto" width="50%"></p>
+<p><strong>Soft和Hard注意</strong></p>
+<p><code>Soft 注意</code> ：类似global注意，权值会放在图片的所有patches中。计算复杂。</p>
+<p><code>Hard 注意</code>： 不同时刻，会选择不同的patch。虽然计算少，但是<strong>non-differentiable</strong>，并且需要复杂的技术去训练模型，比如方差减少和强化学习。</p>
+<p><strong>Local注意</strong></p>
+<p>类似于滑动窗口，计算一个<strong>对齐位置</strong><span class="math inline">\(\color{blue}{p_t}\)</span>，<strong>根据经验</strong>设置<strong>窗口大小</strong><span class="math inline">\(D\)</span>，那么需要注意的源单词序列是 ： <span class="math display">\[
+[p_t -D, p_t + D]
+\]</span> <span class="math inline">\(\alpha_t\)</span> 的长度就是<span class="math inline">\(2D\)</span>，只需要选择这<span class="math inline">\(2D\)</span>个单词进行注意力计算，而不是Global的整个序列。</p>
+<p><strong>对齐位置选择</strong></p>
+<p>对齐位置的选择就很重要，主要有两种办法。</p>
+<p>local-m (monotonic) 设置位置， 即以当前单词位置作为对齐位置 <span class="math display">\[
+p_t = t
+\]</span> local-p (predictive) 预测位置</p>
+<p><span class="math inline">\(S\)</span> 是输入句子的长度，预测对齐位置如下 <span class="math display">\[
+p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
+\quad p_t \in [0, S]
+\]</span> <strong>对齐向量计算</strong></p>
+<p><strong><span class="math inline">\(\alpha_t\)</span>的长度就是<span class="math inline">\(2D\)</span></strong>，对于每一个<span class="math inline">\(s \in [p_t -D, p_t + D]\)</span>， 为了更好地对齐，添加一个正态分布<span class="math inline">\(N(\mu, \sigma ^2)\)</span>，其中 <span class="math inline">\(\mu = p_t, \sigma = \frac{D}{2}\)</span>。</p>
+<p>计算对齐概率： <span class="math display">\[
+\alpha_t(s) = 
+\mathrm{align} (h_t, \bar h_s)
+\exp \left( - \frac{(s - \mu)^2}{2\sigma^2}\right)
+= 
+\mathrm{align} (h_t, \bar h_s)
+\exp \left( - \frac{2(s - p_t)^2}{D^2}\right)
+\]</span></p>
+<h2 id="input-feeding">Input-feeding</h2>
+<p>前面的Global和Local两种方式中，在每一步的时候，计算每一个attention (实际上是指 <span class="math inline">\(\hat h_t\)</span>)，都是独立的，这样只是<strong>次最优的</strong>。</p>
+<p>在每一步的计算中，<strong>这些attention应该有所关联，当前知道之前的attention才对</strong>。实际是应该有个<code>coverage set</code>去追踪之前的信息。</p>
+<p>我们会把当前的注意<span class="math inline">\(\hat h_t\)</span> 作为下一次的输入，并且做一个<strong>串联</strong>，来计算新的attention，如下图所示</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/image/paper/04_input_feed.png" style="display:block; margin:auto" width="50%"></p>
+<p>这样有两重意义：</p>
+<ul>
+<li>模型会知道之前的对齐选择</li>
+<li>会建立一个水平和垂直都很深的网络</li>
+</ul>
+<h1 id="pytorch实现global">PyTorch实现Global</h1>
+<h2 id="计算对齐向量">计算对齐向量</h2>
+<p><strong>初始化参数</strong></p>
+<ul>
+<li>score_type: 计算score的方法</li>
+<li>hidden_size: Encoder和Decoder的hidden_size</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, score_type, hidden_size)</span>:</span></span><br><span class="line">       <span class="string">'''</span></span><br><span class="line"><span class="string">       Args:</span></span><br><span class="line"><span class="string">           score_type: 计算score的方法，'dot', 'general', 'concat'</span></span><br><span class="line"><span class="string">           hidden_size: Encoder和Decoder的hidden_size</span></span><br><span class="line"><span class="string">       '''</span></span><br><span class="line">       super(Attn, self).__init__()</span><br><span class="line">       </span><br><span class="line">       self.score_type = score_type</span><br><span class="line">       self.hidden_size = hidden_size</span><br><span class="line">       self.max_length = max_length</span><br><span class="line">       <span class="keyword">if</span> score_type == <span class="string">'general'</span>:</span><br><span class="line">           self.attn = nn.Linear(hidden_size, hidden_size)</span><br><span class="line">       <span class="keyword">elif</span> score_type == <span class="string">'concat'</span>:</span><br><span class="line">           self.attn = nn.Linear(hidden_size * <span class="number">2</span>, hidden_size)</span><br><span class="line">           self.other = nn.Parameter(torch.FloatTensor(<span class="number">1</span>, hidden_size))</span><br></pre></td></tr></table></figure>
+<p><strong>计算score</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, hidden, encoder_output)</span>:</span></span><br><span class="line">       <span class="string">''' 计算Decoder中LSTM的ht与Encoder中的hs的得分，便于后面算对齐概率</span></span><br><span class="line"><span class="string">       Args:</span></span><br><span class="line"><span class="string">           hidden: Decoder中最顶层LSTM的隐状态，h_de_t，[1, h_size]</span></span><br><span class="line"><span class="string">           encoder_output: Encoder某时刻的隐状态，h_en_s，[1, h_size]</span></span><br><span class="line"><span class="string">       Returns:</span></span><br><span class="line"><span class="string">           energy: d_ht与e_hs的得分，即Yt与Xs的得分</span></span><br><span class="line"><span class="string">       '''</span></span><br><span class="line">       <span class="keyword">if</span> self.score_type == <span class="string">'dot'</span>:</span><br><span class="line">           energy = hidden.dot(encoder_output)</span><br><span class="line">       <span class="keyword">elif</span> self.score_type == <span class="string">'general'</span>:</span><br><span class="line">           energy = self.attn(encoder_output)</span><br><span class="line">           energy = hidden.dot(energy)</span><br><span class="line">       <span class="keyword">elif</span> self.score_type == <span class="string">'concat'</span>:</span><br><span class="line">           h_o = torch.cat((hidden, encoder_output), <span class="number">1</span>)</span><br><span class="line">           energy = self.attn(h_o)</span><br><span class="line">           energy = self.other.dot(energy)</span><br><span class="line">       <span class="keyword">return</span> energy</span><br></pre></td></tr></table></figure>
+<p><strong>前向计算</strong></p>
+<p>实际就是对所有的打分结果进行<code>softmax</code> 得到对齐向量，也成为<strong>注意力权值</strong>，<code>attn_weights</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, hidden, encoder_outputs)</span>:</span></span><br><span class="line">    <span class="string">''' 时刻t，计算对齐向量</span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">            hidden: Top LSTM的隐状态</span></span><br><span class="line"><span class="string">            encoder_outputs: Encoder的所有隐状态, len=Tx输入句子长度</span></span><br><span class="line"><span class="string">        Returns:</span></span><br><span class="line"><span class="string">            align_vec: 当前ht与所有encoder_outputs的对齐向量，alpha_t，len=Tx，返回[1, 1, seq_len]格式</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">    seq_len = len(encoder_outputs)</span><br><span class="line">    attn_energies = get_variable(torch.zeros(seq_len))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">        attn_energies[i] = self.score(hidden, encoder_outputs[i])</span><br><span class="line">        <span class="comment"># normalize [0, 1], resize to [1, 1, seq_len]</span></span><br><span class="line">        align_vec = F.softmax(attn_energies)</span><br><span class="line">        align_vec = align_vec.unsqueeze(<span class="number">0</span>).unsqueeze(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> align_vec</span><br></pre></td></tr></table></figure>
+<p><strong>Decoder网络</strong></p>
+<p>参数</p>
+<p>hidden_size: Embedding和GRU的hidden_size</p>
+<pre><code>    output_size: 输出的size，是目标语言的词典大小
+    score_type: &#39;dot&#39;, &#39;general&#39;, &#39;concat&#39;
+    n_layers: GRU的层数
+    dropout_p: dropout</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">''' init</span></span><br><span class="line"><span class="string">Args:</span></span><br><span class="line"><span class="string">           </span></span><br><span class="line"><span class="string">        '''</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-10-15T02:52:44.131Z" itemprop="dateUpdated">2017-10-15 10:52:44</time>
+</span><br>
+
+
+        
+        <br>原始链接：<a href="/2017/10/12/Attention-based-NMT/" target="_blank" rel="external">http://plmsmile.github.io/2017/10/12/Attention-based-NMT/</a>
+        
+    </div>
+    <footer>
+        <a href="http://plmsmile.github.io">
+            <img src="/img/avatar.jpg" alt="PLM">
+            PLM
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Attention-based NMT 阅读笔记》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&via=http://plmsmile.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/10/16/tips/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">那些年折磨过的问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/10/attention-model/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">自然语言处理中的Attention Model</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>PLM &copy; 2016 - 2017</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Attention-based NMT 阅读笔记》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&via=http://plmsmile.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3aQW7DMAwFUd//0i7QVYFC9nzSKWpqtDKCONLTgiEpHQce5/f4+Zx+svrN9K3WkCFDxmsZ5+X4zbh+l38/3bLVXDJkyNiHkQbZ61+obUG6HTJkyJDRWQpZaH9eGTJkyCALImlimizKkCFDRqeI5Z93NuXjtbgMGTJeyKgdDPzN88fPN2TIkPHvGWc4+K91mmvxqmTIkDGaQdr6vBHWL0f5NY4jPZ2QIUPGyxlpxsWvdtWuhZEgHmBkyJAxjsHDZdoge6rORqmqDBkyBjFqqVhaXnZmQc8yZMjYgFELozwRfOqt5bsyZMgYzeAhlZe1PEEk5XFQysqQIWMoIy1Z07SPt9vScnf5vyFDhoxxDP5C58iTH2R2ymAZMmRMZfCGV3oxon/AwItqGTJk7MCoBTu+lOAEFYf75RGmDBkyhjI6aRyfkjTX+Hpu/jdkyJAxiMEvYPGJU1j/UFOGDBmzGekiUvyzxfAycZQhQ8ZoRhpYi5Ebl6O1Fp4MGTJmM0gqVitTrwMrmRE12mTIkLENgzfR0oD7VNp307aTIUPGaEZadvI0sdaeq22NDBkyZjPOcPAC9TrV49c70MUOGTJkjGbUmmX8uX8VrHYdRIYMGfMYJMimpWxnR4MzjTR7lSFDxssZvOFVa889Vb7eXLaQIUPG9oxOV6/f1LtJN2XIkCGjlMx1GPGxhAwZMjZg8GZ9WkV2gnjxjpsMGTLGMWrN+s71i/Ros7atMmTIGMH4AnZhiYdYYhWNAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.0"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.0" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
