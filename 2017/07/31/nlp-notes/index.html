@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="语言模型 二元语法$ $ 对于一个句子\(s=w_1 \cdots w_n\)，近似认为一个词的概率只依赖于它前面的1个词。即一个状态只跟上一个状态有关，也称为一阶马尔科夫链。 \[ \color{blue}{p(s)}=p(w_1)p(w_2|w_1)p(w_3|w_2) \cdots p(w_n|w_{l-1})= \color {red} {\prod_{i=1}^l {p(w_i|">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-22T07:13:04.688Z">
+<meta property="og:updated_time" content="2017-11-27T03:14:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="语言模型和平滑方法">
 <meta name="twitter:description" content="语言模型 二元语法$ $ 对于一个句子\(s=w_1 \cdots w_n\)，近似认为一个词的概率只依赖于它前面的1个词。即一个状态只跟上一个状态有关，也称为一阶马尔科夫链。 \[ \color{blue}{p(s)}=p(w_1)p(w_2|w_1)p(w_3|w_2) \cdots p(w_n|w_{l-1})= \color {red} {\prod_{i=1}^l {p(w_i|">
@@ -255,7 +255,7 @@
 \]</span> 其中可以推导出：<span class="math inline">\(H(X, Y) = H(X) + H(Y \mid X)\)</span>。</p>
 <h2 id="相对熵和交叉熵">相对熵和交叉熵</h2>
 <p><strong>相对熵</strong></p>
-<p>随机变量<span class="math inline">\(X\)</span>的状态空间<span class="math inline">\(\Omega {x}\)</span>上有两个概率分布<span class="math inline">\(p(x)\)</span>和<span class="math inline">\(q(x)\)</span>。相对熵</p>
+<p>随机变量<span class="math inline">\(X\)</span>的状态空间<span class="math inline">\(\Omega {x}\)</span>上有两个概率分布<span class="math inline">\(p(x)\)</span>和<span class="math inline">\(q(x)\)</span>。一般p是<code>真实分布</code>，q是<code>预测分布</code>。</p>
 <p><strong>相对熵</strong>也称为<code>KL距离</code>，用来衡量相同事件空间里<strong>两个概率分布的差异</strong>。</p>
 <p><span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>的<strong>相对熵</strong><span class="math inline">\(\color{blue}{D(p\mid\mid q)}\)</span>用来度量<strong>它们之间的差异</strong>，如下 <span class="math display">\[
 \color{blue}{D(p\mid\mid q)}
@@ -263,11 +263,11 @@
 = E_p(\log \frac{p(X)}{q(X)}) \; (期望)
 \]</span> 特别地，若<span class="math inline">\(p==q\)</span>，则相对熵为0；若差别增加，相对熵的值也增加。简单理解“相对”如下： <span class="math display">\[
 D(p \mid\mid q)=\sum_{x \in X}{p(x)(\log p(x) - \log q(x))}
-= \underbrace{\left(-\sum_{x \in X}{ \color{red}{p(x)\log q(x)}}\right)}_{\color {red}{以q去近似p的熵}} - \underbrace{\left(-\sum_{x \in X} {\color{red}{p(x)\log p(x)}}\right)}_{\color{red} {p本身的熵}}
+= \underbrace{\left(-\sum_{x \in X}{ \color{red}{p(x)\log q(x)}}\right)}_{\color {red}{以q去近似p的熵=交叉熵}} - \underbrace{\left(-\sum_{x \in X} {\color{red}{p(x)\log p(x)}}\right)}_{\color{red} {p本身的熵}}
 \]</span> <strong>交叉熵</strong></p>
 <p>交叉熵用来衡量<strong>估计模型与真实概率分布之间的差异。</strong></p>
-<p>随机变量<span class="math inline">\(X \sim p(x)\)</span>，<span class="math inline">\(q(x)\)</span>近似于<span class="math inline">\(p(x)\)</span>。 则随机变量<span class="math inline">\(X\)</span>和模型<span class="math inline">\(q\)</span>之间的<strong>交叉熵</strong><span class="math inline">\(\color {blue} {H(X, q)}\)</span>如下： <span class="math display">\[
-\color {blue} {H(X, q)} = H(X) + D(p \mid\mid q) = \color {red} {-\sum_{x \in X}{p(x)\log q(x)}}
+<p>随机变量<span class="math inline">\(X \sim p(x)\)</span>，<span class="math inline">\(q(x)\)</span>近似于<span class="math inline">\(p(x)\)</span>。 则随机变量<span class="math inline">\(X\)</span>和模型<span class="math inline">\(q\)</span>之间的<strong>交叉熵</strong><span class="math inline">\(\color {blue} {H(X, q)}\)</span>如下：<strong>以<span class="math inline">\(q\)</span>去近似<span class="math inline">\(p\)</span>的熵</strong> <span class="math display">\[
+\color {blue} {H(p, q)} = H(X) + D(p \mid\mid q) = \color {red} {-\sum_{x \in X}{p(x)\log q(x)}}
 \]</span></p>
 <p><strong>实际应用</strong></p>
 <p>交叉熵的实际应用，设<span class="math inline">\(y\)</span>是预测的概率分布，<span class="math inline">\(y^\prime\)</span>为真实的概率分布。则用<strong>交叉熵去判断估计的准确程度</strong> <span class="math display">\[
@@ -335,7 +335,7 @@ p(w_i \mid w_{i-1}) = \lambda p_{ML}(w_i | w_{i-1}) + (1-\lambda)p_{ML}(w_i)，\
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-09-22T07:13:04.688Z" itemprop="dateUpdated">2017-09-22 15:13:04</time>
+    最后更新时间：<time datetime="2017-11-27T03:14:35.000Z" itemprop="dateUpdated">2017-11-27 11:14:35</time>
 </span><br>
 
 
