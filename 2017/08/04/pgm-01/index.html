@@ -343,7 +343,7 @@ A =
 \frac1 4 \\
 \frac1 4 \\
 \end {bmatrix}
-\]</span> <span class="math inline">\(A\)</span>的一列是当前页面出去的所有页面，一行是进入当前页面的所有页面。设<span class="math inline">\(u\)</span>表示第<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>行，那么<span class="math inline">\(u*q\)</span>就表示当页面<span class="math inline">\(i\)</span>接受当前<span class="math inline">\(q\)</span>的更新后的rank值。</p>
+\]</span> <span class="math inline">\(A\)</span>的<strong>一列是当前页面出去的所有页面</strong>，<strong>一行是进入当前页面的所有页面</strong>。设<span class="math inline">\(u\)</span>表示第<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>行，那么<span class="math inline">\(u*q\)</span>就表示当页面<span class="math inline">\(i\)</span>接受当前<span class="math inline">\(q\)</span>的更新后的rank值。</p>
 <p>定义矩阵<span class="math inline">\(\color {blue} {G} = \color{red} {\alpha A + (1-\alpha) \frac {1} {n} U}\)</span>，对<span class="math inline">\(A\)</span>进行修正，<span class="math inline">\(G\)</span>所有元素大于0，具有遍历性</p>
 <ul>
 <li><span class="math inline">\(\alpha \in[0, 1] \; (\alpha = 0.85)\)</span> 阻尼因子</li>
@@ -378,7 +378,7 @@ A =
 <li>有<span class="math inline">\(N\)</span>种，隐状态种类集合<span class="math inline">\(\color {blue} {S = \{s_1, s_2, \cdots, s_N\}}\)</span>会相</li>
 <li>隐藏状态互相互转换，<strong>一步转移</strong>。<strong><span class="math inline">\(s_i\)</span>转移到<span class="math inline">\(s_j\)</span>的概率</strong> <span class="math inline">\(\color {red} {a_{ij} = P(q_t= s_j \mid q_{t-1}=s_i)}\)</span></li>
 <li><span class="math inline">\(q_t = s_i\)</span> 代表在<span class="math inline">\(t\)</span>时刻，系统隐藏状态<span class="math inline">\(q_t\)</span>是<span class="math inline">\(s_i\)</span></li>
-<li><code>隐状态时间序列</code> <span class="math inline">\(\color{blue}{Q = \{q_q, q_2, \cdots, q_t, q_{t+1}\cdots \}}\)</span></li>
+<li><code>隐状态时间序列</code> <span class="math inline">\(\color{blue}{Q = \{q_1, q_2, \cdots, q_t, q_{t+1}\cdots \}}\)</span></li>
 </ul>
 <p><strong>观察状态</strong></p>
 <ul>
