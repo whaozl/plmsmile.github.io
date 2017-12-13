@@ -157,14 +157,14 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-25_谷歌翻译论文笔记"
+            <article id="post-rnn"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-10-17 13:25:38" datetime="2017-10-17T05:25:38.000Z"  itemprop="datePublished">2017-10-17</time>
+        <time class="post-time" title="2017-10-18 20:35:29" datetime="2017-10-18T12:35:29.000Z"  itemprop="datePublished">2017-10-18</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/深度学习/">深度学习</a></li></ul>
 
 
 
@@ -175,7 +175,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/17/25_谷歌翻译论文笔记/">谷歌翻译论文笔记</a>
+      <a class="post-title-link" href="/2017/10/18/rnn/">循环神经网络</a>
     </h3>
   
 
@@ -186,28 +186,24 @@
 
     
         
-谷歌神经机器翻译系统
+LSTM经典描述
+经典RNN模型
+模型
+人类在思考的时候，会从上下文、从过去推断出现在的结果。传统的神经网络无法记住过去的历史信息。
+循环神经网络是指随着时间推移，重复发生的结构。它可以记住之前发生的事情，并且推断出后面发生的事情。用于处理时间序列很好。所有的神经元共享权值。如下图所示。
 
-
-简介
-神经机器翻译是自动翻译的端到端的学习方法，克服了传统的基于词典翻译的许多缺点。但仍然有以下的缺点
-
-训练和翻译都太慢了，花费代价很大
-缺乏鲁棒性，特别是输入句子包含生僻词汇
-精确度和速度也不行
-
-传统NMT缺点
-神经机器翻译(NMT)是自动翻译的端到端的学习方法。NMT一般由两个RNN组成，分别处理输入句子和生成目标句子。一般会使用注...
+记住短期信息
+比如预测“天空中有__”，如果过去的信息“鸟”离当前位置比较近，则RN...
     
 
-        <a href="/2017/10/17/25_谷歌翻译论文笔记/" class="post-more waves-effect waves-button">
+        <a href="/2017/10/18/rnn/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经机器翻译/">神经机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GRU/">GRU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LSTM/">LSTM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNN/">RNN</a></li></ul>
 
     </div>
     
@@ -260,6 +256,65 @@
     
 
         <a href="/2017/10/17/谷歌翻译论文笔记/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经机器翻译/">神经机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-25_谷歌翻译论文笔记"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-17 13:25:38" datetime="2017-10-17T05:25:38.000Z"  itemprop="datePublished">2017-10-17</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/17/25_谷歌翻译论文笔记/">谷歌翻译论文笔记</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+谷歌神经机器翻译系统
+
+
+简介
+神经机器翻译是自动翻译的端到端的学习方法，克服了传统的基于词典翻译的许多缺点。但仍然有以下的缺点
+
+训练和翻译都太慢了，花费代价很大
+缺乏鲁棒性，特别是输入句子包含生僻词汇
+精确度和速度也不行
+
+传统NMT缺点
+神经机器翻译(NMT)是自动翻译的端到端的学习方法。NMT一般由两个RNN组成，分别处理输入句子和生成目标句子。一般会使用注...
+    
+
+        <a href="/2017/10/17/25_谷歌翻译论文笔记/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
@@ -634,59 +689,6 @@ Basic
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IIS/">IIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/各种熵/">各种熵</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/最大熵模型/">最大熵模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/期望/">期望</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-ml-ng-notes"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-08-20 21:38:54" datetime="2017-08-20T13:38:54.000Z"  itemprop="datePublished">2017-08-20</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/08/20/ml-ng-notes/">机器学习笔记</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        线性回归
-有\(m\)个样本\((x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \cdots, (x^{(m)}, y^{(m)})\)，假设函数有2个参数\(\theta_0, \theta_1\)，形式如下： \[
-h_\theta(x) = \theta_0 + \theta_1x
-\]
-代价函数
-代价函数 \[
-\color{red} {J...
-    
-
-        <a href="/2017/08/20/ml-ng-notes/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/梯度下降/">梯度下降</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
 
     </div>
     
