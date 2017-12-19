@@ -323,7 +323,7 @@ J
 \end{align}
 \]</span></p>
 <h1 id="负采样训练">负采样训练</h1>
-<p>每次计算都会算整个<span class="math inline">\(|V|\)</span>词表，太耗时了。 可以从噪声分布<span class="math inline">\(P_n(w)\)</span>中进行<strong>负采样</strong>，来代替整个词表。当然单词采样概率与其词频相关。只需关心：目标函数、梯度、更新规则。</p>
+<p>每次计算都会算整个<span class="math inline">\(|V|\)</span>词表，太耗时了。 可以从噪声分布<span class="math inline">\(P_n(w)\)</span>中进行<strong>负采样</strong>，来代替整个词表。当然单词采样概率与其<code>词频</code>相关。只需关心：<code>目标函数</code>、<code>梯度</code>、<code>更新规则</code>。</p>
 <h2 id="标签函数">标签函数</h2>
 <p>对于一对中心词和上下文单词<span class="math inline">\((w, c)\)</span> ，设<code>标签</code>如下：</p>
 <ul>
