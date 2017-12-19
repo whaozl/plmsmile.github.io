@@ -29,7 +29,7 @@
 <meta property="og:description" content="Softmax Softmax常数不变性 \[ \rm{softmax}(\mathbf{x})_i = \frac{e^{\mathbf x_i}}{\sum_{j}e^{\mathbf{x}_j}} \] 一般在计算softmax的时候，避免太大的数，要加一个常数。 一般是减去最大的数。 \[ \rm{softmax}(x) = \rm{softmax}(x+c) \] 关">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/note3/three_layer.png">
-<meta property="og:updated_time" content="2017-12-18T04:42:26.154Z">
+<meta property="og:updated_time" content="2017-12-19T14:43:21.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs224n-assignment-1">
 <meta name="twitter:description" content="Softmax Softmax常数不变性 \[ \rm{softmax}(\mathbf{x})_i = \frac{e^{\mathbf x_i}}{\sum_{j}e^{\mathbf{x}_j}} \] 一般在计算softmax的时候，避免太大的数，要加一个常数。 一般是减去最大的数。 \[ \rm{softmax}(x) = \rm{softmax}(x+c) \] 关">
@@ -168,7 +168,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#softmax"><span class="post-toc-number">1.</span> <span class="post-toc-text">Softmax</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#softmax常数不变性"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Softmax常数不变性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关键代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">关键代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经网络基础"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经网络基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sigmoid实现"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Sigmoid实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#softmax求梯度"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Softmax求梯度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交叉熵求梯度"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">交叉熵求梯度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单网络"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">简单网络</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度检查"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">梯度检查</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#softmax"><span class="post-toc-number">1.</span> <span class="post-toc-text">Softmax</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#softmax常数不变性"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Softmax常数不变性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关键代码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">关键代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经网络基础"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经网络基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sigmoid实现"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Sigmoid实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#softmax求梯度"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Softmax求梯度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交叉熵求梯度"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">交叉熵求梯度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单网络"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">简单网络</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度检查"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">梯度检查</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#word2vec"><span class="post-toc-number">3.</span> <span class="post-toc-text">Word2Vec</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#词向量的梯度"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">词向量的梯度</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -277,7 +277,14 @@ g^{\prime}_i(\theta_j) = e^{\theta_j}
 &amp; =  S_i - y_i 
 \end{align}
 \]</span> 所以，交叉熵的导数是 <span class="math display">\[
-\frac{\partial CE}{\partial \theta_i} = \hat y_i  - y_i
+\frac{\partial CE}{\partial \theta_i} = \hat y_i  - y_i, \quad \quad \frac{\partial CE(y, \hat y)}{\partial \theta} = \hat y  - y
+\]</span></p>
+<p>即 <span class="math display">\[
+\frac{\partial CE(y, \hat y)}{\partial \theta_i} = 
+\begin{cases}
+&amp; \hat y_i - 1, &amp; \text{i是label} \\
+&amp;\hat y_i, &amp; \text{其它}\\
+\end{cases}
 \]</span></p>
 <h2 id="简单网络">简单网络</h2>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/note3/three_layer.png" style="display:block; margin:auto" width="40%"></p>
@@ -308,6 +315,31 @@ J = \rm{CE}(y, \hat y)
 <h2 id="梯度检查">梯度检查</h2>
 <p><a href="https://plmsmile.github.io/2017/11/23/cs224n-notes3-neural-networks/#梯度检查">我的梯度检查</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradcheck_naive</span><span class="params">(f, x)</span>:</span></span><br><span class="line">    fx, grad = f(x) <span class="comment"># Evaluate function value at original point</span></span><br><span class="line">    h = <span class="number">1e-4</span>        <span class="comment"># Do not change this!</span></span><br><span class="line">    <span class="comment"># Iterate over all indexes in x</span></span><br><span class="line">    it = np.nditer(x, flags=[<span class="string">'multi_index'</span>], op_flags=[<span class="string">'readwrite'</span>])</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> it.finished:</span><br><span class="line">        ix = it.multi_index</span><br><span class="line">        <span class="comment"># 关键代码</span></span><br><span class="line">        x[ix] += h</span><br><span class="line">        random.setstate(rndstate)</span><br><span class="line">        new_f1 = f(x)[<span class="number">0</span>]</span><br><span class="line">        x[ix] -= <span class="number">2</span> * h</span><br><span class="line">        random.setstate(rndstate)</span><br><span class="line">        new_f2 = f(x)[<span class="number">0</span>]</span><br><span class="line">        x[ix] += h</span><br><span class="line">        numgrad = (new_f1 - new_f2) / (<span class="number">2</span> * h)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Compare gradients</span></span><br><span class="line">        reldiff = abs(numgrad - grad[ix]) / max(<span class="number">1</span>, abs(numgrad), abs(grad[ix]))</span><br><span class="line">        <span class="keyword">if</span> reldiff &gt; <span class="number">1e-5</span>:</span><br><span class="line">            <span class="keyword">print</span> (<span class="string">"Gradient check failed."</span>)</span><br><span class="line">            <span class="keyword">print</span> (<span class="string">"First gradient error found at index %s"</span> % str(ix))</span><br><span class="line">            <span class="keyword">print</span> (<span class="string">"Your gradient: %f \t Numerical gradient: %f"</span> % (</span><br><span class="line">                grad[ix], numgrad))</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        it.iternext() <span class="comment"># Step to next dimension</span></span><br></pre></td></tr></table></figure>
+<h1 id="word2vec">Word2Vec</h1>
+<p><a href="https://plmsmile.github.io/2017/11/12/cs224n-notes1-word2vec/#word2vec">我的word2vec笔记</a></p>
+<h2 id="词向量的梯度">词向量的梯度</h2>
+<p>符号定义</p>
+<ul>
+<li><span class="math inline">\(v_c\)</span> 中心词向量，输入词向量，<span class="math inline">\(V\)</span>， <span class="math inline">\(\mathbb{R}^{W\times d}\)</span><br>
+</li>
+<li><span class="math inline">\(u_o\)</span> 上下文词向量，输出词向量，<span class="math inline">\(U=[u_1, u_2, \cdots, u_w]\)</span> , <span class="math inline">\(\mathbb{R}^{d\times W}\)</span></li>
+</ul>
+<p><strong>前向</strong></p>
+<p>预测o是c的上下文概率，o为正确单词 <span class="math display">\[
+\hat y_o = p(o \mid c) = \rm{softmax}(o) = \frac{\exp(u_o^T v_c)}{\sum_{w} \exp(u_w^T v_c)}
+\]</span> 得分向量： <span class="math display">\[
+z=U^T \cdot v_c, \quad \in \mathbb{R}^{W \times 1 }
+\]</span> <strong>loss及梯度</strong> <span class="math display">\[
+J_{\rm{softmax-CE}}(v_c, o, U) = CE(y, \hat y), \quad \text{其中} \; \frac{\partial CE(y, \hat y)}{\partial \theta} = \hat y  - y
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+&amp; \frac{\partial J}{\partial z} = \hat y  - y  &amp;\text{预测的}  \\ \\
+&amp; \frac{\partial J}{\partial v_c} = U \cdot (\hat y  - y) &amp;\text{中心词的梯度} \\ \\
+&amp; \frac{\partial J}{\partial U} =  (\hat y  - y)  &amp; \text{上下文的梯度} \\
+\end{align}
+\]</span></p>
+<p><strong>关键代码</strong></p>
 
         </div>
 
@@ -315,7 +347,7 @@ J = \rm{CE}(y, \hat y)
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-18T04:42:26.154Z" itemprop="dateUpdated">2017-12-18 12:42:26</time>
+    最后更新时间：<time datetime="2017-12-19T14:43:21.196Z" itemprop="dateUpdated">2017-12-19 22:43:21</time>
 </span><br>
 
 
