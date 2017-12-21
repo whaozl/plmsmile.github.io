@@ -19,9 +19,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="cs224n,assignment,word2vec,cbow,skip-gram">
+    <meta name="keywords" content="word2vec,cs224n,assignment,cbow,skip-gram">
     <meta name="description" content="Softmax Softmax常数不变性 \[ \rm{softmax}(\mathbf{x})_i = \frac{e^{\mathbf x_i}}{\sum_{j}e^{\mathbf{x}_j}} \] 一般在计算softmax的时候，避免太大的数，要加一个常数。 一般是减去最大的数。 \[ \rm{">
-<meta name="keywords" content="cs224n,assignment,word2vec,cbow,skip-gram">
+<meta name="keywords" content="word2vec,cs224n,assignment,cbow,skip-gram">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cs224n-assignment-1">
 <meta property="og:url" content="http://plmsmile.github.io/2017/12/17/cs224n-assignment-1/index.html">
@@ -29,7 +29,7 @@
 <meta property="og:description" content="Softmax Softmax常数不变性 \[ \rm{softmax}(\mathbf{x})_i = \frac{e^{\mathbf x_i}}{\sum_{j}e^{\mathbf{x}_j}} \] 一般在计算softmax的时候，避免太大的数，要加一个常数。 一般是减去最大的数。 \[ \rm{softmax}(x) = \rm{softmax}(x+c) \] 关">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/note3/three_layer.png">
-<meta property="og:updated_time" content="2017-12-19T14:43:21.196Z">
+<meta property="og:updated_time" content="2017-12-21T14:13:13.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs224n-assignment-1">
 <meta name="twitter:description" content="Softmax Softmax常数不变性 \[ \rm{softmax}(\mathbf{x})_i = \frac{e^{\mathbf x_i}}{\sum_{j}e^{\mathbf{x}_j}} \] 一般在计算softmax的时候，避免太大的数，要加一个常数。 一般是减去最大的数。 \[ \rm{softmax}(x) = \rm{softmax}(x+c) \] 关">
@@ -328,18 +328,48 @@ J = \rm{CE}(y, \hat y)
 <p>预测o是c的上下文概率，o为正确单词 <span class="math display">\[
 \hat y_o = p(o \mid c) = \rm{softmax}(o) = \frac{\exp(u_o^T v_c)}{\sum_{w} \exp(u_w^T v_c)}
 \]</span> 得分向量： <span class="math display">\[
-z=U^T \cdot v_c, \quad \in \mathbb{R}^{W \times 1 }
+z=U^T \cdot v_c, \quad  [W,d] \times[ d] \in ,\mathbb{R}^{W }
 \]</span> <strong>loss及梯度</strong> <span class="math display">\[
 J_{\rm{softmax-CE}}(v_c, o, U) = CE(y, \hat y), \quad \text{其中} \; \frac{\partial CE(y, \hat y)}{\partial \theta} = \hat y  - y
 \]</span></p>
-<p><span class="math display">\[
-\begin{align}
-&amp; \frac{\partial J}{\partial z} = \hat y  - y  &amp;\text{预测的}  \\ \\
-&amp; \frac{\partial J}{\partial v_c} = U \cdot (\hat y  - y) &amp;\text{中心词的梯度} \\ \\
-&amp; \frac{\partial J}{\partial U} =  (\hat y  - y)  &amp; \text{上下文的梯度} \\
-\end{align}
-\]</span></p>
+<table>
+<colgroup>
+<col width="35%">
+<col width="8%">
+<col width="42%">
+<col width="13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">梯度</th>
+<th align="center">中文</th>
+<th align="center">计算</th>
+<th align="center">维数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\frac{\partial J}{\partial z}\)</span></td>
+<td align="center">softmax</td>
+<td align="center"><span class="math inline">\(\hat y - y\)</span></td>
+<td align="center"><span class="math inline">\(W\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\frac{\partial J}{\partial v_c}\)</span></td>
+<td align="center">中心词</td>
+<td align="center"><span class="math inline">\(\frac{\partial J}{\partial z} \cdot \frac{\partial z}{\partial v_c} = (\hat y - y) \cdot U^T\)</span></td>
+<td align="center"><span class="math inline">\(d\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\frac{\partial J}{\partial U}\)</span></td>
+<td align="center">上下文</td>
+<td align="center"><span class="math inline">\(\frac{\partial J}{\partial z} \cdot \frac{\partial z}{\partial U^T}= (\hat y - y) \cdot v_c\)</span></td>
+<td align="center"><span class="math inline">\(d \times W\)</span></td>
+</tr>
+</tbody>
+</table>
 <p><strong>关键代码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmaxCostAndGradient</span><span class="params">(predicted, target, outputVectors, dataset)</span>:</span></span><br><span class="line">    <span class="string">""" Softmax cost function for word2vec models</span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">        predicted: 中心词vc</span></span><br><span class="line"><span class="string">        target: 上下文uo, index</span></span><br><span class="line"><span class="string">        outputVectors: 输出，上下文矩阵U，W*d，未转置</span></span><br><span class="line"><span class="string">        dataset: </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        cost: 交叉熵loss</span></span><br><span class="line"><span class="string">        gradv: 一维向量</span></span><br><span class="line"><span class="string">        gradU: W*d</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    vhat = predicted</span><br><span class="line">    z = np.dot(outputVectors,vhat)</span><br><span class="line">    preds = softmax(z)</span><br><span class="line">    <span class="comment">#  Calculate the cost:</span></span><br><span class="line">    cost = -np.log(preds[target])</span><br><span class="line">    <span class="comment">#  Gradients</span></span><br><span class="line">    gradz = preds.copy()</span><br><span class="line">    gradz[target] -= <span class="number">1.0</span></span><br><span class="line">    gradU = np.outer(z, vhat)</span><br><span class="line">    gradv = np.dot(outputVectors.T, z)</span><br><span class="line">    <span class="comment">### END YOUR CODE</span></span><br><span class="line">    <span class="keyword">return</span> cost, gradv, gradU</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -347,7 +377,7 @@ J_{\rm{softmax-CE}}(v_c, o, U) = CE(y, \hat y), \quad \text{其中} \; \frac{\pa
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-19T14:43:21.196Z" itemprop="dateUpdated">2017-12-19 22:43:21</time>
+    最后更新时间：<time datetime="2017-12-21T14:13:13.946Z" itemprop="dateUpdated">2017-12-21 22:13:13</time>
 </span><br>
 
 
