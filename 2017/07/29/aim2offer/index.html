@@ -19,16 +19,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="算法,排序">
+    <meta name="keywords" content="leetcode,排序">
     <meta name="description" content="数组中重复的数字-03 题目1 找到数组中重复的数字  一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3  思路1 对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn) 思路2">
-<meta name="keywords" content="算法,排序">
+<meta name="keywords" content="leetcode,排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指Offer算法题">
 <meta property="og:url" content="http://plmsmile.github.io/2017/07/29/aim2offer/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="数组中重复的数字-03 题目1 找到数组中重复的数字  一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3  思路1 对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn) 思路2 使用哈希表，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复了。时">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-28T03:47:04.698Z">
+<meta property="og:updated_time" content="2017-12-29T04:00:48.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer算法题">
 <meta name="twitter:description" content="数组中重复的数字-03 题目1 找到数组中重复的数字  一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3  思路1 对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn) 思路2 使用哈希表，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复了。时">
@@ -149,7 +149,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/leetcode/">leetcode</a></li></ul>
 
             
         </h5>
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数组中重复的数字-03"><span class="post-toc-number">1.</span> <span class="post-toc-text">数组中重复的数字-03</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目1"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目1</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目2"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">题目2</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二维数组查找-04"><span class="post-toc-number">2.</span> <span class="post-toc-text">二维数组查找-04</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#字符串替换空格-05"><span class="post-toc-number">3.</span> <span class="post-toc-text">字符串替换空格-05</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#逆序打印链表-06"><span class="post-toc-number">4.</span> <span class="post-toc-text">逆序打印链表-06</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链表基础考点"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">链表基础考点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从尾到头打印链表"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">从尾到头打印链表</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#重建二叉树-07"><span class="post-toc-number">5.</span> <span class="post-toc-text">重建二叉树-07</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#树的考点"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">树的考点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前序中序建立二叉树"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">前序中序建立二叉树</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的下一个节点-08"><span class="post-toc-number">6.</span> <span class="post-toc-text">二叉树的下一个节点-08</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#两个栈实现队列-09"><span class="post-toc-number">7.</span> <span class="post-toc-text">两个栈实现队列-09</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#栈和队列"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">栈和队列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用两个栈实现队列"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">用两个栈实现队列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#两个队列实现栈"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">两个队列实现栈</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#算法和数据操作"><span class="post-toc-number">8.</span> <span class="post-toc-text">算法和数据操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总览"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">总览</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#斐波那契数列-递归循环-10"><span class="post-toc-number">9.</span> <span class="post-toc-text">斐波那契数列-递归循环-10</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#斐波那契数列"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">斐波那契数列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#青蛙跳台阶"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">青蛙跳台阶</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#矩阵覆盖问题"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">矩阵覆盖问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#排序算法"><span class="post-toc-number">10.</span> <span class="post-toc-text">排序算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入排序-插入希尔"><span class="post-toc-number">10.1.</span> <span class="post-toc-text">插入排序-插入希尔</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数组中重复的数字-03"><span class="post-toc-number">1.</span> <span class="post-toc-text">数组中重复的数字-03</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目1"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目1</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目2"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">题目2</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二维数组查找-04"><span class="post-toc-number">2.</span> <span class="post-toc-text">二维数组查找-04</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#字符串替换空格-05"><span class="post-toc-number">3.</span> <span class="post-toc-text">字符串替换空格-05</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#逆序打印链表-06"><span class="post-toc-number">4.</span> <span class="post-toc-text">逆序打印链表-06</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链表基础考点"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">链表基础考点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从尾到头打印链表"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">从尾到头打印链表</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#重建二叉树-07"><span class="post-toc-number">5.</span> <span class="post-toc-text">重建二叉树-07</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#树的考点"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">树的考点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前序中序建立二叉树"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">前序中序建立二叉树</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的下一个节点-08"><span class="post-toc-number">6.</span> <span class="post-toc-text">二叉树的下一个节点-08</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#两个栈实现队列-09"><span class="post-toc-number">7.</span> <span class="post-toc-text">两个栈实现队列-09</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#栈和队列"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">栈和队列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用两个栈实现队列"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">用两个栈实现队列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#两个队列实现栈"><span class="post-toc-number">7.3.</span> <span class="post-toc-text">两个队列实现栈</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#算法和数据操作"><span class="post-toc-number">8.</span> <span class="post-toc-text">算法和数据操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总览"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">总览</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#斐波那契数列-递归循环-10"><span class="post-toc-number">9.</span> <span class="post-toc-text">斐波那契数列-递归循环-10</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#斐波那契数列"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">斐波那契数列</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#青蛙跳台阶"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">青蛙跳台阶</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#矩阵覆盖问题"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">矩阵覆盖问题</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -179,7 +179,7 @@
             <time class="post-time" title="2017-07-29 11:42:07" datetime="2017-07-29T03:42:07.000Z"  itemprop="datePublished">2017-07-29</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/leetcode/">leetcode</a></li></ul>
 
 
 
@@ -460,15 +460,6 @@ f(n) =
 <p><span class="math inline">\(2\times1\)</span>矩阵去覆盖<span class="math inline">\(2 \times 8\)</span> 矩阵，可以横着竖着覆盖，问多少种覆盖方法？</p>
 </blockquote>
 <p>同理，最后一个横着放或者竖着放。<span class="math inline">\(f(8)=f(7)+f(6)\)</span></p>
-<h1 id="排序算法">排序算法</h1>
-<h2 id="插入排序-插入希尔">插入排序-插入希尔</h2>
-<p><strong>直接插入排序</strong></p>
-<blockquote>
-<p>前面的已经有序，把后面的插入到前面有序的元素中。</p>
-</blockquote>
-<p>如对<code>4  5  1  2  6  3</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5插入4</span></span><br><span class="line"><span class="number">4</span> <span class="number">5</span>   <span class="number">1</span> <span class="number">2</span> <span class="number">6</span> <span class="number">3</span></span><br><span class="line"><span class="comment"># 1插入 4 5</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">5</span>   <span class="number">2</span> <span class="number">6</span> <span class="number">3</span></span><br><span class="line"><span class="comment"># 2插入 1 4 5</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span>   <span class="number">6</span> <span class="number">3</span></span><br><span class="line"><span class="comment"># 6插入 1 2 4 5</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>   <span class="number">3</span></span><br><span class="line"><span class="comment"># 3插入到前面</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span></span><br></pre></td></tr></table></figure>
-<p><strong>折半插入</strong></p>
 
         </div>
 
@@ -476,7 +467,7 @@ f(n) =
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-28T03:47:04.698Z" itemprop="dateUpdated">2017-12-28 11:47:04</time>
+    最后更新时间：<time datetime="2017-12-29T04:00:48.199Z" itemprop="dateUpdated">2017-12-29 12:00:48</time>
 </span><br>
 
 
@@ -501,7 +492,7 @@ f(n) =
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
 
 
             
