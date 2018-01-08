@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="有序列表转二叉查找树-109 Convert Sorted List to Binary Search Tree 二叉树 二叉树的最小深度-111 Minimum Depth of Binary Tree 最小深度：根节点到某个叶子节点的最短路径。  为空，返回0 左孩子为空，则结果在右孩子 右孩子为空，则结果在左孩子 左右均不为空，返回小的+1  二叉树遍历 中序遍历-">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-07T03:26:35.760Z">
+<meta property="og:updated_time" content="2018-01-08T15:19:19.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-01">
 <meta name="twitter:description" content="有序列表转二叉查找树-109 Convert Sorted List to Binary Search Tree 二叉树 二叉树的最小深度-111 Minimum Depth of Binary Tree 最小深度：根节点到某个叶子节点的最短路径。  为空，返回0 左孩子为空，则结果在右孩子 右孩子为空，则结果在左孩子 左右均不为空，返回小的+1  二叉树遍历 中序遍历-">
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有序列表转二叉查找树-109"><span class="post-toc-number">1.</span> <span class="post-toc-text">有序列表转二叉查找树-109</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二叉树"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">二叉树</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的最小深度-111"><span class="post-toc-number">2.</span> <span class="post-toc-text">二叉树的最小深度-111</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树遍历"><span class="post-toc-number">3.</span> <span class="post-toc-text">二叉树遍历</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中序遍历-94"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">中序遍历-94</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后序遍历-145"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">后序遍历-145</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先序遍历-144"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">先序遍历-144</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有序列表转二叉查找树-109"><span class="post-toc-number">1.</span> <span class="post-toc-text">有序列表转二叉查找树-109</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二叉树"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">二叉树</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的最小深度-111"><span class="post-toc-number">2.</span> <span class="post-toc-text">二叉树的最小深度-111</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树遍历"><span class="post-toc-number">3.</span> <span class="post-toc-text">二叉树遍历</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中序遍历-94"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">中序遍历-94</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后序遍历-145"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">后序遍历-145</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先序遍历-144"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">先序遍历-144</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#发现重复的数字-287"><span class="post-toc-number">4.</span> <span class="post-toc-text">发现重复的数字-287</span></a></li></ol>
         </nav>
     </aside>
     
@@ -241,6 +241,23 @@
 </ul>
 <p><a href="https://github.com/plmsmile/leetcode/blob/master/144_btree_pre_order/btree_preorder.cpp" target="_blank" rel="noopener">关键代码</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; pre_order(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vpre;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">    <span class="keyword">if</span> (root != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        st.push(root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        TreeNode* p = st.top();</span><br><span class="line">        vpre.push_back(p-&gt;val);</span><br><span class="line">        st.pop();</span><br><span class="line">        <span class="comment">// 右进、左进；出时：左先出</span></span><br><span class="line">        <span class="keyword">if</span> (p-&gt;right) &#123;</span><br><span class="line">            st.push(p-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;left) &#123;</span><br><span class="line">            st.push(p-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> vpre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="发现重复的数字-287">发现重复的数字-287</h1>
+<p><a href="https://leetcode.com/problems/find-the-duplicate-number/description/" target="_blank" rel="noopener">Find the Duplicate Number</a>， 类似于<a href="https://plmsmile.github.io/2017/07/29/aim2offer/#题目2">aim2offer中查找重复的数字</a></p>
+<blockquote>
+<p>数组a，有n+1个数，都在[1,n]范围内，只有一个重复的元素。找到它</p>
+</blockquote>
+<p><strong>二分思路</strong></p>
+<p><code>[1, n]</code>这个范围有n个数。划分为两个范围<code>[1, m]</code>和<code>[m+1, n]</code></p>
+<ul>
+<li>每次去遍历整个数组，统计两个范围内的数字的数目</li>
+<li>统计整个数组中元素在<code>[1, m]</code>范围内的个数<span class="math inline">\(c_1\)</span></li>
+<li>统计整个数组中元素在<code>[m+1, n]</code>范围内的个数<span class="math inline">\(c_2\)</span></li>
+</ul>
+<p>[1, m]这m个数字的个数是c</p>
+<ul>
+<li>如果 <code>c &gt; m</code>， 则[1, m]内一定存在重复的数，<code>e = m</code></li>
+<li>否则，[m+1, n]一定存在重复的数，<code>s = m + 1</code></li>
+</ul>
 
         </div>
 
@@ -248,7 +265,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-07T03:26:35.760Z" itemprop="dateUpdated">2018-01-07 11:26:35</time>
+    最后更新时间：<time datetime="2018-01-08T15:19:19.956Z" itemprop="dateUpdated">2018-01-08 23:19:19</time>
 </span><br>
 
 
