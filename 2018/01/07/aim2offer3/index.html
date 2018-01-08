@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-07T14:49:54.712Z">
+<meta property="og:updated_time" content="2018-01-08T03:52:35.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Aim2offer3(21-30)">
 <meta name="twitter:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#把奇数放在偶数的前面-21"><span class="post-toc-number">1.</span> <span class="post-toc-text">把奇数放在偶数的前面-21</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链表中倒数第k个节点-22"><span class="post-toc-number">2.</span> <span class="post-toc-text">链表中倒数第k个节点-22</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#把奇数放在偶数的前面-21"><span class="post-toc-number">1.</span> <span class="post-toc-text">把奇数放在偶数的前面-21</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链表中倒数第k个节点-22"><span class="post-toc-number">2.</span> <span class="post-toc-text">链表中倒数第k个节点-22</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链表中环的入口节点-23"><span class="post-toc-number">3.</span> <span class="post-toc-text">链表中环的入口节点-23</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#双指针法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">双指针法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#断链法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">断链法</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -228,10 +228,34 @@
 <h1 id="链表中倒数第k个节点-22">链表中倒数第k个节点-22</h1>
 <p>不知道链表长度，要求在<span class="math inline">\(O(n)\)</span>内找到倒数第k个节点，注意代码的鲁棒性。</p>
 <p><strong>双指针思路</strong></p>
-<p>指针l和指针r始终保持<strong>距离为k-1</strong>，指针r走到末尾时，指针l就是倒数第k个节点。</p>
-<p>注意头结点为空和k非法。</p>
-<p>[关键代码]</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 返回链表中的倒数第k个节点</span></span><br><span class="line"><span class="comment"> * 双指针思路，注意代码的鲁棒性</span></span><br><span class="line"><span class="comment"> * Args:</span></span><br><span class="line"><span class="comment"> *      phead -- 头指针</span></span><br><span class="line"><span class="comment"> *      k  -- 无符号整数</span></span><br><span class="line"><span class="comment"> * Returns:</span></span><br><span class="line"><span class="comment"> *      nullptr or 第k个节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">ListNode* <span class="title">kth_from_end</span><span class="params">(ListNode* phead, <span class="keyword">unsigned</span> <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. phead为空或者k不合法，都返回空</span></span><br><span class="line">    <span class="keyword">if</span> (phead == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 双指针</span></span><br><span class="line">    ListNode* pr = phead;</span><br><span class="line">    ListNode* pl = phead;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. pl先走</span></span><br><span class="line">    <span class="keyword">while</span> (pl &amp;&amp; count &lt;= k - <span class="number">1</span>) &#123;</span><br><span class="line">        pl = pl-&gt;next;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 不足k个节点，返回空</span></span><br><span class="line">    <span class="keyword">if</span> (pl == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 左右指针一起走，保持k-1的距离</span></span><br><span class="line">    <span class="keyword">while</span> (pl-&gt;next) &#123;</span><br><span class="line">        pl = pl-&gt;next;</span><br><span class="line">        pr = pr-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两个指针，<code>l</code>先走k-1步，<code>r</code>再从头节点出发，始终<strong>保持距离为k-1</strong>。 <strong>r走到末尾</strong>时，<strong>l就是倒数第k个节点</strong>。</p>
+<p>注意头结点为空和k非法(为0、k超出等)的情况。</p>
+<p><strong>双指针求链表中间节点</strong></p>
+<p>两个指针，<code>l</code><strong>走一步</strong>，<code>r</code><strong>走两步</strong>。<strong>r走到末尾</strong>的时候，<strong>l正好走到中间</strong>。</p>
+<p><strong>双指针总结</strong></p>
+<p>当一个指针遍历链表不能解决问题的时候，就使用两个指针。</p>
+<ul>
+<li>同时走、一个速度快</li>
+<li>一个先走、速度一样</li>
+</ul>
+<p><a href="https://github.com/plmsmile/aim2offer/blob/master/22_kth_node_from_end/kth_node_from_end.cpp" target="_blank" rel="noopener">关键代码</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 返回链表中的倒数第k个节点</span></span><br><span class="line"><span class="comment"> * 双指针思路，注意代码的鲁棒性</span></span><br><span class="line"><span class="comment"> * Args:</span></span><br><span class="line"><span class="comment"> *      phead -- 头指针</span></span><br><span class="line"><span class="comment"> *      k  -- 无符号整数</span></span><br><span class="line"><span class="comment"> * Returns:</span></span><br><span class="line"><span class="comment"> *      nullptr or 第k个节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">ListNode* <span class="title">kth_from_end</span><span class="params">(ListNode* phead, <span class="keyword">unsigned</span> <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. phead为空或者k不合法，都返回空，k不能为0，否则k-1是一个巨大的数</span></span><br><span class="line">    <span class="keyword">if</span> (phead == <span class="literal">nullptr</span> || k == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 双指针</span></span><br><span class="line">    ListNode* pr = phead;</span><br><span class="line">    ListNode* pl = phead;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. pl先走</span></span><br><span class="line">    <span class="keyword">while</span> (pl &amp;&amp; count &lt;= k - <span class="number">1</span>) &#123;</span><br><span class="line">        pl = pl-&gt;next;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 4. 不足k个节点，返回空</span></span><br><span class="line">    <span class="keyword">if</span> (pl == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5. 左右指针一起走，保持k-1的距离</span></span><br><span class="line">    <span class="keyword">while</span> (pl-&gt;next) &#123;</span><br><span class="line">        pl = pl-&gt;next;</span><br><span class="line">        pr = pr-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="链表中环的入口节点-23">链表中环的入口节点-23</h1>
+<blockquote>
+<p>如果一个链表有环，则返回这个环的入口节点</p>
+</blockquote>
+<h2 id="双指针法">双指针法</h2>
+<p><strong>确定有环</strong></p>
+<p>双指针，同时走，l一次1步，r一次2步。</p>
+<ul>
+<li>r走到末尾，则无环</li>
+<li>r与l相遇，则有环。相遇节点在环内</li>
+</ul>
+<p><strong>确定环内节点数量</strong></p>
+<p>相遇节点在环内，从相遇节点开始遍历一圈，计数。再次回到相遇节点，就能知道<strong>环内节点数量k</strong>。</p>
+<p><strong>找到环的入口节点</strong></p>
+<p>双指针，r先走k步，l再走。l与r相遇时，就是环的入口节点</p>
+<h2 id="断链法">断链法</h2>
 
         </div>
 
@@ -239,7 +263,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-07T14:49:54.712Z" itemprop="dateUpdated">2018-01-07 22:49:54</time>
+    最后更新时间：<time datetime="2018-01-08T03:52:35.606Z" itemprop="dateUpdated">2018-01-08 11:52:35</time>
 </span><br>
 
 
