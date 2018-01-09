@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="数组中重复的数字-03 题目1 找到数组中重复的数字  一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3  思路1 对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn) 思路2 使用哈希表，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复了。时">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-29T04:00:48.199Z">
+<meta property="og:updated_time" content="2018-01-09T02:04:10.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer算法题">
 <meta name="twitter:description" content="数组中重复的数字-03 题目1 找到数组中重复的数字  一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3  思路1 对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn) 思路2 使用哈希表，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复了。时">
@@ -215,6 +215,7 @@
 <p><strong>思路1</strong></p>
 <p>创建一个新数组b存放原数组a。遍历原数组，当前是m，如果b[m]已经没有值，则存放；如果有值，则重复。但是需要<code>O(n)</code>的辅助空间</p>
 <p><strong>最优思路</strong></p>
+<p>见<a href="https://plmsmile.github.io/2017/12/29/leetcode-01/#发现重复的数字-287">二分查重描述清晰版</a></p>
 <p>把<span class="math inline">\(a[1, n]\)</span>的个数字，分为两部分。<span class="math inline">\(a[1, m]\)</span>和<span class="math inline">\(a[m+1, n]\)</span>。</p>
 <p>在<span class="math inline">\(a[1, m]\)</span>中，统计数字<span class="math inline">\(1,2\cdots, m\)</span>在<span class="math inline">\(a[1,m]\)</span>中出现的次数<code>count</code></p>
 <ul>
@@ -467,7 +468,7 @@ f(n) =
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-29T04:00:48.199Z" itemprop="dateUpdated">2017-12-29 12:00:48</time>
+    最后更新时间：<time datetime="2018-01-09T02:04:10.711Z" itemprop="dateUpdated">2018-01-09 10:04:10</time>
 </span><br>
 
 
