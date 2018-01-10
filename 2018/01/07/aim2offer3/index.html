@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-10T11:20:16.959Z">
+<meta property="og:updated_time" content="2018-01-10T12:13:03.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Aim2offer3(21-30)">
 <meta name="twitter:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#把奇数放在偶数的前面-21"><span class="post-toc-number">1.</span> <span class="post-toc-text">把奇数放在偶数的前面-21</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链表中倒数第k个节点-22"><span class="post-toc-number">2.</span> <span class="post-toc-text">链表中倒数第k个节点-22</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链表中环的入口节点-23"><span class="post-toc-number">3.</span> <span class="post-toc-text">链表中环的入口节点-23</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#双指针法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">双指针法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推导法和断链法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">推导法和断链法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#翻转链表-24"><span class="post-toc-number">4.</span> <span class="post-toc-text">翻转链表-24</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#合并两个有序链表-25"><span class="post-toc-number">5.</span> <span class="post-toc-text">合并两个有序链表-25</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#树的子结构-26"><span class="post-toc-number">6.</span> <span class="post-toc-text">树的子结构-26</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的镜像-27"><span class="post-toc-number">7.</span> <span class="post-toc-text">二叉树的镜像-27</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#把奇数放在偶数的前面-21"><span class="post-toc-number">1.</span> <span class="post-toc-text">把奇数放在偶数的前面-21</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链表中倒数第k个节点-22"><span class="post-toc-number">2.</span> <span class="post-toc-text">链表中倒数第k个节点-22</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#链表中环的入口节点-23"><span class="post-toc-number">3.</span> <span class="post-toc-text">链表中环的入口节点-23</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#双指针法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">双指针法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#推导法和断链法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">推导法和断链法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#翻转链表-24"><span class="post-toc-number">4.</span> <span class="post-toc-text">翻转链表-24</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#合并两个有序链表-25"><span class="post-toc-number">5.</span> <span class="post-toc-text">合并两个有序链表-25</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#树的子结构-26"><span class="post-toc-number">6.</span> <span class="post-toc-text">树的子结构-26</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的镜像-27"><span class="post-toc-number">7.</span> <span class="post-toc-text">二叉树的镜像-27</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#对称的二叉树-28"><span class="post-toc-number">8.</span> <span class="post-toc-text">对称的二叉树-28</span></a></li></ol>
         </nav>
     </aside>
     
@@ -304,6 +304,24 @@
 <li>交换其左右孩子节点</li>
 <li>右孩子入栈，左孩子入栈</li>
 </ul>
+<p>[关键代码]</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 先序遍历求二叉树的镜像</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mirror</span><span class="params">(TreeNode *head)</span> </span>&#123;</span><br><span class="line">    TreeNode* p = head;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        st.push(p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 栈不为空</span></span><br><span class="line">    <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        TreeNode* now = st.top();</span><br><span class="line">        st.pop();</span><br><span class="line">        <span class="comment">// 交换其左右节点</span></span><br><span class="line">        TreeNode* t = now-&gt;left;</span><br><span class="line">        now-&gt;left = now-&gt;right;</span><br><span class="line">        now-&gt;right = t;</span><br><span class="line">        <span class="comment">// 左右节点入栈</span></span><br><span class="line">        <span class="keyword">if</span> (now-&gt;right) &#123;</span><br><span class="line">            st.push(now-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (now-&gt;left) &#123;</span><br><span class="line">            st.push(now-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="对称的二叉树-28">对称的二叉树-28</h1>
+<p><a href="https://leetcode.com/problems/symmetric-tree/description/" target="_blank" rel="noopener">leetcode对称的二叉树</a></p>
+<blockquote>
+<p>判断一个二叉树是不是对称的</p>
+</blockquote>
+<p><strong>思路</strong></p>
+<p>普通的遍历都是<strong>先左后右</strong>， 对称的话，得用<strong>先右后左</strong>。</p>
+<p>一棵树<strong>对称</strong>，则先左后右的先序序列、先右后左的<a href="https://plmsmile.github.io/2017/12/29/leetcode-01/#先序遍历-144">先序序列</a>应该一样。</p>
+<p>遍历的时候</p>
+<ul>
+<li>根节点为空，对称</li>
+<li>否则，看<code>sym(root.left, root.right)</code></li>
+<li>两个节点其中一个为空，则看<code>p1 == p2</code></li>
+<li>两个都不为空，则<strong>先看根节点的值</strong></li>
+<li>最后则<strong>交叉看左右子树</strong>，<code>sym(p1.left, p2.right) &amp;&amp; sym(p1.right, p2.left)</code></li>
+</ul>
 
         </div>
 
@@ -311,7 +329,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-10T11:20:16.959Z" itemprop="dateUpdated">2018-01-10 19:20:16</time>
+    最后更新时间：<time datetime="2018-01-10T12:13:03.612Z" itemprop="dateUpdated">2018-01-10 20:13:03</time>
 </span><br>
 
 
