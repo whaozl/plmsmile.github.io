@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-12T07:46:00.411Z">
+<meta property="og:updated_time" content="2018-01-21T14:24:41.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Aim2offer3(21-40)">
 <meta name="twitter:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
@@ -532,10 +532,13 @@
 <p>上面耗时间：<strong>找任意指针S1</strong>。用<strong>HashMap</strong>建立<code>(N, N1)</code>的配对，就<strong>能够<span class="math inline">\(O(1)\)</span>查找到S1</strong>。从而总时间为<span class="math inline">\(O(n)\)</span></p>
 <p><strong>思路3 最优-新旧链表先连再断</strong></p>
 <ul>
-<li>把N1连接到N后面，<code>a-a1-b-b1-c-c1</code></li>
-<li>设置N1的S1，实际上，<code>a-s</code>, <code>a-a1</code>，<code>s-s1</code> ，所以能够找到<code>a1-s1</code></li>
-<li>把N和N1断开，得到<code>a1-b1-c1</code></li>
+<li><strong>连接新节点</strong>。把N1连接到N后面，<code>a-a1-b-b1-c-c1</code></li>
+<li><strong>设置随机节点</strong>。设置N1的S1，实际上，<code>a-s</code>, <code>a-a1</code>，<code>s-s1</code> ，所以能够找到<code>a1-s1</code></li>
+<li><strong>新旧节点断开</strong>。把N和N1断开，得到<code>a1-b1-c1</code></li>
 </ul>
+<p>注意：设置随机节点时，随机节点可能为空。断链时，下一个节点可能为空。</p>
+<p>[关键代码]</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">RandomListNode* <span class="title">clone</span><span class="params">(RandomListNode* head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1. 新建节点，连接到原节点的后面</span></span><br><span class="line">    RandomListNode* p = head;</span><br><span class="line">    <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        RandomListNode* p1 = <span class="keyword">new</span> RandomListNode(p-&gt;label);</span><br><span class="line">        <span class="comment">// 连接</span></span><br><span class="line">        p1-&gt;next = p-&gt;next;</span><br><span class="line">        p-&gt;next = p1;</span><br><span class="line">        p = p1-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 为新节点设置随机节点</span></span><br><span class="line">    p = head;</span><br><span class="line">    <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        RandomListNode* p1 = p-&gt;next;</span><br><span class="line">        RandomListNode* s = p-&gt;random;</span><br><span class="line">        <span class="comment">// 注意random可能为空</span></span><br><span class="line">        <span class="keyword">if</span> (s != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            p1-&gt;random = s-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        p = p1-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 新旧节点断开</span></span><br><span class="line">    p = head;</span><br><span class="line">    RandomListNode* head1 = p-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        <span class="comment">// 新节点</span></span><br><span class="line">        RandomListNode* p1 = p-&gt;next;</span><br><span class="line">        <span class="comment">// 原节点，连接到原下一个节点</span></span><br><span class="line">        p-&gt;next = p1-&gt;next;</span><br><span class="line">        <span class="comment">// 新节点的下一个节点，可能下一个节点为空</span></span><br><span class="line">        <span class="keyword">if</span> (p-&gt;next) &#123;</span><br><span class="line">            p1-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            p1-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -543,7 +546,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-12T07:46:00.411Z" itemprop="dateUpdated">2018-01-12 15:46:00</time>
+    最后更新时间：<time datetime="2018-01-21T14:24:41.666Z" itemprop="dateUpdated">2018-01-21 22:24:41</time>
 </span><br>
 
 
