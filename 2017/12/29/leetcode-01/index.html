@@ -29,7 +29,7 @@
 <meta property="og:description" content="有序列表转二叉查找树-109 Convert Sorted List to Binary Search Tree 二叉树 二叉树的最小深度-111 Minimum Depth of Binary Tree 最小深度：根节点到某个叶子节点的最短路径。  为空，返回0 左孩子为空，则结果在右孩子 右孩子为空，则结果在左孩子 左右均不为空，返回小的+1  二叉树遍历 先序遍历-">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ds/tree/bstree_03.jpg">
-<meta property="og:updated_time" content="2018-01-21T06:36:59.483Z">
+<meta property="og:updated_time" content="2018-01-21T07:05:08.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-01">
 <meta name="twitter:description" content="有序列表转二叉查找树-109 Convert Sorted List to Binary Search Tree 二叉树 二叉树的最小深度-111 Minimum Depth of Binary Tree 最小深度：根节点到某个叶子节点的最短路径。  为空，返回0 左孩子为空，则结果在右孩子 右孩子为空，则结果在左孩子 左右均不为空，返回小的+1  二叉树遍历 先序遍历-">
@@ -349,11 +349,26 @@
 <p>给一颗二叉树和一个sum值，判断是否有从根节点到叶子节点的路径，使得路径上的节点求和等于sum</p>
 </blockquote>
 <p><strong>思路</strong></p>
-<p>做减法</p>
+<p><strong>做减法</strong></p>
 <ul>
 <li>根节点为空，False</li>
 <li>没有孩子，判断<code>root.val == sum</code></li>
 <li>有孩子，<strong>把sum减掉根节点的值，去判断左右子树是否有</strong> ，<code>sum = sum - root.val</code></li>
+</ul>
+<p>[关键代码]</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathSum</span><span class="params">(TreeNode* root, <span class="keyword">int</span> sum)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1. 节点为空</span></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2. 没有左右子树，直接判断</span></span><br><span class="line">    <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) &#123;</span><br><span class="line">        <span class="keyword">return</span> root-&gt;val == sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3. 减小sum，去递归判断左右子树</span></span><br><span class="line">    <span class="keyword">int</span> newsum = sum - root-&gt;val;</span><br><span class="line">    <span class="keyword">return</span> hasPathSum(root-&gt;left, newsum) || hasPathSum(root-&gt;right, newsum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>题目2 从根节点到叶子节点求和-保存路径-113</strong></p>
+<p><a href="https://leetcode.com/problems/path-sum-ii/description/" target="_blank" rel="noopener">Path Sum-113</a>， <code>Medium</code></p>
+<blockquote>
+<p>给二叉树和sum值，找到root-to-leaf的路径，使得和为sum。保存该路径</p>
+</blockquote>
+<p><strong>思路</strong></p>
+<p>用<code>vector&lt;int&gt; path</code> 来记录<strong>当前路径</strong>， <code>vector&lt;vector&lt;int&gt;&gt; res</code> 记录<strong>最终结果</strong></p>
+<ul>
+<li>根节点为空，返回</li>
+<li>到达叶子节点，<code>val == sum</code>， 把<strong>当前节点加入path</strong>，<strong>当前path加入res</strong>， 否则返回</li>
+<li>非叶子节点，<strong>把当前节点加入path</strong>，<strong>去左右子树中遍历</strong>，继续追加path直到叶子节点</li>
+<li>非叶子节点，结束后，<strong>把当前节点从path中删除</strong></li>
 </ul>
 
         </div>
@@ -362,7 +377,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-21T06:36:59.483Z" itemprop="dateUpdated">2018-01-21 14:36:59</time>
+    最后更新时间：<time datetime="2018-01-21T07:05:08.668Z" itemprop="dateUpdated">2018-01-21 15:05:08</time>
 </span><br>
 
 
