@@ -543,12 +543,13 @@
 <blockquote>
 <p>给一个二叉搜索树，转化为一个排好序的双向链表。左孩子-前一个节点，右孩子-后一个节点。</p>
 </blockquote>
-<p>BST的<a href="https://plmsmile.github.io/2017/12/29/leetcode-01/#中序遍历-94">中序遍历</a>就是自动有序的</p>
+<p><a href="https://www.nowcoder.com/practice/947f6eb80d944a84850b0538bf0ec3a5?tpId=13&amp;tqId=11179&amp;tPage=2&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking" target="_blank" rel="noopener">牛客网二叉搜索树与双向链表</a></p>
+<p>BST的<a href="https://plmsmile.github.io/2017/12/29/leetcode-01/#中序遍历-94">中序遍历</a>就是自动有序的。</p>
 <p><strong>递归思路</strong></p>
-<p>中序遍历，使用<code>plast</code>来记录链表中的最后一个元素。</p>
+<p>中序遍历，使用<code>pre</code>来记录链表中的最后一个元素。</p>
 <ul>
 <li>遍历到根节点时，递归转换左子树</li>
-<li>last与root连接</li>
+<li>pre与root连接，<code>pre.right=root</code>, <code>root.left=pre</code>, <code>pre=root</code></li>
 <li>递归创建右子树</li>
 </ul>
 
