@@ -29,7 +29,7 @@
 <meta property="og:description" content="有序列表转二叉查找树-109 Convert Sorted List to Binary Search Tree 二叉树的最小深度-111 Minimum Depth of Binary Tree 最小深度：根节点到某个叶子节点的最短路径。  为空，返回0 左孩子为空，则结果在右孩子 右孩子为空，则结果在左孩子 左右均不为空，返回小的+1  二叉树遍历 先序遍历-144">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ds/tree/bstree_03.jpg">
-<meta property="og:updated_time" content="2018-01-25T08:44:58.139Z">
+<meta property="og:updated_time" content="2018-01-26T08:16:03.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode-01">
 <meta name="twitter:description" content="有序列表转二叉查找树-109 Convert Sorted List to Binary Search Tree 二叉树的最小深度-111 Minimum Depth of Binary Tree 最小深度：根节点到某个叶子节点的最短路径。  为空，返回0 左孩子为空，则结果在右孩子 右孩子为空，则结果在左孩子 左右均不为空，返回小的+1  二叉树遍历 先序遍历-144">
@@ -168,7 +168,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有序列表转二叉查找树-109"><span class="post-toc-number">1.</span> <span class="post-toc-text">有序列表转二叉查找树-109</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的最小深度-111"><span class="post-toc-number">2.</span> <span class="post-toc-text">二叉树的最小深度-111</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树遍历"><span class="post-toc-number">3.</span> <span class="post-toc-text">二叉树遍历</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先序遍历-144"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">先序遍历-144</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中序遍历-094"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">中序遍历-094</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后序遍历-145"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">后序遍历-145</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#层次遍历-102"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">层次遍历-102</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#发现重复的数字-287"><span class="post-toc-number">4.</span> <span class="post-toc-text">发现重复的数字-287</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#合并两条有序链表-021"><span class="post-toc-number">5.</span> <span class="post-toc-text">合并两条有序链表-021</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#合并多条有序链表-023"><span class="post-toc-number">6.</span> <span class="post-toc-text">合并多条有序链表-023</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#z型打印二叉树-103"><span class="post-toc-number">7.</span> <span class="post-toc-text">Z型打印二叉树-103</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树路径求和-112.113.437"><span class="post-toc-number">8.</span> <span class="post-toc-text">二叉树路径求和-112.113.437</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有序链表转平衡bst-109"><span class="post-toc-number">9.</span> <span class="post-toc-text">有序链表转平衡BST-109</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#序列化二叉树-297"><span class="post-toc-number">10.</span> <span class="post-toc-text">序列化二叉树-297</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数字全排列-046"><span class="post-toc-number">11.</span> <span class="post-toc-text">数字全排列-046</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#重复数字全排列-047"><span class="post-toc-number">12.</span> <span class="post-toc-text">重复数字全排列-047</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#n皇后问题-051"><span class="post-toc-number">13.</span> <span class="post-toc-text">N皇后问题-051</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#n皇后问题-052"><span class="post-toc-number">14.</span> <span class="post-toc-text">N皇后问题-052</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有序列表转二叉查找树-109"><span class="post-toc-number">1.</span> <span class="post-toc-text">有序列表转二叉查找树-109</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树的最小深度-111"><span class="post-toc-number">2.</span> <span class="post-toc-text">二叉树的最小深度-111</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树遍历"><span class="post-toc-number">3.</span> <span class="post-toc-text">二叉树遍历</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#先序遍历-144"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">先序遍历-144</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中序遍历-094"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">中序遍历-094</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后序遍历-145"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">后序遍历-145</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#层次遍历-102"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">层次遍历-102</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#发现重复的数字-287"><span class="post-toc-number">4.</span> <span class="post-toc-text">发现重复的数字-287</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#合并两条有序链表-021"><span class="post-toc-number">5.</span> <span class="post-toc-text">合并两条有序链表-021</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#合并多条有序链表-023"><span class="post-toc-number">6.</span> <span class="post-toc-text">合并多条有序链表-023</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#z型打印二叉树-103"><span class="post-toc-number">7.</span> <span class="post-toc-text">Z型打印二叉树-103</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树路径求和-112.113.437"><span class="post-toc-number">8.</span> <span class="post-toc-text">二叉树路径求和-112.113.437</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#有序链表转平衡bst-109"><span class="post-toc-number">9.</span> <span class="post-toc-text">有序链表转平衡BST-109</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#序列化二叉树-297"><span class="post-toc-number">10.</span> <span class="post-toc-text">序列化二叉树-297</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数字全排列-046"><span class="post-toc-number">11.</span> <span class="post-toc-text">数字全排列-046</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#重复数字全排列-047"><span class="post-toc-number">12.</span> <span class="post-toc-text">重复数字全排列-047</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#n皇后问题-051"><span class="post-toc-number">13.</span> <span class="post-toc-text">N皇后问题-051</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#n皇后问题-052"><span class="post-toc-number">14.</span> <span class="post-toc-text">N皇后问题-052</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数组中次数超过一半的数-169"><span class="post-toc-number">15.</span> <span class="post-toc-text">数组中次数超过一半的数-169</span></a></li></ol>
         </nav>
     </aside>
     
@@ -484,6 +484,33 @@
 </blockquote>
 <p>做了上面的题，那这个就很简单了，返回数量就行了。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 返回n皇后的解法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solveNQueens</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 所有的结果</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; locations;</span><br><span class="line">    <span class="comment">// 当前的位置</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path(n);</span><br><span class="line">    <span class="comment">// 初始化为0-n-1</span></span><br><span class="line">    <span class="built_in">std</span>::iota(path.begin(), path.end(), <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// dfs遍历搜索</span></span><br><span class="line">    dfs(<span class="number">0</span>, n, path, locations);</span><br><span class="line">    <span class="keyword">return</span> locations.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="数组中次数超过一半的数-169">数组中次数超过一半的数-169</h1>
+<p><a href="https://leetcode.com/problems/majority-element/description/" target="_blank" rel="noopener">Majority Element-169</a>， <code>easy</code></p>
+<blockquote>
+<p>一个数组，有一个元素出现次数超过一半，找到它。</p>
+</blockquote>
+<p><strong>思路0 先排序再找</strong></p>
+<p><span class="math inline">\(O(n\log n)\)</span></p>
+<p><strong>思路1 快速排序查找第k大元素思想</strong></p>
+<p><a href="https://plmsmile.github.io/2017/12/26/sort-algorithms/#快速排序">快速排序笔记</a> 。</p>
+<ul>
+<li>如果排好序，则该重复的数字应该在数组中间<span class="math inline">\(a_{\frac{n}{2}}\)</span>。 也就是中位数，第<code>n/2</code>大的数字</li>
+<li>问题就转化为<strong>查找数组中的K大的元素</strong></li>
+</ul>
+<p>查找第k大的元素</p>
+<ul>
+<li><code>partition(a, l, r)</code> 会把<code>x=a[l]</code>放到中间去，小于的在右边，大于的在左边。返回x的最终位置<code>i</code></li>
+<li><code>i == k</code>， 则x就是第k大的元素</li>
+<li><code>k &lt; i</code>， 则k在右边</li>
+<li><code>k &gt; i</code>， 则k在左边</li>
+<li>继续查找，知道 <code>i == k</code></li>
+</ul>
+<p><strong>思路2 count加加减减思想</strong></p>
+<ul>
+<li>遇见友军（相同的），就++</li>
+<li>遇见敌军（不同的），就--</li>
+<li>最后剩余的肯定就是人数最多的那个（数字）</li>
+</ul>
 
         </div>
 
@@ -491,7 +518,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-01-25T08:44:58.139Z" itemprop="dateUpdated">2018-01-25 16:44:58</time>
+    最后更新时间：<time datetime="2018-01-26T08:16:03.541Z" itemprop="dateUpdated">2018-01-26 16:16:03</time>
 </span><br>
 
 
