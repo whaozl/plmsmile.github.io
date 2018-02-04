@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-04T14:45:00.375Z">
+<meta property="og:updated_time" content="2018-02-04T15:11:25.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Aim2offer3(21-40)">
 <meta name="twitter:description" content="把奇数放在偶数的前面-21 问题 输入：一个数组，乱序，有奇数和偶数 输出：把所有的奇数放在前面，所有的偶数放在后面 暴力思路  从头到尾遍历数组 遇到奇数，访问下一个 遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾  冒泡思路  for (int i = n-1; i &amp;gt; 0; i--) 依次放置好后面n-1个数即可 从for (int j = 0; j">
@@ -660,21 +660,23 @@
 <blockquote>
 <p>给一个数组，有正数有负数。求所有连续子数组和的最大值。O(n)</p>
 </blockquote>
-<p><a href="https://www.nowcoder.net/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&amp;tqId=11183&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking" target="_blank" rel="noopener">牛客网连续子数组的最大和</a></p>
+<p><a href="https://www.nowcoder.net/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&amp;tqId=11183&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking" target="_blank" rel="noopener">牛客网连续子数组的最大和</a> ，<a href="https://github.com/plmsmile/aim2offer/blob/master/42_subarray_maxsum/maxsum_subarray.cpp" target="_blank" rel="noopener">github代码</a></p>
 <p><strong>思路1 累加切换思路</strong></p>
 <p>当前累加和，最大累加和。遍历遇到数n</p>
 <ul>
 <li>如果<code>cursum &lt;= 0</code>， 则<code>cursum = n</code>， 否则 <code>cursum += n</code></li>
 <li>如果<code>cursum &gt; bestsum</code>， 则<code>bestsum = cursum</code></li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxsum_subarray</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a.empty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> cursum = a[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> bestsum = a[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cursum &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            cursum = a[i];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cursum += a[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cursum &gt; bestsum) &#123;</span><br><span class="line">            bestsum = cursum;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bestsum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>思路2 动态规划</strong></p>
 <p>设<code>f[i]</code>表示以<span class="math inline">\(a_i\)</span> 结尾的子数组的最大和，我们要求<code>max[fi]</code> <span class="math display">\[
 f(i) = 
 \begin{cases}
-&amp; a_i, &amp;  f(i-1) \le 0\\
-&amp; f(i-1) + a_i, &amp; f(i-1) &gt; 0  \\
+&amp; a_i, &amp;  f(i-1) \le 0 \quad or \quad i = 0\\
+&amp; f(i-1) + a_i, &amp; f(i-1) &gt; 0 \quad and \quad i \ne 0  \\
 \end{cases}
 \]</span></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxsum_subarray_dp</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a.empty()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// p[i]=k，以i结尾的所有连续子数组中的最大值为k</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p(a.size(), <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">0</span> || p[i<span class="number">-1</span>] &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            p[i] = a[i];</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p[i<span class="number">-1</span>] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            p[i] = p[i<span class="number">-1</span>] + a[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="built_in">std</span>::max_element(p.begin(), p.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -682,7 +684,7 @@ f(i) =
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-02-04T14:45:00.375Z" itemprop="dateUpdated">2018-02-04 22:45:00</time>
+    最后更新时间：<time datetime="2018-02-04T15:11:25.316Z" itemprop="dateUpdated">2018-02-04 23:11:25</time>
 </span><br>
 
 
