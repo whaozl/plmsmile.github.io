@@ -41,7 +41,7 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/NB5.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/NB6.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/NB8.png">
-<meta property="og:updated_time" content="2017-12-11T05:13:24.000Z">
+<meta property="og:updated_time" content="2018-03-01T13:33:35.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs224n-notes3-神经网络2">
 <meta name="twitter:description" content="过拟合 过拟合 训练数据很少，或者训练次数很多，会导致过拟合。避免过拟合的方法有如下几种：  early stop 数据集扩增 正则化 （L1， L2权重衰减） Dropout  现在一般用L2正则化+Dropout。 过拟合时，拟合系数一般都很大。过拟合需要顾及到所有的数据点，意味着拟合函数波动很大。  看到，在某些很小的区间内里，函数值的变化很剧烈。意味着这些小区间的导">
@@ -222,10 +222,10 @@
 <h2 id="范数">范数</h2>
 <p><strong>向量范数</strong></p>
 <p><span class="math inline">\(x \in \mathbb {R}^d\)</span></p>
-<table style="width:75%;">
+<table>
 <colgroup>
-<col width="18%">
-<col width="56%">
+<col width="19%">
+<col width="80%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -240,11 +240,11 @@
 </tr>
 <tr class="even">
 <td>2-范数</td>
-<td><span class="math inline">\(\left \| x\right\|_2 = \left(\sum_i^d \|x_i\|^2\right)^{\frac{1}{2}}\)</span>， <strong>绝对值之和再开方</strong></td>
+<td><span class="math inline">\(\left \| x\right\|_2 = \left(\sum_i^d \vert x_i\vert^2\right)^{\frac{1}{2}}\)</span>， <strong>绝对值平方之和再开方</strong></td>
 </tr>
 <tr class="odd">
 <td>p-范数</td>
-<td><span class="math inline">\(\left \| x\right\|_p = \left(\sum_i^d \|x_i\|^p\right)^{\frac{1}{p}}\)</span>， <strong>绝对值的p次方之和的<span class="math inline">\(\frac{1}{p}\)</span>次幂</strong></td>
+<td><span class="math inline">\(\left \| x\right\|_p = \left(\sum_i^d \|x_i\|^p\right)^{\frac{1}{p}}\)</span>， <strong>绝对值的p次方之和的<span class="math inline">\(\frac{1}{p}​\)</span>次幂</strong></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\infty\)</span>-范数</td>
@@ -501,7 +501,7 @@ E(x) = E(\mu), \quad D(x) = \frac{b}{b-1} E(\sigma^2)
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-12-11T05:13:24.000Z" itemprop="dateUpdated">2017-12-11 13:13:24</time>
+    最后更新时间：<time datetime="2018-03-01T13:33:35.198Z" itemprop="dateUpdated">2018-03-01 21:33:35</time>
 </span><br>
 
 

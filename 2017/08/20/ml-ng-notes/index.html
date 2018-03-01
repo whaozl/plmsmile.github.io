@@ -47,7 +47,7 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ml/lr/02_%E5%9C%86%E5%BD%A2%E6%95%B0%E6%8D%AE.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ml/lr/03_%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ml/lr/06_y01%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0.png">
-<meta property="og:updated_time" content="2017-11-21T01:33:38.000Z">
+<meta property="og:updated_time" content="2018-03-01T12:49:17.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习笔记">
 <meta name="twitter:description" content="线性回归 有\(m\)个样本\((x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \cdots, (x^{(m)}, y^{(m)})\)，假设函数有2个参数\(\theta_0, \theta_1\)，形式如下： \[ h_\theta(x) = \theta_0 + \theta_1x \] 代价函数 代价函数 \[ \color{red} {J(\t">
@@ -344,7 +344,6 @@ h_\theta(x) = \theta_0 + \theta_1x_1 + \theta_2x^2_2
 </tbody>
 </table>
 <h1 id="逻辑回归">逻辑回归</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=<span class="string">""</span> style=<span class="string">"display:block; margin:auto"</span> width=<span class="string">"60%"</span>&gt;</span><br></pre></td></tr></table></figure>
 <p>线性回归有2个不好的问题：直线难以拟合很多数据；数据标签一般是<span class="math inline">\(0, 1\)</span>，但是<span class="math inline">\(h_\theta(x)\)</span>却可能远大于1或者远小于0。如下图。</p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/image/ml/lr/%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB%E4%B8%8D%E6%8B%9F%E5%90%88.png" style="display:block; margin:auto" width="60%"></p>
 <h2 id="基本模型">基本模型</h2>
@@ -361,6 +360,7 @@ x的分类预测, y =
     0, \; &amp; h_\theta(x) &lt; 0.5,  \; 即 \; \theta^Tx &lt; 0 \\
 \end{cases}
 \]</span></p>
+<p><code>逻辑回归</code>就是要学到合适的<span class="math inline">\(\theta\)</span>，使得<strong>正例的特征远大于0</strong>，<strong>负例的特征远小于0</strong>。</p>
 <h2 id="决策边界">决策边界</h2>
 <p><strong>线性边界</strong></p>
 <p>假设我们有一个模型<span class="math inline">\(h_\theta(x) = g(\theta_0 + \theta_1x_1 + \theta_2x_2)\)</span>，已经确定参数<span class="math inline">\(\theta = (-3, 1, 1)\)</span>，即模型<span class="math inline">\(h_\theta(x) = g(-3+x_1+x_2)\)</span>，数据和模型如下图所示</p>
@@ -383,8 +383,8 @@ h_\theta(x)  = g(\theta_0 + \theta_1x_1 + \theta_2x_2 + \theta_3x_1^2 + \theta_4
 <p><img src="http://otafnwsmg.bkt.clouddn.com/image/ml/lr/03_%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0.png" style="display:block; margin:auto" width="50%"></p>
 <p><strong>代价函数</strong></p>
 <p>逻辑回归的<strong>代价函数</strong> <span class="math display">\[
+\rm{Cost}(h_\theta(x), y) = 
 \color{red}{
-Cost(h_\theta(x), y) = 
 \begin{cases}
 -\log(h_\theta(x)),\; &amp; y=1 \\
 -\log(1-h_\theta(x)), \; &amp; y=0 \\
@@ -393,7 +393,7 @@ Cost(h_\theta(x), y) =
 \]</span> 当实际上<span class="math inline">\(y=1\)</span>时，若预测为0，则代价会无穷大。当实际上<span class="math inline">\(y=0\)</span>时，若预测为1，则代价会无穷大。</p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/image/ml/lr/06_y01%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0.png" style="display:block; margin:auto" width="50%"></p>
 <p>整理代价函数如下 <span class="math display">\[
-\color{red}{Cost(h_\theta(x), y) = -y \cdot \log(h_\theta(x)) - (1-y) \cdot \log(1- h_\theta(x))}
+\rm{Cost}(h_\theta(x), y) =\color{red}{ -y \cdot \log(h_\theta(x)) - (1-y) \cdot \log(1- h_\theta(x))}
 \]</span> 得到所有的<span class="math inline">\(\color{red}{J(\theta)}\)</span> <span class="math display">\[
 J(\theta) = -\frac{1}{m} \sum_{i=1}^m
 \left(
@@ -406,7 +406,6 @@ y^{(i)}\log h_\theta(x^{(i)})
 <p>对每个参数<span class="math inline">\(\theta_j\)</span>，依次更新参数 <span class="math display">\[
 \color{red} {\theta_j = \theta_j -\alpha \cdot  \frac{1}{m} \sum_{i=1}^m \left(h_\theta(x^{(i)})-y^{(i)} \right) \cdot x_j^{(i)}}
 \]</span> 逻辑回归虽然梯度下降的式子和线性回归看起来一样，但是实际上<span class="math inline">\(h_\theta(x)\)</span>和<span class="math inline">\(J(\theta)\)</span>都不一样，所以是不一样的。</p>
-<p>gg</p>
 
         </div>
 
@@ -414,7 +413,7 @@ y^{(i)}\log h_\theta(x^{(i)})
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-11-21T01:33:38.000Z" itemprop="dateUpdated">2017-11-21 09:33:38</time>
+    最后更新时间：<time datetime="2018-03-01T12:49:17.715Z" itemprop="dateUpdated">2018-03-01 20:49:17</time>
 </span><br>
 
 
