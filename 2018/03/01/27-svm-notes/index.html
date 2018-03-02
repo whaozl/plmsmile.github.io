@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ml/svm/linear-desicion2">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ml/svm/margin-1">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/ml/svm/margin-2">
-<meta property="og:updated_time" content="2018-03-02T03:17:41.765Z">
+<meta property="og:updated_time" content="2018-03-02T12:02:23.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM笔记">
 <meta name="twitter:description" content="Support Vector Machine简单笔记。 特征空间上的间隔最大的线性分类器。学习策略是间隔最大化，转化为一个凸二次规划问题的求解。   SVM概览 线性分类器 逻辑回归的图像和公式如下，预测的分类为1的概率。  \[ h_\theta(x) = g(\theta^Tx), \quad g(z) = \frac{1}{1+e^{-z}}, \quad g(z) =">
@@ -353,8 +353,8 @@ d^* = \max_{\lambda_i \ge 0} \theta_d(\lambda) =  \max_{\lambda_i \ge 0} \min_{w
 </ul>
 <strong>1 对wb的极小化</strong> $$
 <span class="math display">\[\begin{align}
-&amp; \frac{\partial L}{\partial w} = 0 \\
-&amp; \frac{\partial L}{\partial b} = 0 \\
+&amp; \frac{\partial L}{\partial w} = 0  \to \\
+&amp; \frac{\partial L}{\partial b} = 0 \to \\
 
 \end{align}\]</span>
 <p>$$</p>
@@ -365,7 +365,7 @@ d^* = \max_{\lambda_i \ge 0} \theta_d(\lambda) =  \max_{\lambda_i \ge 0} \min_{w
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-02T03:17:41.765Z" itemprop="dateUpdated">2018-03-02 11:17:41</time>
+    最后更新时间：<time datetime="2018-03-02T12:02:23.887Z" itemprop="dateUpdated">2018-03-02 20:02:23</time>
 </span><br>
 
 
@@ -445,7 +445,14 @@ d^* = \max_{\lambda_i \ge 0} \theta_d(\lambda) =  \max_{\lambda_i \ge 0} \min_{w
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/02/aim2offer4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Aim2offer4(51-64)</h4>
+      </a>
+    </div>
   
 
   
