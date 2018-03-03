@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="一直都想搭建一个博客，今天终于把博客给初步搭建好了。搭建的过程其实不那么顺利，所以简答记录一下。 搭建过程  根据手把手搭建博客教程这篇文章来进行搭建，其中目前只看了它的第一页 后期在hexo主题里面选择了even主题 依照even-wiki来添加标签、分类和about页面 修改主题目录下的_config.yml的menu，把home、tags等手动改成中文了  遇到的坑  没">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-10-17T08:26:18.000Z">
+<meta property="og:updated_time" content="2018-03-03T02:00:06.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客搭建过程及问题">
 <meta name="twitter:description" content="一直都想搭建一个博客，今天终于把博客给初步搭建好了。搭建的过程其实不那么顺利，所以简答记录一下。 搭建过程  根据手把手搭建博客教程这篇文章来进行搭建，其中目前只看了它的第一页 后期在hexo主题里面选择了even主题 依照even-wiki来添加标签、分类和about页面 修改主题目录下的_config.yml的menu，把home、tags等手动改成中文了  遇到的坑  没">
@@ -220,7 +220,7 @@
 <p>一般是使用<code>pandoc</code>进行渲染，先去官网下载，然后下一步安装即可。最后，执行下面的命令，安装就好了。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-pandoc --save</span><br><span class="line"><span class="meta">#</span> 再次应该就不会报错了</span><br><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
 <h2 id="配置git">配置git</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name plmsmile</span><br><span class="line">git config --global user.email plmspark@163.com</span><br><span class="line"><span class="meta">#</span> 生成Key，一路回车</span><br><span class="line">ssh-keygen -t rsa -C "plmspark@163.com" </span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="meta">#</span> 测试</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name plmsmile</span><br><span class="line">git config --global user.email plmspark@163.com</span><br><span class="line"><span class="meta">#</span> 生成Key，一路回车</span><br><span class="line">ssh-keygen -t rsa -C "plmspark@163.com" </span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="meta">#</span> 到github上添加该sshkey</span><br><span class="line"><span class="meta">#</span> 测试</span><br><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <h2 id="潜在问题">潜在问题</h2>
 <ul>
 <li>本站没有搜索功能，安装插件失败了</li>
@@ -240,7 +240,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-10-17T08:26:18.000Z" itemprop="dateUpdated">2017-10-17 16:26:18</time>
+    最后更新时间：<time datetime="2018-03-03T02:00:06.174Z" itemprop="dateUpdated">2018-03-03 10:00:06</time>
 </span><br>
 
 
