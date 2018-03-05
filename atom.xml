@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://plmsmile.github.io/"/>
-  <updated>2018-03-03T15:05:52.907Z</updated>
+  <updated>2018-03-05T09:49:27.678Z</updated>
   <id>http://plmsmile.github.io/</id>
   
   <author>
@@ -17,13 +17,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>决策树笔记</title>
+    <link href="http://plmsmile.github.io/2018/03/05/29-desicion-tree/"/>
+    <id>http://plmsmile.github.io/2018/03/05/29-desicion-tree/</id>
+    <published>2018-03-05T07:44:59.000Z</published>
+    <updated>2018-03-05T09:49:27.678Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。</p></blockquote><h1 id="决策树">决策树</h1><h2 id="概览">概览</h2><p><strong>树的意义</strong></p><p>决策树是一棵<code>if-then树</code>。 <code>内部节点</code>代表一个属性或<code>特征</code>，<code>叶节点</code>代表一个<code>类</code>。</p><p>决策树也是给定各个特征的情况下，某类别的概率。即条件概率<span class="math inline">\(P(Y \mid X)\)</span>。</p><p><strong>树的生成</strong></p><p>构建根节点，选择<code>最优特征</code>。按照特征<code>划分子集</code>，继续选择新的最优特征，直到没有或者全部被正确分类。</p><p><strong>剪枝</strong></p><p>决策树的生成对应于<code>模型的局部选择</code>，会尽量拟合训练数据，导致模型复杂和过拟合。所以要自下而上删掉一些节点。</p><p>决策树的剪枝对应于<code>模型的全局选择</code></p><h2 id="熵和信息增益">熵和信息增益</h2><p>在每个节点，要选择一个最优特征生成。ID3使用信息增益选择最优特征，C4.5使用信息增益率来选择最优特征。</p><p><strong>信息量</strong></p><p>信息量是随机变量<span class="math inline">\(X\)</span>不确定性的度量。 <span class="math display">\[I(X) = - \log p(x)\]</span> <strong>熵</strong></p><p>熵是信息量的期望，也是<strong>随机变量不确定性的度量</strong>。 <span class="math display">\[H(X) = - \sum_{x \in X} p(x) \log p(x)\]</span> <strong>条件熵</strong></p><p>条件熵是在给定随机变量<span class="math inline">\(X\)</span>的情况下，随机变量<span class="math inline">\(Y\)</span>的不确定性。<br><span class="math display">\[H(Y \mid X) = \sum_{i = 1}^K p(x_i) H(Y \mid X = x_i)\]</span> <span class="math inline">\(X\)</span>共有<code>K</code>类，<span class="math inline">\(p(x_i)\)</span>表示<span class="math inline">\(X\)</span>属于第<span class="math inline">\(i\)</span>类的概率。<span class="math inline">\(H(Y\mid X=x_i)\)</span>表示<span class="math inline">\(X=x_i\)</span>时<span class="math inline">\(Y\)</span>的子集的熵。</p><p><strong>经验熵和经验条件熵</strong></p><p>由数据估计（极大似然估计）得到的熵和条件熵。</p><p>如数据集D，有K个类别。<code>经验熵</code>是 <span class="math display">\[H(D) = -\sum_{k=1}^K \frac{\vert C_k\vert}{\vert D\vert} \log_2 \frac{\vert C_k\vert}{\vert D\vert}\]</span> 特征A根据取值把数据集D划分为n个子集，则<strong>给定特征A时数据集D的</strong><code>经验条件熵</code>是： <span class="math display">\[H(D \mid A) = \sum_{i=1}^n \frac{\vert D_i\vert}{\vert D\vert} H(D_i)= -\sum_{i=1}^n \frac{\vert D_i\vert}{\vert D\vert} \sum_{k=1}^K \frac{\vert D_{ik}\vert}{\vert D_i\vert} \log_2 \frac{\vert D_{ik}\vert}{\vert D_i\vert}\]</span> <strong>信息增益</strong></p><p>信息增益是给定特征A，使得数据集D<strong>不确定性减少的程度</strong>。<code>信息增益 = 熵 - 条件熵</code> <span class="math display">\[g(D, A) = H(D) - H(D \mid A)\]</span> 特征A的<strong>信息增益越大</strong>，A的<strong>分类能力就越强</strong>。</p><p><strong>信息增益的问题</strong></p><p>对于取值很多的特征，比如连续型数据(时间)。每一个取值几乎都可以确定一个样本。即这个特征就可以划分所有的样本数据。</p><ul><li>使得所有分支下的样本集合都是<code>纯的</code>，极端情况每一个叶子节点都是一个样本</li><li><strong>数据更纯，信息增益更大</strong>，选择它作为根节点，结果就是<strong>庞大且深度很浅的树</strong></li></ul><p><strong>信息增益比</strong></p><p>数据集<span class="math inline">\(D\)</span>关于特征A的熵，<span class="math inline">\(n\)</span>是特征A的取值个数： <span class="math display">\[H_A(D) = -\sum_{i=1}^n \frac{\vert D_i\vert}{\vert D\vert} \log_2 \frac{\vert D_i\vert}{\vert D\vert}\]</span> <code>信息增益比 = 信息增益 / D关于特征A的熵</code> ： <span class="math display">\[g_R(D, A) = \frac {g(D, A)}{H_A(D)}\]</span> 解决信息增益的问题：特征A分的类别越多，<span class="math inline">\(D\)</span>关于A的熵就越大，作为分母，所以信息增益<span class="math inline">\(g_R(D, A)\)</span> 就越小。</p><p>信息增益比的问题：实际上偏好可取类别数目较少的特征。</p><h2 id="基尼指数">基尼指数</h2><p><code>CART</code>分类树使用基尼指数来选择最优特征。 <strong>基尼指数也是度量不确定性</strong>。</p><p><strong>概率分布基尼指数</strong></p><p>分类中，有<span class="math inline">\(K\)</span>类。 样本属于第<span class="math inline">\(k\)</span>类的概率为<span class="math inline">\(p_k\)</span>。 <span class="math display">\[\rm{Gini}(p) = \sum_{k=1}^K p_k(1-p_k) = 1 - \sum_{k=1}^Kp_k^2\]</span> <strong>样本集合基尼指数</strong></p><p>集合D，有<span class="math inline">\(K\)</span>类，<span class="math inline">\(D_k\)</span> 是第k类的样本子集。则D的基尼指数 <span class="math display">\[\rm{Gini}(D) = 1 - \sum_{k=1}^K \left(\frac{\vert D_k\vert}{\vert D\vert} \right)^2\]</span> <strong>特征A条件基尼指数</strong></p><p>特征A取值为某一可能取值为<code>a</code>。 根据是否取值为a把D划分为<span class="math inline">\(D_1\)</span>和<span class="math inline">\(D_2\)</span>两个集合。</p><p>在特征A的条件下，D的基尼指数如下： <span class="math display">\[\rm{Gini}(D, A) = \frac{\vert D_1\vert}{\vert D\vert} \rm{Gini}(D_1) + \frac{\vert D_2\vert}{\vert D\vert} \rm{Gini}(D_2)\]</span> <span class="math inline">\(\rm{Gini}(D, A)\)</span>是<strong>集合D根据特征A分割后，集合D的不确定性</strong>。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;决策树&quot;&gt;决策树&lt;/h1&gt;
+&lt;h2 id=&quot;概览&quot;&gt;概览&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;树的意义&lt;
+      
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="决策树" scheme="http://plmsmile.github.io/tags/%E5%86%B3%E7%AD%96%E6%A0%91/"/>
+    
+      <category term="ID3" scheme="http://plmsmile.github.io/tags/ID3/"/>
+    
+      <category term="CART" scheme="http://plmsmile.github.io/tags/CART/"/>
+    
+      <category term="熵" scheme="http://plmsmile.github.io/tags/%E7%86%B5/"/>
+    
+      <category term="信息增益" scheme="http://plmsmile.github.io/tags/%E4%BF%A1%E6%81%AF%E5%A2%9E%E7%9B%8A/"/>
+    
+  </entry>
+  
+  <entry>
     <title>机器学习知识点汇总整理</title>
     <link href="http://plmsmile.github.io/2018/03/03/28-ml-interview-notes/"/>
     <id>http://plmsmile.github.io/2018/03/03/28-ml-interview-notes/</id>
     <published>2018-03-03T13:32:52.000Z</published>
-    <updated>2018-03-03T15:05:52.907Z</updated>
+    <updated>2018-03-05T01:39:41.174Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="" style="display:block; margin:auto" width="60%"></p><h1 id="tensorflow">Tensorflow</h1><p><strong>1 Tensorflow的计算图</strong></p><p>Tensorflow通过<code>计算图</code>的形式来表示计算。是一个有向图。<strong>节点</strong>代表一个<code>计算</code>，<strong>边</strong>代表计算之间的<code>依赖关系</code>。</p><ul><li>构建计算图</li><li>执行计算图，<code>session.run</code></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x_data = np.float32(np.random.rand(<span class="number">2</span>,<span class="number">100</span>))</span><br><span class="line">y_data = np.dot([<span class="number">0.1</span> , <span class="number">0.2</span>] , x_data) + <span class="number">0.3</span></span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">1</span>]))</span><br><span class="line">W = tf.Variable(tf.random_uniform([<span class="number">1</span>,<span class="number">2</span>],<span class="number">-1.0</span>,<span class="number">1.0</span>))</span><br><span class="line"></span><br><span class="line">y = tf.matmul(W,x_data) + b</span><br><span class="line"></span><br><span class="line">loss = tf.reduce_mean(tf.square(y - y_data))</span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>)</span><br><span class="line">train = optimizer.minimize(loss)</span><br></pre></td></tr></table></figure><p><img src="http://otafnwsmg.bkt.clouddn.com/image/itv/tf/flow-graph.jpg" style="display:block; margin:auto" width="30%"></p><h1 id="knn">KNN</h1><p>看中间的绿色属于哪一类？</p><ul><li>和谁近就属于谁</li><li>看k个</li></ul><p><img src="http://otafnwsmg.bkt.clouddn.com/img/it/knn/knn.png" style="display:block; margin:auto" width="30%"></p><p><strong>1 欧式距离和曼哈顿距离</strong></p><p><code>欧式距离</code>是两点之间的距离 <span class="math display">\[d = \sqrt {(x_1-x_2)^2 +(y_1-y_2)^2  }\]</span> <code>曼哈顿距离</code>也称作<code>城市街区距离</code>，两个十字路口的实际要走的距离 <span class="math display">\[d = \vert x_1 - x_2\vert +  \vert y_1 -y_2 \vert\]</span> <strong>2 K值的选择</strong></p><ul><li>k较小：用较小范围进行预测。容易过拟合，模型复杂。</li><li>k较大：用较大范围进行预测。较远不相似的也会起作用，会发生错误。模型简单。</li><li>k=N：完全不可取。每个都是属于最多样本的类别</li><li>一般选择比较小的数值。如采用<code>交叉验证法</code>来选择最优的k值。 （一部分训练，一部分测试）</li></ul><h1 id="logistic-regression">Logistic Regression</h1><p><a href="https://plmsmile.github.io/2017/08/20/ml-ng-notes/#逻辑回归">我的LR笔记</a></p><p><strong>1 简介LR</strong></p><p>问一个女生喜欢你吗，SVM会告诉你喜欢或者不喜欢。很粗暴。</p><p>LR则会告诉你，有多喜欢你，多不喜欢你。就是告诉你一个<code>可能性</code>。多喜欢你是取决于她的看重点权值和你身上有的东西x。 <span class="math display">\[p(y=1\mid x;\theta)= \sigma(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}} \quad\quad  = h_\theta(x)\]</span></p><p><span class="math display">\[p(y=1) = h(x), \quad p(y=0) = 1-h(x)\]</span></p><p>使用<code>极大似然法</code>进行参数估计：<strong>样本恰好使联合概率密度（似然函数）取得最大值</strong>。<strong>概率密度相乘</strong>。</p><p><code>对数似然函数</code>： <span class="math display">\[\begin{align}L(\theta) &amp; = \log \prod_{i=1}^N [h(x)^{y_i} ][1-h(x)]^{1-y_i} \\&amp; = \sum_{i=1}^N \left( y_i \log h(x) + (1-y_i)\log(1-h(x)) \right) \\&amp; = \sum_{i=1}^N (y_i \theta^Tx_i - \log(1+e^{\theta^Tx}))\end{align}\]</span> 使<span class="math inline">\(L(\theta)\)</span>最大，取负数就是其<code>损失函数</code> ： <span class="math display">\[J(\theta) = -\frac{1}{m} L(\theta) = -\frac{1}{m} \sum_{i=1}^N \left( y_i \log h(x) + (1-y_i)\log(1-h(x)) \right)\]</span> 令导数为0，发现无法解析求解。 <span class="math display">\[\begin{align}\frac{\partial L(\theta)}{\partial \theta} &amp; =\sum_{i=1}^N y_i x_i  - \sum_{i=1}^N \frac{e^{\theta^Tx}}{1 + e^{\theta^Tx}} x_i \\&amp; = \sum_{i=1}^N x_i (y_i - \sigma(\theta^Tx) )\end{align}\]</span> 只能借助迭代法，如<strong>梯度下降法和拟牛顿法来进行求解</strong>。</p><p><strong>2 LR和SVM的比较</strong></p><p><strong>相同点</strong></p><ul><li>都是分类算法，都是监督学习算法</li><li>如果不考虑核函数，LR和SVM都是线性分类算法，决策面都是线性的</li><li>LR和SVM都是判别式模型</li></ul>]]></content>
+    <content type="html"><![CDATA[<p><img src="" style="display:block; margin:auto" width="60%"></p><h1 id="tensorflow">Tensorflow</h1><p><strong>1 Tensorflow的计算图</strong></p><p>Tensorflow通过<code>计算图</code>的形式来表示计算。是一个有向图。<strong>节点</strong>代表一个<code>计算</code>，<strong>边</strong>代表计算之间的<code>依赖关系</code>。</p><ul><li>构建计算图</li><li>执行计算图，<code>session.run</code></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x_data = np.float32(np.random.rand(<span class="number">2</span>,<span class="number">100</span>))</span><br><span class="line">y_data = np.dot([<span class="number">0.1</span> , <span class="number">0.2</span>] , x_data) + <span class="number">0.3</span></span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">1</span>]))</span><br><span class="line">W = tf.Variable(tf.random_uniform([<span class="number">1</span>,<span class="number">2</span>],<span class="number">-1.0</span>,<span class="number">1.0</span>))</span><br><span class="line"></span><br><span class="line">y = tf.matmul(W,x_data) + b</span><br><span class="line"></span><br><span class="line">loss = tf.reduce_mean(tf.square(y - y_data))</span><br><span class="line">optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>)</span><br><span class="line">train = optimizer.minimize(loss)</span><br></pre></td></tr></table></figure><p><img src="http://otafnwsmg.bkt.clouddn.com/image/itv/tf/flow-graph.jpg" style="display:block; margin:auto" width="30%"></p><h1 id="knn">KNN</h1><p>看中间的绿色属于哪一类？</p><ul><li>和谁近就属于谁</li><li>看k个</li></ul><p><img src="http://otafnwsmg.bkt.clouddn.com/img/it/knn/knn.png" style="display:block; margin:auto" width="30%"></p><p><strong>1 欧式距离和曼哈顿距离</strong></p><p><code>欧式距离</code>是两点之间的距离 <span class="math display">\[d = \sqrt {(x_1-x_2)^2 +(y_1-y_2)^2  }\]</span> <code>曼哈顿距离</code>也称作<code>城市街区距离</code>，两个十字路口的实际要走的距离 <span class="math display">\[d = \vert x_1 - x_2\vert +  \vert y_1 -y_2 \vert\]</span> <strong>2 K值的选择</strong></p><ul><li>k较小：用较小范围进行预测。容易过拟合，模型复杂。</li><li>k较大：用较大范围进行预测。较远不相似的也会起作用，会发生错误。模型简单。</li><li>k=N：完全不可取。每个都是属于最多样本的类别</li><li>一般选择比较小的数值。如采用<code>交叉验证法</code>来选择最优的k值。 （一部分训练，一部分测试）</li></ul><h1 id="logistic-regression">Logistic Regression</h1><p><a href="https://plmsmile.github.io/2017/08/20/ml-ng-notes/#逻辑回归">我的LR笔记</a></p><table><thead><tr class="header"><th align="left">问题列表</th></tr></thead><tbody><tr class="odd"><td align="left">1 简介LR</td></tr><tr class="even"><td align="left">2 LR与SVM的区别和联系</td></tr><tr class="odd"><td align="left">3 LR与线性回归的区别和联系</td></tr></tbody></table><p><strong>1 简介LR</strong></p><p>问一个女生喜欢你吗，SVM会告诉你喜欢或者不喜欢。很粗暴。</p><p>LR则会告诉你，有多喜欢你，多不喜欢你。就是告诉你一个<code>可能性</code>。多喜欢你是取决于她的看重点权值和你身上有的东西x。 <span class="math display">\[p(y=1\mid x;\theta)= \sigma(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}} \quad\quad  = h_\theta(x)\]</span></p><p><span class="math display">\[p(y=1) = h(x), \quad p(y=0) = 1-h(x)\]</span></p><p>使用<code>极大似然法</code>进行参数估计：<strong>样本恰好使联合概率密度（似然函数）取得最大值</strong>。<strong>概率密度相乘</strong>。</p><p><code>对数似然函数</code>： <span class="math display">\[\begin{align}L(\theta) &amp; = \log \prod_{i=1}^N [h(x)^{y_i} ][1-h(x)]^{1-y_i} \\&amp; = \sum_{i=1}^N \left( y_i \log h(x) + (1-y_i)\log(1-h(x)) \right) \\&amp; = \sum_{i=1}^N (y_i \theta^Tx_i - \log(1+e^{\theta^Tx}))\end{align}\]</span> 使<span class="math inline">\(L(\theta)\)</span>最大，取负数就是其<code>损失函数</code> ： <span class="math display">\[J(\theta) = -\frac{1}{m} L(\theta) = -\frac{1}{m} \sum_{i=1}^N \left( y_i \log h(x) + (1-y_i)\log(1-h(x)) \right)\]</span> 令导数为0，发现无法解析求解。 <span class="math display">\[\begin{align}\frac{\partial L(\theta)}{\partial \theta} &amp; =\sum_{i=1}^N y_i x_i  - \sum_{i=1}^N \frac{e^{\theta^Tx}}{1 + e^{\theta^Tx}} x_i \\&amp; = \sum_{i=1}^N x_i (y_i - \sigma(\theta^Tx) )\end{align}\]</span> 只能借助迭代法，如<strong>梯度下降法和拟牛顿法来进行求解</strong>。</p><p><strong>2 LR和SVM的比较</strong></p><p><strong>相同点</strong></p><ul><li>都是分类算法，都是监督学习算法</li><li>如果不考虑核函数，LR和SVM都是<code>线性分类算法</code>，决策面都是线性的</li><li>LR和SVM都是<a href="https://plmsmile.github.io/2017/08/04/pgm-01/#产生式和判别式">判别式模型</a>。 不关心数据怎么生成，只关心数据之间的差别。用差别来进行分类。</li></ul><p>判别模型： <code>KNN</code>、 <code>LR</code> 、<code>SVM</code> 。 生成式模型：<code>朴素贝叶斯</code>、 <code>HMM</code> 。</p><p><strong>不同点</strong></p><ul><li>损失函数不同 <span class="math display">\[  J(\theta)  = -\frac{1}{m} \sum_{i=1}^N \left( y_i \log h(x) + (1-y_i)\log(1-h(x)) \right)  \]</span></li></ul><p><span class="math display">\[  L(w, b, \lambda) =\frac{1}{2} \|w\|^2 - \sum_{i=1}^n \alpha_i \left(y_i(w^Tx_i+b) - 1\right)  \]</span></p><p>LR基于<code>概率理论</code>，用<code>sigmoid</code>函数表示，通过<code>极大似然法</code>估计出参数的值。</p><p>SVM基于<code>间隔最大化原理</code>，认为最大几何间隔的分类面为最优分类面。</p><ul><li>SVM只在乎边界线附近的点(SV)，LR在乎所有的点。</li><li>SVM不直接依赖于数据分布；LR受所有点影响，如果不同类别不平衡，要对数据做<code>balancing</code></li><li>处理非线性问题时，SVM使用核函数，LR不使用核函数</li><li>SVM只有少数SV进行核计算，LR如果用核函数，则所有的点都会进行计算，代价太高</li><li>线性SVM依赖数据的距离测度，要对数据做归一化，而LR不用</li><li>SVM损失函数自带L2正则项，而LR需要额外添加</li></ul><p><strong>3 LR与线性回归的联系</strong></p><p><strong>联系</strong></p><p>LR本质上是一个线性核回归模型</p><p><strong>区别</strong></p><ul><li>目标函数：线性回归最小二乘，LR是似然函数</li><li>线性回归整个实数范围内进行预测；LR预测值限定为<code>[0,1]</code> ，<code>sigmoid</code>的非线性形式。轻松处理<code>0/1分类问题</code></li></ul>]]></content>
     
     <summary type="html">
     
@@ -93,9 +131,9 @@
       <category term="机器学习" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="SVM" scheme="http://plmsmile.github.io/tags/SVM/"/>
-    
       <category term="机器学习" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="SVM" scheme="http://plmsmile.github.io/tags/SVM/"/>
     
       <category term="拉格朗日对偶性" scheme="http://plmsmile.github.io/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AF%B9%E5%81%B6%E6%80%A7/"/>
     
@@ -405,11 +443,11 @@
       <category term="cs224n" scheme="http://plmsmile.github.io/categories/cs224n/"/>
     
     
-      <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
-    
       <category term="cs224n" scheme="http://plmsmile.github.io/tags/cs224n/"/>
     
       <category term="assignment" scheme="http://plmsmile.github.io/tags/assignment/"/>
+    
+      <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
     
       <category term="cbow" scheme="http://plmsmile.github.io/tags/cbow/"/>
     
@@ -1046,9 +1084,9 @@ P(s) = P(小猫) \cdo
       <category term="自然语言处理" scheme="http://plmsmile.github.io/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="自然语言处理" scheme="http://plmsmile.github.io/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
-    
       <category term="机器学习" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="自然语言处理" scheme="http://plmsmile.github.io/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
       <category term="各种熵" scheme="http://plmsmile.github.io/tags/%E5%90%84%E7%A7%8D%E7%86%B5/"/>
     

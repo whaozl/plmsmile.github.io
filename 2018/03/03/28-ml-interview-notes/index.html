@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/itv/tf/flow-graph.jpg">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/it/knn/knn.png">
-<meta property="og:updated_time" content="2018-03-03T15:05:52.907Z">
+<meta property="og:updated_time" content="2018-03-05T01:39:41.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习知识点汇总整理">
 <meta name="twitter:description" content="Tensorflow 1 Tensorflow的计算图 Tensorflow通过计算图的形式来表示计算。是一个有向图。节点代表一个计算，边代表计算之间的依赖关系。  构建计算图 执行计算图，session.run  12345678910x_data = np.float32(np.random.rand(2,100))y_data = np.dot([0.1 , 0.2] ,">
@@ -225,6 +225,24 @@ d = \vert x_1 - x_2\vert +  \vert y_1 -y_2 \vert
 </ul>
 <h1 id="logistic-regression">Logistic Regression</h1>
 <p><a href="https://plmsmile.github.io/2017/08/20/ml-ng-notes/#逻辑回归">我的LR笔记</a></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">问题列表</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1 简介LR</td>
+</tr>
+<tr class="even">
+<td align="left">2 LR与SVM的区别和联系</td>
+</tr>
+<tr class="odd">
+<td align="left">3 LR与线性回归的区别和联系</td>
+</tr>
+</tbody>
+</table>
 <p><strong>1 简介LR</strong></p>
 <p>问一个女生喜欢你吗，SVM会告诉你喜欢或者不喜欢。很粗暴。</p>
 <p>LR则会告诉你，有多喜欢你，多不喜欢你。就是告诉你一个<code>可能性</code>。多喜欢你是取决于她的看重点权值和你身上有的东西x。 <span class="math display">\[
@@ -254,8 +272,36 @@ J(\theta) = -\frac{1}{m} L(\theta) = -\frac{1}{m} \sum_{i=1}^N \left( y_i \log h
 <p><strong>相同点</strong></p>
 <ul>
 <li>都是分类算法，都是监督学习算法</li>
-<li>如果不考虑核函数，LR和SVM都是线性分类算法，决策面都是线性的</li>
-<li>LR和SVM都是判别式模型</li>
+<li>如果不考虑核函数，LR和SVM都是<code>线性分类算法</code>，决策面都是线性的</li>
+<li>LR和SVM都是<a href="https://plmsmile.github.io/2017/08/04/pgm-01/#产生式和判别式">判别式模型</a>。 不关心数据怎么生成，只关心数据之间的差别。用差别来进行分类。</li>
+</ul>
+<p>判别模型： <code>KNN</code>、 <code>LR</code> 、<code>SVM</code> 。 生成式模型：<code>朴素贝叶斯</code>、 <code>HMM</code> 。</p>
+<p><strong>不同点</strong></p>
+<ul>
+<li>损失函数不同 <span class="math display">\[
+  J(\theta)  = -\frac{1}{m} \sum_{i=1}^N \left( y_i \log h(x) + (1-y_i)\log(1-h(x)) \right)
+  \]</span></li>
+</ul>
+<p><span class="math display">\[
+  L(w, b, \lambda) =\frac{1}{2} \|w\|^2 - \sum_{i=1}^n \alpha_i \left(y_i(w^Tx_i+b) - 1\right)
+  \]</span></p>
+<p>LR基于<code>概率理论</code>，用<code>sigmoid</code>函数表示，通过<code>极大似然法</code>估计出参数的值。</p>
+<p>SVM基于<code>间隔最大化原理</code>，认为最大几何间隔的分类面为最优分类面。</p>
+<ul>
+<li>SVM只在乎边界线附近的点(SV)，LR在乎所有的点。</li>
+<li>SVM不直接依赖于数据分布；LR受所有点影响，如果不同类别不平衡，要对数据做<code>balancing</code></li>
+<li>处理非线性问题时，SVM使用核函数，LR不使用核函数</li>
+<li>SVM只有少数SV进行核计算，LR如果用核函数，则所有的点都会进行计算，代价太高</li>
+<li>线性SVM依赖数据的距离测度，要对数据做归一化，而LR不用</li>
+<li>SVM损失函数自带L2正则项，而LR需要额外添加</li>
+</ul>
+<p><strong>3 LR与线性回归的联系</strong></p>
+<p><strong>联系</strong></p>
+<p>LR本质上是一个线性核回归模型</p>
+<p><strong>区别</strong></p>
+<ul>
+<li>目标函数：线性回归最小二乘，LR是似然函数</li>
+<li>线性回归整个实数范围内进行预测；LR预测值限定为<code>[0,1]</code> ，<code>sigmoid</code>的非线性形式。轻松处理<code>0/1分类问题</code></li>
 </ul>
 
         </div>
@@ -264,7 +310,7 @@ J(\theta) = -\frac{1}{m} L(\theta) = -\frac{1}{m} \sum_{i=1}^N \left( y_i \log h
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-03T15:05:52.907Z" itemprop="dateUpdated">2018-03-03 23:05:52</time>
+    最后更新时间：<time datetime="2018-03-05T01:39:41.174Z" itemprop="dateUpdated">2018-03-05 09:39:41</time>
 </span><br>
 
 
@@ -344,7 +390,14 @@ J(\theta) = -\frac{1}{m} L(\theta) = -\frac{1}{m} \sum_{i=1}^N \left( y_i \log h
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/05/29-desicion-tree/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">决策树笔记</h4>
+      </a>
+    </div>
   
 
   
