@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="决策树,ID3,CART,熵,信息增益">
-    <meta name="description" content="决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。  决策树 概览 树的意义 决策树是一棵if-then树。 内部节点代表一个属性或特征，叶节点代表一个类。 决策树也是给定各个特征的情况下，某类别的概率。即条件概率\(P(Y \mid X)\)。 树的生成 构建根节点，">
+    <meta name="description" content="决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。  决策树背景 概览 树的意义 决策树是一棵if-then树。 内部节点代表一个属性或特征，叶节点代表一个类。 决策树也是给定各个特征的情况下，某类别的概率。即条件概率\(P(Y \mid X)\)。 树的生成 构建根节">
 <meta name="keywords" content="决策树,ID3,CART,熵,信息增益">
 <meta property="og:type" content="article">
 <meta property="og:title" content="决策树笔记">
 <meta property="og:url" content="http://plmsmile.github.io/2018/03/05/29-desicion-tree/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
-<meta property="og:description" content="决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。  决策树 概览 树的意义 决策树是一棵if-then树。 内部节点代表一个属性或特征，叶节点代表一个类。 决策树也是给定各个特征的情况下，某类别的概率。即条件概率\(P(Y \mid X)\)。 树的生成 构建根节点，选择最优特征。按照特征划分子集，继续选择新的最优特征，直到没有或者全部被正确">
+<meta property="og:description" content="决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。  决策树背景 概览 树的意义 决策树是一棵if-then树。 内部节点代表一个属性或特征，叶节点代表一个类。 决策树也是给定各个特征的情况下，某类别的概率。即条件概率\(P(Y \mid X)\)。 树的生成 构建根节点，选择最优特征。按照特征划分子集，继续选择新的最优特征，直到没有或者全部被">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-05T09:49:27.678Z">
+<meta property="og:updated_time" content="2018-03-05T15:06:25.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="决策树笔记">
-<meta name="twitter:description" content="决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。  决策树 概览 树的意义 决策树是一棵if-then树。 内部节点代表一个属性或特征，叶节点代表一个类。 决策树也是给定各个特征的情况下，某类别的概率。即条件概率\(P(Y \mid X)\)。 树的生成 构建根节点，选择最优特征。按照特征划分子集，继续选择新的最优特征，直到没有或者全部被正确">
+<meta name="twitter:description" content="决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。  决策树背景 概览 树的意义 决策树是一棵if-then树。 内部节点代表一个属性或特征，叶节点代表一个类。 决策树也是给定各个特征的情况下，某类别的概率。即条件概率\(P(Y \mid X)\)。 树的生成 构建根节点，选择最优特征。按照特征划分子集，继续选择新的最优特征，直到没有或者全部被">
     
         <link rel="alternate" type="application/atom+xml" title="PLM&#39;s Notes" href="/atom.xml">
     
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#决策树"><span class="post-toc-number">1.</span> <span class="post-toc-text">决策树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概览"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#熵和信息增益"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">熵和信息增益</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基尼指数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">基尼指数</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#决策树背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">决策树背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概览"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#熵和信息增益"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">熵和信息增益</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基尼指数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">基尼指数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#id3算法"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">ID3算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#c4.5算法"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">C4.5算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#id3c4.5决策树剪枝"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">ID3/C4.5决策树剪枝</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -194,7 +194,7 @@
             <blockquote>
 <p>决策树的特征选择、生成、剪枝。熵、信息增益。ID3、C4.5。分类与回归树CART。</p>
 </blockquote>
-<h1 id="决策树">决策树</h1>
+<h1 id="决策树背景">决策树背景</h1>
 <h2 id="概览">概览</h2>
 <p><strong>树的意义</strong></p>
 <p>决策树是一棵<code>if-then树</code>。 <code>内部节点</code>代表一个属性或<code>特征</code>，<code>叶节点</code>代表一个<code>类</code>。</p>
@@ -210,7 +210,8 @@
 <p>信息量是随机变量<span class="math inline">\(X\)</span>不确定性的度量。 <span class="math display">\[
 I(X) = - \log p(x)
 \]</span> <strong>熵</strong></p>
-<p>熵是信息量的期望，也是<strong>随机变量不确定性的度量</strong>。 <span class="math display">\[
+<p>熵是信息量的期望，也是<strong>随机变量不确定性的度量</strong>。熵偏向<code>离散属性</code>， 基尼指数偏向<code>连续属性</code>。<br>
+<span class="math display">\[
 H(X) = - \sum_{x \in X} p(x) \log p(x)
 \]</span> <strong>条件熵</strong></p>
 <p>条件熵是在给定随机变量<span class="math inline">\(X\)</span>的情况下，随机变量<span class="math inline">\(Y\)</span>的不确定性。<br>
@@ -225,7 +226,7 @@ H(D) = -\sum_{k=1}^K \frac{\vert C_k\vert}{\vert D\vert} \log_2 \frac{\vert C_k\
 H(D \mid A) = \sum_{i=1}^n \frac{\vert D_i\vert}{\vert D\vert} H(D_i)
 = -\sum_{i=1}^n \frac{\vert D_i\vert}{\vert D\vert} \sum_{k=1}^K \frac{\vert D_{ik}\vert}{\vert D_i\vert} \log_2 \frac{\vert D_{ik}\vert}{\vert D_i\vert}
 \]</span> <strong>信息增益</strong></p>
-<p>信息增益是给定特征A，使得数据集D<strong>不确定性减少的程度</strong>。<code>信息增益 = 熵 - 条件熵</code> <span class="math display">\[
+<p>信息增益是给定特征A，使得数据集D<strong>不确定性减少的程度</strong>。<code>信息增益 = 划分前熵 - 划分后熵 = 熵 - 条件熵</code> <span class="math display">\[
 g(D, A) = H(D) - H(D \mid A)
 \]</span> 特征A的<strong>信息增益越大</strong>，A的<strong>分类能力就越强</strong>。</p>
 <p><strong>信息增益的问题</strong></p>
@@ -235,15 +236,15 @@ g(D, A) = H(D) - H(D \mid A)
 <li><strong>数据更纯，信息增益更大</strong>，选择它作为根节点，结果就是<strong>庞大且深度很浅的树</strong></li>
 </ul>
 <p><strong>信息增益比</strong></p>
-<p>数据集<span class="math inline">\(D\)</span>关于特征A的熵，<span class="math inline">\(n\)</span>是特征A的取值个数： <span class="math display">\[
+<p><code>数据集</code><span class="math inline">\(D\)</span>关于<code>特征</code>A的<code>熵</code>，<span class="math inline">\(n\)</span>是特征A的取值个数： <span class="math display">\[
 H_A(D) = -\sum_{i=1}^n 
 \frac{\vert D_i\vert}{\vert D\vert} \log_2 \frac{\vert D_i\vert}{\vert D\vert}
-\]</span> <code>信息增益比 = 信息增益 / D关于特征A的熵</code> ： <span class="math display">\[
+\]</span> <code>信息增益比 = 信息增益 / 划分前熵 = 信息增益 / D关于特征A的熵</code> ： <span class="math display">\[
 g_R(D, A) = \frac {g(D, A)}{H_A(D)}
-\]</span> 解决信息增益的问题：特征A分的类别越多，<span class="math inline">\(D\)</span>关于A的熵就越大，作为分母，所以信息增益<span class="math inline">\(g_R(D, A)\)</span> 就越小。</p>
+\]</span> 解决信息增益的问题：特征A分的类别越多，<span class="math inline">\(D\)</span>关于A的熵就越大，作为分母，所以信息增益<span class="math inline">\(g_R(D, A)\)</span> 就越小。在信息增益的基础上增加了一个<code>分母惩罚项</code>。</p>
 <p>信息增益比的问题：实际上偏好可取类别数目较少的特征。</p>
 <h2 id="基尼指数">基尼指数</h2>
-<p><code>CART</code>分类树使用基尼指数来选择最优特征。 <strong>基尼指数也是度量不确定性</strong>。</p>
+<p><code>CART</code>分类树使用基尼指数来选择最优特征。 <code>基尼指数</code>也是度量<code>不确定性</code>。 熵偏向<code>离散属性</code>， 基尼指数偏向<code>连续属性</code>。</p>
 <p><strong>概率分布基尼指数</strong></p>
 <p>分类中，有<span class="math inline">\(K\)</span>类。 样本属于第<span class="math inline">\(k\)</span>类的概率为<span class="math inline">\(p_k\)</span>。 <span class="math display">\[
 \rm{Gini}(p) = \sum_{k=1}^K p_k(1-p_k) = 1 - \sum_{k=1}^Kp_k^2
@@ -255,6 +256,37 @@ g_R(D, A) = \frac {g(D, A)}{H_A(D)}
 <p>在特征A的条件下，D的基尼指数如下： <span class="math display">\[
 \rm{Gini}(D, A) = \frac{\vert D_1\vert}{\vert D\vert} \rm{Gini}(D_1) + \frac{\vert D_2\vert}{\vert D\vert} \rm{Gini}(D_2)
 \]</span> <span class="math inline">\(\rm{Gini}(D, A)\)</span>是<strong>集合D根据特征A分割后，集合D的不确定性</strong>。</p>
+<h2 id="id3算法">ID3算法</h2>
+<p>决策树的生成，ID3算法以<code>信息增益最大</code>为标准选择特征。递归构建，不断选择最优特征对训练集进行划分。</p>
+<p>递归终止条件：</p>
+<ul>
+<li>当前节点的所有样本，属于同一类别<span class="math inline">\(C_k\)</span>，无需划分。该节点为叶子节点，类标记为<span class="math inline">\(C_k\)</span></li>
+<li>当前属性集为空，或所有样本在属性集上取值相同</li>
+<li>当前节点的样本集合为空，没有样本</li>
+</ul>
+<p>在集合D中，选择信息增益最大的特征<span class="math inline">\(A_g\)</span> ：</p>
+<ul>
+<li><code>增益小于阈值</code>，则<code>不继续向下分裂，到达叶子节点</code>。该节点的标记为该节点所有样本中的<code>majority class</code><span class="math inline">\(C_k\)</span>。 这也是<code>预剪枝</code></li>
+<li><code>增益大于阈值</code>，按照特征<span class="math inline">\(A_g\)</span>的每一个取值<span class="math inline">\(A_g=a_i\)</span>把D划分为各个子集<span class="math inline">\(D_i\)</span>，去掉特征<span class="math inline">\(A_g\)</span></li>
+</ul>
+<p>继续对每个内部节点进行递归划分。</p>
+<h2 id="c4.5算法">C4.5算法</h2>
+<p>C4.5是ID3的改进，C4.5以<code>信息增益率最大</code>为标准选择特征。</p>
+<h2 id="id3c4.5决策树剪枝">ID3/C4.5决策树剪枝</h2>
+<p><code>决策树的生成</code>，会过多地考虑如何提高对训练数据的分类，从而<code>构建出非常复杂的决策树</code>。就容易<code>过拟合</code>。</p>
+<p>剪枝就是裁掉一些子树和叶节点，并将其根节点或父节点作为叶节点。剪枝分为预剪枝和后剪枝。</p>
+<p><strong>预剪枝</strong></p>
+<p><code>在生成树的时候</code>，设定信息增益的<code>阈值</code>，如果某节点的<code>某特征的信息增益小于该阈值</code>，则<code>不继续分裂</code>，<code>直接设为叶节点</code>。选择该节点的D中类别<code>数量最多的类别</code> （<code>majority class</code>）作为<code>类别标记</code>。</p>
+<p><strong>后剪枝</strong></p>
+<p>树构建好以后，基于整体，<code>极小化损失函数</code>，自下而上地进行剪枝。</p>
+<p>树T的参数表示</p>
+<ul>
+<li>叶节点的个数<span class="math inline">\(\vert T \vert\)</span></li>
+<li>叶节点<span class="math inline">\(t\)</span></li>
+<li>叶节点<span class="math inline">\(t\)</span>上有<span class="math inline">\(N_t\)</span>个样本</li>
+<li>叶节点t上的经验熵<span class="math inline">\(H_t(T)\)</span></li>
+<li>​</li>
+</ul>
 
         </div>
 
@@ -262,7 +294,7 @@ g_R(D, A) = \frac {g(D, A)}{H_A(D)}
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-05T09:49:27.678Z" itemprop="dateUpdated">2018-03-05 17:49:27</time>
+    最后更新时间：<time datetime="2018-03-05T15:06:25.949Z" itemprop="dateUpdated">2018-03-05 23:06:25</time>
 </span><br>
 
 
