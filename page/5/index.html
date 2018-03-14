@@ -213,6 +213,62 @@
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-aim2offer"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-07-29 11:42:07" datetime="2017-07-29T03:42:07.000Z"  itemprop="datePublished">2017-07-29</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/leetcode/">leetcode</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/07/29/aim2offer/">剑指Offer算法题</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        数组中重复的数字-03
+题目1
+找到数组中重复的数字
+
+一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3
+
+思路1
+对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn)
+思路2
+使用哈希表，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复...
+    
+
+        <a href="/2017/07/29/aim2offer/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-cnn-mnist"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -631,56 +687,6 @@ Dataset: ...
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心得/">心得</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Spark-PairRDD"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-03-13 19:37:06" datetime="2017-03-13T11:37:06.000Z"  itemprop="datePublished">2017-03-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/大数据/">大数据</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/03/13/Spark-PairRDD/">Spark的键值对RDD</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        PairRDD及其创建
-键值对RDD称为PairRDD，通常用来做聚合计算。Spark为Pair RDD提供了许多专有的操作。
-1234# 创建pair rdd: map 或者 读取键值对格式自动转成pairrdd# 每行的第一个单词作为key，line作为valuepairs = lines.map(lambda line: (line.split(' ')[0], line))
-转...
-    
-
-        <a href="/2017/03/13/Spark-PairRDD/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PairRDD/">PairRDD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
 
     </div>
     
