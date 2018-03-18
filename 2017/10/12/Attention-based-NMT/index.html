@@ -13,30 +13,30 @@
     
     
     
-    <title>Attention-based NMT 阅读笔记 | PLM&#39;s Notes | 好好学习，天天笔记</title>
+    <title>注意力机制和PyTorch实现机器翻译 | PLM&#39;s Notes | 好好学习，天天笔记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="论文笔记,Attention,自然语言处理,深度学习">
-    <meta name="description" content="Effective Approaches to Attention-based Neural Machine Translation  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时">
-<meta name="keywords" content="论文笔记,Attention,自然语言处理,深度学习">
+    <meta name="keywords" content="论文笔记,注意力,Attention,自然语言处理,深度学习,机器翻译">
+    <meta name="description" content="Effective Approaches to Attention-based Neural Machine Translation 前面阐述注意力理论知识，后面简单描述PyTorch利用注意力实现机器翻译  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着">
+<meta name="keywords" content="论文笔记,注意力,Attention,自然语言处理,深度学习,机器翻译">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Attention-based NMT 阅读笔记">
+<meta property="og:title" content="注意力机制和PyTorch实现机器翻译">
 <meta property="og:url" content="http://plmsmile.github.io/2017/10/12/Attention-based-NMT/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
-<meta property="og:description" content="Effective Approaches to Attention-based Neural Machine Translation  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时，都选择关注所有的单词。和Bahdanau的方式 有点相似，但是更简单些。简">
+<meta property="og:description" content="Effective Approaches to Attention-based Neural Machine Translation 前面阐述注意力理论知识，后面简单描述PyTorch利用注意力实现机器翻译  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/01-encoder-decoder-n">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/01_nmt.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/02_global_attention.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/03_local_attention.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/04_input_feed.png">
-<meta property="og:updated_time" content="2017-10-15T02:52:46.000Z">
+<meta property="og:updated_time" content="2018-03-18T10:04:24.530Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Attention-based NMT 阅读笔记">
-<meta name="twitter:description" content="Effective Approaches to Attention-based Neural Machine Translation  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时，都选择关注所有的单词。和Bahdanau的方式 有点相似，但是更简单些。简">
+<meta name="twitter:title" content="注意力机制和PyTorch实现机器翻译">
+<meta name="twitter:description" content="Effective Approaches to Attention-based Neural Machine Translation 前面阐述注意力理论知识，后面简单描述PyTorch利用注意力实现机器翻译  简介  Attention介绍 在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。 本着简单和有效的原则，本论文提出了两种注意力机制。 Global 每次翻译时">
 <meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/01-encoder-decoder-n">
     
         <link rel="alternate" type="application/atom+xml" title="PLM&#39;s Notes" href="/atom.xml">
@@ -125,7 +125,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Attention-based NMT 阅读笔记</div>
+        <div class="flex-col header-title ellipsis">注意力机制和PyTorch实现机器翻译</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -147,7 +147,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Attention-based NMT 阅读笔记</h1>
+        <h1 class="title">注意力机制和PyTorch实现机器翻译</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-10-12T08:12:39.000Z" itemprop="datePublished" class="page-time">
@@ -155,7 +155,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
 
             
         </h5>
@@ -172,7 +172,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#attention介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Attention介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用范围"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">应用范围</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经机器翻译"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经机器翻译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思想"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概率计算"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">概率计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本论文的模型"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">本论文的模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#注意力模型"><span class="post-toc-number">3.</span> <span class="post-toc-text">注意力模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#global-attention"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Global Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#local-attention"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Local Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#input-feeding"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Input-feeding</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#pytorch实现global"><span class="post-toc-number">4.</span> <span class="post-toc-text">PyTorch实现Global</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算对齐向量"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">计算对齐向量</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#attention介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Attention介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用范围"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">应用范围</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经机器翻译"><span class="post-toc-number">2.</span> <span class="post-toc-text">神经机器翻译</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思想"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">思想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概率计算"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">概率计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本论文的模型"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">本论文的模型</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#注意力模型"><span class="post-toc-number">3.</span> <span class="post-toc-text">注意力模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#global-attention"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Global Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#local-attention"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Local Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#input-feeding"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Input-feeding</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#pytorch实现global注意力"><span class="post-toc-number">4.</span> <span class="post-toc-text">PyTorch实现Global注意力</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算对齐向量"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">计算对齐向量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#计算新的语义"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">计算新的语义</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -180,12 +180,12 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Attention-based NMT 阅读笔记</h1>
+        <h1 class="post-card-title">注意力机制和PyTorch实现机器翻译</h1>
         <div class="post-meta">
             <time class="post-time" title="2017-10-12 16:12:39" datetime="2017-10-12T08:12:39.000Z"  itemprop="datePublished">2017-10-12</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
 
 
 
@@ -199,6 +199,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <blockquote>
 <p><a href="https://arxiv.org/pdf/1508.04025.pdf" target="_blank" rel="noopener">Effective Approaches to Attention-based Neural Machine Translation</a></p>
+<p>前面阐述注意力理论知识，后面简单描述PyTorch利用注意力实现机器翻译</p>
 </blockquote>
 <h1 id="简介">简介</h1>
 <p><img src="" style="display:block; margin:auto" width="70%"></p>
@@ -206,9 +207,9 @@
 <p>在翻译的时候，选择性的选择一些重要信息。<a href="https://plmsmile.github.io/2017/10/10/attention-model/">详情看这篇文章</a> 。</p>
 <p>本着简单和有效的原则，本论文提出了两种<code>注意力机制</code>。</p>
 <p><strong>Global</strong></p>
-<p>每次翻译时，都选择关注所有的单词。和<a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Bahdanau的方式</a> 有点相似，但是更简单些。<a href="https://plmsmile.github.io/2017/10/10/attention-model/#思想">简单原理介绍</a>。</p>
+<p>每次翻译时，都选择关注<strong>所有的单词</strong>。和<a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Bahdanau的方式</a> 有点相似，但是更简单些。<a href="https://plmsmile.github.io/2017/10/10/attention-model/#思想">简单原理介绍</a>。</p>
 <p><strong>Local</strong></p>
-<p>每次翻译时，只选择关注一部分的单词。介于soft和hard注意力之间。(soft和hard见别的论文)。</p>
+<p>每次翻译时，只选择<strong>关注一部分的单词</strong>。介于soft和hard注意力之间。(soft和hard见别的论文)。</p>
 <p>优点有下面几个</p>
 <ul>
 <li>比Global和Soft<strong>更好计算</strong></li>
@@ -233,7 +234,7 @@
 =  \sum_{j=1}^m \log p(y_j \mid y_1, \cdots, y_{j-1}, s)
 \]</span> 但是怎么选择Encoder和Decoder（RNN, CNN, GRU, LSTM），怎么去生成语义<span class="math inline">\(s\)</span>却有很多选择。</p>
 <h2 id="概率计算">概率计算</h2>
-<p>结合Dncoder上一时刻的隐状态<span class="math inline">\(\color{blue}{h_{j-1}}\)</span>和encoder给的语义向量<span class="math inline">\(\color{blue}{s}\)</span>，通过函数<span class="math inline">\(\color{blue}{f}\)</span> ，就可以计算出<strong>当前的隐状态</strong><span class="math inline">\(\color{blue}{h_j}\)</span> ： <span class="math display">\[
+<p>结合Decoder上一时刻的隐状态<span class="math inline">\(\color{blue}{h_{j-1}}\)</span>和encoder给的语义向量<span class="math inline">\(\color{blue}{s}\)</span>，通过函数<span class="math inline">\(\color{blue}{f}\)</span> ，就可以计算出<strong>当前的隐状态</strong><span class="math inline">\(\color{blue}{h_j}\)</span> ： <span class="math display">\[
 h_j = f(h_{j-1}, s)
 \]</span> 通过<strong>函数</strong><span class="math inline">\(\color{blue}{g}\)</span>对当前隐状态<strong><span class="math inline">\(h_j\)</span>进行转换</strong>，再<code>softmax</code>，就可以得到翻译的目标单词<span class="math inline">\(y_i\)</span>了（选概率最大的那个）。</p>
 <p><span class="math inline">\(g\)</span>一般是<strong>线性变换</strong>，维数变化是<span class="math inline">\([1, h] \to [1, vocab\_size]\)</span>。 <span class="math display">\[
@@ -314,27 +315,34 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
 <li>模型会知道之前的对齐选择</li>
 <li>会建立一个水平和垂直都很深的网络</li>
 </ul>
-<h1 id="pytorch实现global">PyTorch实现Global</h1>
+<h1 id="pytorch实现global注意力">PyTorch实现Global注意力</h1>
+<p><a href="https://github.com/plmsmile/NLP-Demos/blob/master/en-zh-translation/model.py" target="_blank" rel="noopener">机器翻译github源代码</a></p>
 <h2 id="计算对齐向量">计算对齐向量</h2>
-<p><strong>初始化参数</strong></p>
-<ul>
-<li>score_type: 计算score的方法</li>
-<li>hidden_size: Encoder和Decoder的hidden_size</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, score_type, hidden_size)</span>:</span></span><br><span class="line">       <span class="string">'''</span></span><br><span class="line"><span class="string">       Args:</span></span><br><span class="line"><span class="string">           score_type: 计算score的方法，'dot', 'general', 'concat'</span></span><br><span class="line"><span class="string">           hidden_size: Encoder和Decoder的hidden_size</span></span><br><span class="line"><span class="string">       '''</span></span><br><span class="line">       super(Attn, self).__init__()</span><br><span class="line">       </span><br><span class="line">       self.score_type = score_type</span><br><span class="line">       self.hidden_size = hidden_size</span><br><span class="line">       self.max_length = max_length</span><br><span class="line">       <span class="keyword">if</span> score_type == <span class="string">'general'</span>:</span><br><span class="line">           self.attn = nn.Linear(hidden_size, hidden_size)</span><br><span class="line">       <span class="keyword">elif</span> score_type == <span class="string">'concat'</span>:</span><br><span class="line">           self.attn = nn.Linear(hidden_size * <span class="number">2</span>, hidden_size)</span><br><span class="line">           self.other = nn.Parameter(torch.FloatTensor(<span class="number">1</span>, hidden_size))</span><br></pre></td></tr></table></figure>
-<p><strong>计算score</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, hidden, encoder_output)</span>:</span></span><br><span class="line">       <span class="string">''' 计算Decoder中LSTM的ht与Encoder中的hs的得分，便于后面算对齐概率</span></span><br><span class="line"><span class="string">       Args:</span></span><br><span class="line"><span class="string">           hidden: Decoder中最顶层LSTM的隐状态，h_de_t，[1, h_size]</span></span><br><span class="line"><span class="string">           encoder_output: Encoder某时刻的隐状态，h_en_s，[1, h_size]</span></span><br><span class="line"><span class="string">       Returns:</span></span><br><span class="line"><span class="string">           energy: d_ht与e_hs的得分，即Yt与Xs的得分</span></span><br><span class="line"><span class="string">       '''</span></span><br><span class="line">       <span class="keyword">if</span> self.score_type == <span class="string">'dot'</span>:</span><br><span class="line">           energy = hidden.dot(encoder_output)</span><br><span class="line">       <span class="keyword">elif</span> self.score_type == <span class="string">'general'</span>:</span><br><span class="line">           energy = self.attn(encoder_output)</span><br><span class="line">           energy = hidden.dot(energy)</span><br><span class="line">       <span class="keyword">elif</span> self.score_type == <span class="string">'concat'</span>:</span><br><span class="line">           h_o = torch.cat((hidden, encoder_output), <span class="number">1</span>)</span><br><span class="line">           energy = self.attn(h_o)</span><br><span class="line">           energy = self.other.dot(energy)</span><br><span class="line">       <span class="keyword">return</span> energy</span><br></pre></td></tr></table></figure>
-<p><strong>前向计算</strong></p>
-<p>实际就是对所有的打分结果进行<code>softmax</code> 得到对齐向量，也成为<strong>注意力权值</strong>，<code>attn_weights</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, hidden, encoder_outputs)</span>:</span></span><br><span class="line">    <span class="string">''' 时刻t，计算对齐向量</span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">            hidden: Top LSTM的隐状态</span></span><br><span class="line"><span class="string">            encoder_outputs: Encoder的所有隐状态, len=Tx输入句子长度</span></span><br><span class="line"><span class="string">        Returns:</span></span><br><span class="line"><span class="string">            align_vec: 当前ht与所有encoder_outputs的对齐向量，alpha_t，len=Tx，返回[1, 1, seq_len]格式</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line">    seq_len = len(encoder_outputs)</span><br><span class="line">    attn_energies = get_variable(torch.zeros(seq_len))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(seq_len):</span><br><span class="line">        attn_energies[i] = self.score(hidden, encoder_outputs[i])</span><br><span class="line">        <span class="comment"># normalize [0, 1], resize to [1, 1, seq_len]</span></span><br><span class="line">        align_vec = F.softmax(attn_energies)</span><br><span class="line">        align_vec = align_vec.unsqueeze(<span class="number">0</span>).unsqueeze(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> align_vec</span><br></pre></td></tr></table></figure>
-<p><strong>Decoder网络</strong></p>
-<p>参数</p>
-<p>hidden_size: Embedding和GRU的hidden_size</p>
-<pre><code>    output_size: 输出的size，是目标语言的词典大小
-    score_type: &#39;dot&#39;, &#39;general&#39;, &#39;concat&#39;
-    n_layers: GRU的层数
-    dropout_p: dropout</code></pre>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">''' init</span></span><br><span class="line"><span class="string">Args:</span></span><br><span class="line"><span class="string">           </span></span><br><span class="line"><span class="string">        '''</span></span><br></pre></td></tr></table></figure>
+<p>实际上就是<code>attn_weights</code> 。</p>
+<p><strong>输入输出定义</strong></p>
+<p>Encoder的输出，所有语义<span class="math inline">\(c\)</span>，<code>encoder_outputs</code>， <code>[is, b, h]</code>。 <code>is=input_seq_len</code>是输入句子的长度</p>
+<p>当前时刻Decoder的<span class="math inline">\(h_t\)</span>， <code>decoder_rnn_output</code>， <code>[ts, b, h]</code> 。实际上<code>ts=1</code>， 因为每次解码一个单词</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, rnn_outputs, encoder_outputs)</span>:</span></span><br><span class="line">    <span class="string">'''ts个时刻，计算ts个与is的对齐向量，也是注意力权值</span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">    	rnn_outputs -- Decoder中GRU的输出[ts, b, h]</span></span><br><span class="line"><span class="string">        encoder_outputs -- Encoder的最后的输出, [is, b, h]</span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        attn_weights -- Yt与所有Xs的注意力权值，[b, ts, is]</span></span><br><span class="line"><span class="string">    '''</span></span><br></pre></td></tr></table></figure>
+<p><strong>计算得分</strong></p>
+<p>使用<code>gerneral</code>的方式，先过神经网络(线性层)，再<strong>乘法计算得分</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 过Linear层 (b, h, is)</span></span><br><span class="line">encoder_outputs = self.attn(encoder_outputs).transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># [b,ts,is] &lt; [b,ts,h] * [b,h,is]</span></span><br><span class="line">attn_energies = rnn_outputs.bmm(encoder_outputs)</span><br></pre></td></tr></table></figure>
+<p><strong>softmax计算对齐向量</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">attn_weights = my_log_softmax(attn_energies)</span><br><span class="line"><span class="keyword">return</span> attn_weights</span><br></pre></td></tr></table></figure>
+<h2 id="计算新的语义">计算新的语义</h2>
+<p>新的语义也就是，对于翻译单词<span class="math inline">\(w_t\)</span>所需要的<strong>带注意力的语义</strong>。</p>
+<p><strong>输入输出</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, input_seqs, last_hidden, encoder_outputs)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    一次输入(ts, b)，b个句子, ts=target_seq_len</span></span><br><span class="line"><span class="string">    1. input &gt; embedded </span></span><br><span class="line"><span class="string">    2. embedded, last_hidden --GRU-- rnn_output, hidden</span></span><br><span class="line"><span class="string">    3. rnn_output, encoder_outpus --Attn-- attn_weights</span></span><br><span class="line"><span class="string">    4. attn_weights, encoder_outputs --相乘-- context</span></span><br><span class="line"><span class="string">    5. rnn_output, context --变换,tanh,变换-- output </span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">    	input_seqs: [ts, b] batch个上一时刻的输出的单词，id表示。每个batch1个单词</span></span><br><span class="line"><span class="string">        last_hidden: [n_layers, b, h]</span></span><br><span class="line"><span class="string">        encoder_outputs: [is, b, h]</span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    	output: 最终的输出，[ts, b, o]</span></span><br><span class="line"><span class="string">        hidden: GRU的隐状态，[nl, b, h]</span></span><br><span class="line"><span class="string">        attn_weights: 对齐向量，[b, ts, is]</span></span><br><span class="line"><span class="string">    '''</span></span><br></pre></td></tr></table></figure>
+<p><strong>当前时刻Decoder的隐状态</strong></p>
+<p>输入上一时刻的单词和隐状态，通过GRU，计算当前的隐状态。实际上<code>ts=1</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (ts, b, h), (nl, b, h)</span></span><br><span class="line">rnn_output, hidden = self.gru(embedded, last_hidden)</span><br></pre></td></tr></table></figure>
+<p><strong>计算对齐向量</strong></p>
+<p>当前时刻的隐状态 <code>rnn_output</code> 和源句子的语义<code>encoder_outputs</code>，计算对齐向量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对齐向量 [b,ts,is]</span></span><br><span class="line">attn_weights = self.attn(rnn_output, encoder_outputs)</span><br></pre></td></tr></table></figure>
+<p><strong>计算新的语义</strong></p>
+<p>原语义和注意力(对齐向量)，计算当前需要的语义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新的语义 [b,ts,h] &lt; [b,ts,is] * [b,is,h].</span></span><br><span class="line">context = attn_weights.bmm(encoder_outputs.transpose(<span class="number">0</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p><strong>结合新语义和当前隐状态预测新单词</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 语义和输出 [ts, b, 2h] &lt; [ts, b, h], [ts, b, h]</span></span><br><span class="line">output_context = torch.cat((rnn_output, context), <span class="number">2</span>)</span><br><span class="line"><span class="comment"># [ts, b, h] 线性层2h-h</span></span><br><span class="line">output_context = self.concat(output_context)</span><br><span class="line">concat_output = F.tanh(output_context)</span><br><span class="line"><span class="comment"># [ts, b, o] 线性层h-o</span></span><br><span class="line">output = self.out(concat_output)</span><br><span class="line">output = my_log_softmax(output)</span><br><span class="line"><span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -342,7 +350,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-10-15T02:52:46.000Z" itemprop="dateUpdated">2017-10-15 10:52:46</time>
+    最后更新时间：<time datetime="2018-03-18T10:04:24.530Z" itemprop="dateUpdated">2018-03-18 18:04:24</time>
 </span><br>
 
 
@@ -367,7 +375,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器翻译/">机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注意力/">注意力</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
 
 
             
@@ -377,7 +385,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《注意力机制和PyTorch实现机器翻译》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -387,7 +395,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《注意力机制和PyTorch实现机器翻译》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -397,7 +405,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Attention-based NMT 阅读笔记》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《注意力机制和PyTorch实现机器翻译》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -530,7 +538,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《注意力机制和PyTorch实现机器翻译》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -540,7 +548,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《Attention-based NMT 阅读笔记》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&title=《注意力机制和PyTorch实现机器翻译》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -550,7 +558,7 @@ p_t = S \cdot \mathrm{sigmoid} \left(v_p^T \tanh (W_p h_t) \right),
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Attention-based NMT 阅读笔记》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《注意力机制和PyTorch实现机器翻译》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/12/Attention-based-NMT/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
