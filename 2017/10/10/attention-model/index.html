@@ -13,17 +13,17 @@
     
     
     
-    <title>自然语言处理中的Attention Model | PLM&#39;s Notes | 好好学习，天天笔记</title>
+    <title>图文介绍注意力机制 | PLM&#39;s Notes | 好好学习，天天笔记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="自然语言处理,Attention Model,Encoder-Decoder">
+    <meta name="keywords" content="注意力,自然语言处理,机器翻译,Attention Model,Encoder-Decoder">
     <meta name="description" content="Encoder-Decoder 基本介绍 举个翻译的例子，原始句子\(X = (x_1, x_2, \cdots, x_m)\) ，翻译成目标句子\(Y = (y_1, y_2, \cdots, y_n)\) 。 现在采用Encoder-Decoder架构模型，如下图  Encoder会利用整个原始句子生成一">
-<meta name="keywords" content="自然语言处理,Attention Model,Encoder-Decoder">
+<meta name="keywords" content="注意力,自然语言处理,机器翻译,Attention Model,Encoder-Decoder">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自然语言处理中的Attention Model">
+<meta property="og:title" content="图文介绍注意力机制">
 <meta property="og:url" content="http://plmsmile.github.io/2017/10/10/attention-model/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="Encoder-Decoder 基本介绍 举个翻译的例子，原始句子\(X = (x_1, x_2, \cdots, x_m)\) ，翻译成目标句子\(Y = (y_1, y_2, \cdots, y_n)\) 。 现在采用Encoder-Decoder架构模型，如下图  Encoder会利用整个原始句子生成一个语义向量，Decoder再利用这个向量翻译成其它语言的句子。这样可以把握整个句">
@@ -34,9 +34,9 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/04-rnn-encoder-decoder-n">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/05-aij-compute-n">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/06-summary-am-n">
-<meta property="og:updated_time" content="2017-10-12T06:34:48.000Z">
+<meta property="og:updated_time" content="2018-03-18T10:30:58.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自然语言处理中的Attention Model">
+<meta name="twitter:title" content="图文介绍注意力机制">
 <meta name="twitter:description" content="Encoder-Decoder 基本介绍 举个翻译的例子，原始句子\(X = (x_1, x_2, \cdots, x_m)\) ，翻译成目标句子\(Y = (y_1, y_2, \cdots, y_n)\) 。 现在采用Encoder-Decoder架构模型，如下图  Encoder会利用整个原始句子生成一个语义向量，Decoder再利用这个向量翻译成其它语言的句子。这样可以把握整个句">
 <meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/am/01-encoder-decoder-n">
     
@@ -126,7 +126,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">自然语言处理中的Attention Model</div>
+        <div class="flex-col header-title ellipsis">图文介绍注意力机制</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -148,7 +148,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">自然语言处理中的Attention Model</h1>
+        <h1 class="title">图文介绍注意力机制</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-10-10T03:40:01.000Z" itemprop="datePublished" class="page-time">
@@ -181,7 +181,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">自然语言处理中的Attention Model</h1>
+        <h1 class="post-card-title">图文介绍注意力机制</h1>
         <div class="post-meta">
             <time class="post-time" title="2017-10-10 11:40:01" datetime="2017-10-10T03:40:01.000Z"  itemprop="datePublished">2017-10-10</time>
 
@@ -327,7 +327,7 @@ e_{ij} = a(s_{i-1}, h_j)
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-10-12T06:34:48.000Z" itemprop="dateUpdated">2017-10-12 14:34:48</time>
+    最后更新时间：<time datetime="2018-03-18T10:30:58.053Z" itemprop="dateUpdated">2018-03-18 18:30:58</time>
 </span><br>
 
 
@@ -352,7 +352,7 @@ e_{ij} = a(s_{i-1}, h_j)
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention-Model/">Attention Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Encoder-Decoder/">Encoder-Decoder</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention-Model/">Attention Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Encoder-Decoder/">Encoder-Decoder</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器翻译/">机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注意力/">注意力</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
 
 
             
@@ -362,7 +362,7 @@ e_{ij} = a(s_{i-1}, h_j)
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《自然语言处理中的Attention Model》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《图文介绍注意力机制》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -372,7 +372,7 @@ e_{ij} = a(s_{i-1}, h_j)
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《自然语言处理中的Attention Model》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《图文介绍注意力机制》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -382,7 +382,7 @@ e_{ij} = a(s_{i-1}, h_j)
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自然语言处理中的Attention Model》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/10/attention-model/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《图文介绍注意力机制》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/10/attention-model/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -515,7 +515,7 @@ e_{ij} = a(s_{i-1}, h_j)
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《自然语言处理中的Attention Model》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《图文介绍注意力机制》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -525,7 +525,7 @@ e_{ij} = a(s_{i-1}, h_j)
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《自然语言处理中的Attention Model》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/10/10/attention-model/&title=《图文介绍注意力机制》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -535,7 +535,7 @@ e_{ij} = a(s_{i-1}, h_j)
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自然语言处理中的Attention Model》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/10/attention-model/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《图文介绍注意力机制》 — PLM's Notes&url=http://plmsmile.github.io/2017/10/10/attention-model/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
