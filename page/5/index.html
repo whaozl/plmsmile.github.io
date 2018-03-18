@@ -157,14 +157,14 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-interview"
+            <article id="post-pgm-01"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-07-29 11:42:07" datetime="2017-07-29T03:42:07.000Z"  itemprop="datePublished">2017-07-29</time>
+        <time class="post-time" title="2017-08-04 11:06:41" datetime="2017-08-04T03:06:41.000Z"  itemprop="datePublished">2017-08-04</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
 
 
 
@@ -175,7 +175,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/29/interview/">剑指Offer算法题</a>
+      <a class="post-title-link" href="/2017/08/04/pgm-01/">概率图模型(一)</a>
     </h3>
   
 
@@ -185,26 +185,81 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        03_数组中重复的数字
-题目1
-找到数组中重复的数字
+        概述
+产生式和判别式
 
-一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3
+判别方法 由数据直接去学习决策函数\(Y=f(X)\) 或者\(P(Y \mid X)\)作为预测模型 ，即判别模型
 
-思路1
-对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn)
-思路2
-使用哈希表，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复...
+
+生成方法 先求出联合概率密度\(P(X, Y)\)，然后求出条件概率密度\(P(Y \mid X)\)。即生成模型\(P(Y \mid X) = \frac {P(X, Y)} {P(X)}\)
+
+
+
+
+
+判别式
+生成式...
     
 
-        <a href="/2017/07/29/interview/" class="post-more waves-effect waves-button">
+        <a href="/2017/08/04/pgm-01/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前向算法/">前向算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后向算法，BW算法/">后向算法，BW算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/概率图模型/">概率图模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/维特比算法/">维特比算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/隐马尔科夫模型/">隐马尔科夫模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/马尔可夫链/">马尔可夫链</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-nlp-notes"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-07-31 08:57:52" datetime="2017-07-31T00:57:52.000Z"  itemprop="datePublished">2017-07-31</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/07/31/nlp-notes/">语言模型和平滑方法</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        语言模型
+二元语法$ $
+对于一个句子\(s=w_1 \cdots w_n\)，近似认为一个词的概率只依赖于它前面的1个词。即一个状态只跟上一个状态有关，也称为一阶马尔科夫链。
+\[
+\color{blue}{p(s)}=p(w_1)p(w_2|w_1)p(w_3|w_2) \cdots p(w_n|w_{l-1})= \color {red} {\prod_{i=1}^l {p(w...
+    
+
+        <a href="/2017/07/31/nlp-notes/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/各种熵/">各种熵</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据平滑/">数据平滑</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言模型/">语言模型</a></li></ul>
 
     </div>
     
@@ -261,6 +316,62 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-interview"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-07-29 11:42:07" datetime="2017-07-29T03:42:07.000Z"  itemprop="datePublished">2017-07-29</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/07/29/interview/">剑指Offer算法题</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        03_数组中重复的数字
+题目1
+找到数组中重复的数字
+
+一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3
+
+思路1
+对数组进行排序，然后可以找出重复的数字。但是排序的时间复杂度是O(nlogn)
+思路2
+使用哈希表，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复...
+    
+
+        <a href="/2017/07/29/interview/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
 
     </div>
     
@@ -579,114 +690,6 @@ RDD是跨集群节点分区的、并且可以并行计算的分布式数据集�
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RDD/">RDD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Spark-SQL"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-03-19 22:34:44" datetime="2017-03-19T14:34:44.000Z"  itemprop="datePublished">2017-03-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/大数据/">大数据</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/03/19/Spark-SQL/">Spark-SQL</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        基础
-概念
-Spark SQL是用来处理结构化数据的模块。与基本RDD相比，Spark SQL提供了更多关于数据结构和计算方面的信息(在内部有优化效果)。通常通过SQL和Dataset API来和Spark SQL进行交互。
-
-SQL: 进行SQL查询，从各种结构化数据源(Json, Hive, Parquet)读取数据。返回Dataset/DataFrame。
-Dataset: ...
-    
-
-        <a href="/2017/03/19/Spark-SQL/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark-SQL/">Spark SQL</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-博客搭建过程及问题"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-03-13 22:52:41" datetime="2017-03-13T14:52:41.000Z"  itemprop="datePublished">2017-03-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/心得/">心得</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/03/13/博客搭建过程及问题/">博客搭建过程及问题</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        一直都想搭建一个博客，今天终于把博客给初步搭建好了。搭建的过程其实不那么顺利，所以简答记录一下。
-搭建过程
-
-根据手把手搭建博客教程这篇文章来进行搭建，其中目前只看了它的第一页
-后期在hexo主题里面选择了even主题
-依照even-wiki来添加标签、分类和about页面
-修改主题目录下的_config.yml的menu，把home、tags等手动改成中文了
-
-遇到的坑
-...
-    
-
-        <a href="/2017/03/13/博客搭建过程及问题/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心得/">心得</a></li></ul>
 
     </div>
     
