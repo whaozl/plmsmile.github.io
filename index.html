@@ -157,59 +157,6 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-33-squad-qa"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-03-15 15:19:03" datetime="2018-03-15T07:19:03.000Z"  itemprop="datePublished">2018-03-15</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/15/33-squad-qa/">使用Dynamic Coattention Network来实现SQuAD的QA任务</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        数据处理
-数据格式
-数据集是斯坦福的问答数据，SQuAD数据集下载地址。Stanford Question Answer Dataset 是NLP领域的ImageNet 。
-训练数据是以json格式存储的文本文件。 解析之后是有多条数据，在raw['data']中，是一个list，存放了很多数据。
-下面是一条数据，每条数据是一个dict，
-
-paragraphs是数组，有多个段落...
-    
-
-        <a href="/2018/03/15/33-squad-qa/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coattention/">Coattention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DCN/">DCN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DCNPlus/">DCNPlus</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-32-dynamic-coattention-network"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -691,6 +638,66 @@ tmux list-keys 可以看到所有的按键。
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-aim2offer3"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-01-07 12:22:49" datetime="2018-01-07T04:22:49.000Z"  itemprop="datePublished">2018-01-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/leetcode/">leetcode</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/01/07/aim2offer3/">Aim2offer3(21-40)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        把奇数放在偶数的前面-21
+问题
+输入：一个数组，乱序，有奇数和偶数
+输出：把所有的奇数放在前面，所有的偶数放在后面
+暴力思路
+
+从头到尾遍历数组
+遇到奇数，访问下一个
+遇到偶数，把它后面的数字都向前挪动以为，该偶数放到末尾
+
+冒泡思路
+
+for (int i = n-1; i &gt; 0; i--) 依次放置好后面n-1个数即可
+从for (int j = 0;...
+    
+
+        <a href="/2018/01/07/aim2offer3/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li></ul>
 
     </div>
     

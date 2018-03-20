@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://plmsmile.github.io/"/>
-  <updated>2018-03-18T07:26:05.153Z</updated>
+  <updated>2018-03-18T14:06:35.276Z</updated>
   <id>http://plmsmile.github.io/</id>
   
   <author>
@@ -15,37 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>使用Dynamic Coattention Network来实现SQuAD的QA任务</title>
-    <link href="http://plmsmile.github.io/2018/03/15/33-squad-qa/"/>
-    <id>http://plmsmile.github.io/2018/03/15/33-squad-qa/</id>
-    <published>2018-03-15T07:19:03.000Z</published>
-    <updated>2018-03-18T07:26:05.153Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="数据处理">数据处理</h1><h2 id="数据格式">数据格式</h2><p>数据集是斯坦福的问答数据，<a href="https://rajpurkar.github.io/SQuAD-explorer/" target="_blank" rel="noopener">SQuAD数据集下载地址</a>。<code>Stanford Question Answer Dataset</code> 是NLP领域的<code>ImageNet</code> 。</p><p>训练数据是以<code>json</code>格式存储的文本文件。 解析之后是有多条数据，在<code>raw['data']</code>中，是一个list，存放了很多数据。</p><p>下面是一条数据，每条数据是一个<code>dict</code>，</p><ul><li><code>paragraphs</code>是数组，有多个段落</li><li><code>context</code>是段落的内容，使用&quot; '<br></li><li><code>qas</code> 是数组，多个qa对</li><li><code>answers</code> 是数组，实际上只有一个dict，遍历了所有数据。不知道未来的数据集是否会增加多个答案。写程序还是按照多个来写吧</li><li><code>text</code> 好像没有特殊符号(应该看了所有数据再这样说的)</li></ul><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"titile"</span>: <span class="string">"University of Noetre Dame"</span>,</span><br><span class="line">  <span class="attr">"paragraphs"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"context"</span>: <span class="string">"I love it very much. Notre Dame ranked 18th overall among \"national universities\" in the United States in U.S"</span>,</span><br><span class="line">      <span class="attr">"qas"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"answers"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">"answer_start"</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">"text"</span>: <span class="string">"I love it very much"</span></span><br><span class="line">            &#125;</span><br><span class="line">          ],</span><br><span class="line">          <span class="attr">"qusetion"</span>: <span class="string">"Do you love NLP?"</span>,</span><br><span class="line">          <span class="attr">"id"</span>: <span class="string">"5733ae924776f41900661017"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"answers"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">"answer_start"</span>: <span class="number">188</span>,</span><br><span class="line">              <span class="attr">"text"</span>: <span class="string">"always ing"</span></span><br><span class="line">            &#125;</span><br><span class="line">          ],</span><br><span class="line">          <span class="attr">"qusetion"</span>: <span class="string">"Are you looking for a job?"</span>,</span><br><span class="line">          <span class="attr">"id"</span>: <span class="string">"5733ae924776f41900661018"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="读取原始数据">读取原始数据</h2><p>主要注意对数据中<code>双引号的处理</code>。<code>Implements \&quot;Dynamic Coattention Network\&quot; by PyTorch</code> 。</p><p>使用<code>nltk.word_tokenize()</code> 对句子进行单词切分，转成单词列表。默认对于<strong>前后双引号的转义是不一样</strong>的。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">raw = <span class="string">'implements \"Dynamic Coattention Network\"'</span> </span><br><span class="line">words = nltk.word_tokenize(raw)</span><br><span class="line"><span class="comment"># words如下</span></span><br><span class="line">[<span class="string">'implements'</span>, <span class="string">'``'</span>, <span class="string">'Dynamic'</span>, <span class="string">'Coattention'</span>, <span class="string">'Network'</span>, <span class="string">"''"</span>]</span><br></pre></td></tr></table></figure><p>由于要对原始句子字符串和words进行比较，算出每个单词首字符的<code>charid --- wordid</code>。 所以，如果不对<code>\&quot;</code> 进行转义，比较的话是不会相等的。这里采用一个粗暴的办法，把所有双引号都替换成<code>\``\</code>字符串，这样就能匹配上了。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">raw = <span class="string">'implements \"Dynamic Coattention Network\"'</span></span><br><span class="line"><span class="comment"># 替换及新raw如下</span></span><br><span class="line">raw = raw.replace(<span class="string">'\"'</span>, <span class="string">'``'</span>)</span><br><span class="line"><span class="comment"># implements ``Dynamic Coattention Network``</span></span><br><span class="line">words = nltk.word_tokenize(raw)</span><br><span class="line"><span class="comment"># words如下</span></span><br><span class="line">[<span class="string">'implements'</span>, <span class="string">'``'</span>, <span class="string">'Dynamic'</span>, <span class="string">'Coattention'</span>, <span class="string">'Network'</span>, <span class="string">"``"</span>]</span><br></pre></td></tr></table></figure><p><strong>特殊数据</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Word ERROR. ans=[<span class="number">14</span>], words=[<span class="number">14</span>-story]</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;数据处理&quot;&gt;数据处理&lt;/h1&gt;
-&lt;h2 id=&quot;数据格式&quot;&gt;数据格式&lt;/h2&gt;
-&lt;p&gt;数据集是斯坦福的问答数据，&lt;a href=&quot;https://rajpurkar.github.io/SQuAD-explorer/&quot; target=&quot;_blank&quot; rel=
-      
-    
-    </summary>
-    
-      <category term="自然语言处理" scheme="http://plmsmile.github.io/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
-    
-    
-      <category term="DCN" scheme="http://plmsmile.github.io/tags/DCN/"/>
-    
-      <category term="DCNPlus" scheme="http://plmsmile.github.io/tags/DCNPlus/"/>
-    
-      <category term="Coattention" scheme="http://plmsmile.github.io/tags/Coattention/"/>
-    
-  </entry>
   
   <entry>
     <title>Dynamic Coattention Network (Plus)</title>
@@ -69,11 +38,11 @@
       <category term="自然语言处理" scheme="http://plmsmile.github.io/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="QA" scheme="http://plmsmile.github.io/tags/QA/"/>
-    
       <category term="DCN" scheme="http://plmsmile.github.io/tags/DCN/"/>
     
       <category term="coattention" scheme="http://plmsmile.github.io/tags/coattention/"/>
+    
+      <category term="QA" scheme="http://plmsmile.github.io/tags/QA/"/>
     
   </entry>
   
@@ -130,9 +99,9 @@
       <category term="自然语言处理" scheme="http://plmsmile.github.io/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="DMN" scheme="http://plmsmile.github.io/tags/DMN/"/>
-    
       <category term="QA" scheme="http://plmsmile.github.io/tags/QA/"/>
+    
+      <category term="DMN" scheme="http://plmsmile.github.io/tags/DMN/"/>
     
   </entry>
   
@@ -567,11 +536,11 @@
       <category term="cs224n" scheme="http://plmsmile.github.io/categories/cs224n/"/>
     
     
+      <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
+    
       <category term="cs224n" scheme="http://plmsmile.github.io/tags/cs224n/"/>
     
       <category term="assignment" scheme="http://plmsmile.github.io/tags/assignment/"/>
-    
-      <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
     
       <category term="cbow" scheme="http://plmsmile.github.io/tags/cbow/"/>
     
