@@ -19,9 +19,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="DCN,coattention,QA">
+    <meta name="keywords" content="QA,DCN,coattention">
     <meta name="description" content="Dynamic Coattention Networks For Question Answering DCN+: Mixed Objective and Deep Residual Coattention for Question Answering  先放四张图，分别是DCN的Encoder、Decoder，">
-<meta name="keywords" content="DCN,coattention,QA">
+<meta name="keywords" content="QA,DCN,coattention">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dynamic Coattention Network (Plus)">
 <meta property="og:url" content="http://plmsmile.github.io/2018/03/15/32-dynamic-coattention-network/index.html">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/papers/deep-residual-coattention-encoder.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/papers/deep-residual-coattention-encoder.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/papers/dcnplus-loss.png">
-<meta property="og:updated_time" content="2018-03-18T13:59:04.008Z">
+<meta property="og:updated_time" content="2018-03-18T14:06:35.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Coattention Network (Plus)">
 <meta name="twitter:description" content="Dynamic Coattention Networks For Question Answering DCN+: Mixed Objective and Deep Residual Coattention for Question Answering  先放四张图，分别是DCN的Encoder、Decoder，DCN+的Encoder和Objective。后面再详细总结   DCN">
@@ -324,7 +324,7 @@ C^D = S^Q \cdot A^Q
 <p>使用两层<code>coattention</code>， 最后再残差连接，经过LSTM输出。</p>
 <p><strong>第一层</strong> <span class="math display">\[
 E_1^D = \rm{biGRU_1}(E_0^D) \quad\in \mathbb R^{m \times h} \\
-E_1^Q = \tanh(\rm{W \; \rm{biGRU_1(Q_E)+b)}} \quad \in \mathbb R^{n \times h}
+E_1^Q = \tanh(\rm{W \cdot \rm{biGRU_1(E_0^Q)+b)}} \quad \in \mathbb R^{n \times h}
 \]</span></p>
 <p><span class="math display">\[
 \rm{coattn_1} (E_1^D, E_1^Q) =  S_1^D, S_1^Q, C_1^Q \\
@@ -350,7 +350,7 @@ U = \rm{biGRU}(c) \quad \in \mathbb R^{m \times 2h}
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-18T13:59:04.008Z" itemprop="dateUpdated">2018-03-18 21:59:04</time>
+    最后更新时间：<time datetime="2018-03-18T14:06:35.276Z" itemprop="dateUpdated">2018-03-18 22:06:35</time>
 </span><br>
 
 
