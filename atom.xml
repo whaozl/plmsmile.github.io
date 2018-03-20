@@ -1363,35 +1363,6 @@
   </entry>
   
   <entry>
-    <title>剑指Offer算法题</title>
-    <link href="http://plmsmile.github.io/2017/07/29/interview/"/>
-    <id>http://plmsmile.github.io/2017/07/29/interview/</id>
-    <published>2017-07-29T03:42:07.000Z</published>
-    <updated>2017-07-29T03:45:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="数组中重复的数字">03_数组中重复的数字</h2><h3 id="题目1">题目1</h3><p>找到数组中重复的数字</p><blockquote><p>一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一个重复的数字。例如[2,3,1,0,2,5,3]，输出2或3</p></blockquote><p><strong>思路1</strong></p><p>对数组进行<strong>排序</strong>，然后可以找出重复的数字。但是排序的时间复杂度是<code>O(nlogn)</code></p><p><strong>思路2</strong></p><p>使用<strong>哈希表</strong>，每次存放的时候检查是否在哈希表中，如果已经存在，那么就重复了。时间复杂度<code>O(n)</code>，空间复杂度<code>O(n)</code></p><p><strong>最优思路</strong></p><p>利用<strong>下标</strong>和值的关系，从头到尾依次扫描这个数组。扫描到下标为<code>i</code>，值为<code>m</code>。尽量把<code>m</code>放到<code>a[m]</code>的位置上。修改了原来的数组。</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> m == i:</span><br><span class="line">    <span class="comment"># 扫描下一个数字</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># 把m和a[m]进行比较</span></span><br><span class="line">    <span class="keyword">if</span> m == a[m]:</span><br><span class="line">        <span class="comment"># 找到一个相同的数字</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 把m放到a[m]的位置，交换</span></span><br><span class="line">        m &lt;--&gt; a[m]</span><br></pre></td></tr></table></figure><p>尽管有两重循环，但每个数字最多交换两次就能找到自己的位置，所以总的时间复杂度是<code>O(n)</code>，空间复杂度为<code>O(1)</code></p><h3 id="题目2">题目2</h3><p>不修改数组找出重复的数字</p><blockquote><p>数组，长度为n+1，数字范围[1, n]，数组中至少有一个是重复的，找出任意一个重复的数字，但是不能修改数组</p></blockquote><p><strong>思路1</strong></p><p>创建一个新数组b存放原数组a。遍历原数组，当前是m，如果b[m]已经没有值，则存放；如果有值，则重复。但是需要<code>O(n)</code>的辅助空间</p><p><strong>最优思路</strong></p><p>把[1, n]的个数字，分为两部分。a[1, m]和a[m+1, n]。在a[1, m]中，统计数字[1, m]出现的次数，如果是m次，则重复的区间在a[m+1, n]中，否则在a[1, m]中。继续这样二分查找即能查找到。</p><h2 id="二维数组查找">04_二维数组查找</h2><blockquote><p>​ 一个二维数组，每一行从左到右递增，每一列，从上到下递增。输入一个整数，判断二维数组中是否有这个数字</p></blockquote><p><strong>错误思路</strong></p><p>全盘扫描肯定不行，从左上角最小的开始也不行，应该从最大角的地方开始</p><p><strong>思路</strong></p><p>一行的最大元素在最右边，一列的最小元素在上边。所以从右上角开始查找最好。即<strong>向左查、向下查</strong>，这样每次都能够剔除一行或者一列。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当期右上角值是a[i, j]=m，查找的值是t</span></span><br><span class="line"><span class="keyword">if</span> t == a[i,j]:</span><br><span class="line">    done<span class="comment"># 查找成功</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> t &gt; a[i,j]: </span><br><span class="line">    <span class="comment"># 删除当前行</span></span><br><span class="line">    m = a[i+<span class="number">1</span>, j]</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> t &lt; a[i, j]:</span><br><span class="line">    <span class="comment"># 删除当前列</span></span><br><span class="line">    m = a[i, j<span class="number">-1</span>]</span><br><span class="line"><span class="comment"># 继续查找</span></span><br></pre></td></tr></table></figure><h2 id="字符串替换空格">05_字符串替换空格</h2><blockquote><p>把字符串中的每个空格替换成&quot;%20&quot;</p></blockquote><ul><li>如果在原来的字符串上修改，则会覆盖原来字符串后面的内存</li><li>如果创建新的字符串，则要分配足够的内存</li><li>C/C++中字符串最后一个字符是<code>\0</code></li></ul><p><strong>不好思路</strong></p><p>从前向后扫描，遇到一个空格替换一个。但是每次都需要大量移动后面的元素，所以时间复杂度是<span class="math inline">\(O(n^2)\)</span></p><p><strong>最优思路</strong></p><p><strong>从后向前替换</strong>。使用两个指针p1和p2。先计算出替换后的长度，p2指向替换后的长度的末尾指针。p1指向之前的字符串的指针。</p><ul><li>从p1开始向前移动</li><li>当前是普通字符，则复制到p2，p2向前移动</li><li>当前是空格，则在p2加入“%20”，p2向前移动</li><li>如果p1==p2，那么移动完毕</li></ul><p>总的来说，先找到最终的长度，从后向后拉。时间复杂度是<span class="math inline">\(O(n)\)</span></p><p><strong>技巧</strong></p><blockquote><p>合并两个数组/字符串，如果从前往后，则需要移动多次。从后向前，能够减少移动次数，提高效率</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;数组中重复的数字&quot;&gt;03_数组中重复的数字&lt;/h2&gt;
-&lt;h3 id=&quot;题目1&quot;&gt;题目1&lt;/h3&gt;
-&lt;p&gt;找到数组中重复的数字&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;一个数组存放n个数字，所有数字在[0, n-1]范围内。某些数字是随机重复的。请找出任意一
-      
-    
-    </summary>
-    
-      <category term="Algorithm" scheme="http://plmsmile.github.io/categories/Algorithm/"/>
-    
-    
-      <category term="Algorithm" scheme="http://plmsmile.github.io/tags/Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
     <title>简单的卷积神经网络</title>
     <link href="http://plmsmile.github.io/2017/07/18/cnn-mnist/"/>
     <id>http://plmsmile.github.io/2017/07/18/cnn-mnist/</id>
