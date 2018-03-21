@@ -13,7 +13,7 @@
     
     
     
-    <title>概率图模型(一) | PLM&#39;s Notes | 好好学习，天天笔记</title>
+    <title>马尔可夫模型 | PLM&#39;s Notes | 好好学习，天天笔记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,7 +23,7 @@
     <meta name="description" content="概述 产生式和判别式  判别方法 由数据直接去学习决策函数\(Y=f(X)\) 或者\(P(Y \mid X)\)作为预测模型 ，即判别模型   生成方法 先求出联合概率密度\(P(X, Y)\)，然后求出条件概率密度\(P(Y \mid X)\)。即生成模型\(P(Y \mid X) = \frac {P">
 <meta name="keywords" content="自然语言处理,概率图模型,马尔可夫链,隐马尔科夫模型,维特比算法,前向算法,后向算法，BW算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="概率图模型(一)">
+<meta property="og:title" content="马尔可夫模型">
 <meta property="og:url" content="http://plmsmile.github.io/2017/08/04/pgm-01/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="概述 产生式和判别式  判别方法 由数据直接去学习决策函数\(Y=f(X)\) 或者\(P(Y \mid X)\)作为预测模型 ，即判别模型   生成方法 先求出联合概率密度\(P(X, Y)\)，然后求出条件概率密度\(P(Y \mid X)\)。即生成模型\(P(Y \mid X) = \frac {P(X, Y)} {P(X)}\)      判别式 生成式">
@@ -33,9 +33,9 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/pgm/pagerank-graf2.PNG">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/pgm/pagerank-rezultate_1.gif">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/pgm/HMM.PNG">
-<meta property="og:updated_time" content="2017-09-26T03:29:10.000Z">
+<meta property="og:updated_time" content="2018-03-21T01:30:51.723Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="概率图模型(一)">
+<meta name="twitter:title" content="马尔可夫模型">
 <meta name="twitter:description" content="概述 产生式和判别式  判别方法 由数据直接去学习决策函数\(Y=f(X)\) 或者\(P(Y \mid X)\)作为预测模型 ，即判别模型   生成方法 先求出联合概率密度\(P(X, Y)\)，然后求出条件概率密度\(P(Y \mid X)\)。即生成模型\(P(Y \mid X) = \frac {P(X, Y)} {P(X)}\)      判别式 生成式">
 <meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/pgm/pgm1.png">
     
@@ -125,7 +125,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">概率图模型(一)</div>
+        <div class="flex-col header-title ellipsis">马尔可夫模型</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -147,7 +147,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">概率图模型(一)</h1>
+        <h1 class="title">马尔可夫模型</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-08-04T03:06:41.000Z" itemprop="datePublished" class="page-time">
@@ -180,7 +180,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">概率图模型(一)</h1>
+        <h1 class="post-card-title">马尔可夫模型</h1>
         <div class="post-meta">
             <time class="post-time" title="2017-08-04 11:06:41" datetime="2017-08-04T03:06:41.000Z"  itemprop="datePublished">2017-08-04</time>
 
@@ -542,7 +542,7 @@ P(O, q_t = s_i \mid \mu) &amp;= P(o_1\cdots o_T, q_t=s_i \mid \mu) =P(o_1 \cdots
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-09-26T03:29:10.000Z" itemprop="dateUpdated">2017-09-26 11:29:10</time>
+    最后更新时间：<time datetime="2018-03-21T01:30:51.723Z" itemprop="dateUpdated">2018-03-21 09:30:51</time>
 </span><br>
 
 
@@ -577,7 +577,7 @@ P(O, q_t = s_i \mid \mu) &amp;= P(o_1\cdots o_T, q_t=s_i \mid \mu) =P(o_1 \cdots
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《概率图模型(一)》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《马尔可夫模型》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -587,7 +587,7 @@ P(O, q_t = s_i \mid \mu) &amp;= P(o_1\cdots o_T, q_t=s_i \mid \mu) =P(o_1 \cdots
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《概率图模型(一)》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《马尔可夫模型》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -597,7 +597,7 @@ P(O, q_t = s_i \mid \mu) &amp;= P(o_1\cdots o_T, q_t=s_i \mid \mu) =P(o_1 \cdots
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《概率图模型(一)》 — PLM's Notes&url=http://plmsmile.github.io/2017/08/04/pgm-01/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《马尔可夫模型》 — PLM's Notes&url=http://plmsmile.github.io/2017/08/04/pgm-01/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -730,7 +730,7 @@ P(O, q_t = s_i \mid \mu) &amp;= P(o_1\cdots o_T, q_t=s_i \mid \mu) =P(o_1 \cdots
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《概率图模型(一)》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《马尔可夫模型》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -740,7 +740,7 @@ P(O, q_t = s_i \mid \mu) &amp;= P(o_1\cdots o_T, q_t=s_i \mid \mu) =P(o_1 \cdots
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《概率图模型(一)》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2017/08/04/pgm-01/&title=《马尔可夫模型》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -750,7 +750,7 @@ P(O, q_t = s_i \mid \mu) &amp;= P(o_1\cdots o_T, q_t=s_i \mid \mu) =P(o_1 \cdots
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《概率图模型(一)》 — PLM's Notes&url=http://plmsmile.github.io/2017/08/04/pgm-01/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《马尔可夫模型》 — PLM's Notes&url=http://plmsmile.github.io/2017/08/04/pgm-01/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
