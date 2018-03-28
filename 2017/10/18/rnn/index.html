@@ -50,7 +50,13 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/30_LSTM3-var-peepholes.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/31_LSTM3-var-tied.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/paper/32_LSTM3-var-GRU.png">
-<meta property="og:updated_time" content="2018-03-07T02:53:00.466Z">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/rnn-.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/clip-grads.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/rnn-direct.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/gru-shortcut-connection.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/rnn-whole-read-update.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/gru-select-read-update.png">
+<meta property="og:updated_time" content="2018-03-28T09:24:15.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="循环神经网络">
 <meta name="twitter:description" content="LSTM经典描述 经典RNN模型 模型 人类在思考的时候，会从上下文、从过去推断出现在的结果。传统的神经网络无法记住过去的历史信息。 循环神经网络是指随着时间推移，重复发生的结构。它可以记住之前发生的事情，并且推断出后面发生的事情。用于处理时间序列很好。所有的神经元共享权值。如下图所示。  记住短期信息 比如预测“天空中有__”，如果过去的信息“鸟”离当前位置比较近，则RNN可以">
@@ -189,7 +195,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#lstm经典描述"><span class="post-toc-number">1.</span> <span class="post-toc-text">LSTM经典描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#经典rnn模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">经典RNN模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lstm总览与核心结构"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">LSTM总览与核心结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lstm细节解剖"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">LSTM细节解剖</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lstm总结"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">LSTM总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#图文简介描述lstm"><span class="post-toc-number">2.</span> <span class="post-toc-text">图文简介描述LSTM</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总体架构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">总体架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据流动"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">数据流动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遗忘门"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">遗忘门</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新旧信息合并"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">新旧信息合并</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输出特别的值"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">输出特别的值</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#lstm变体"><span class="post-toc-number">3.</span> <span class="post-toc-text">LSTM变体</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#观察口连接"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">观察口连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#组队遗忘"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">组队遗忘</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gru"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">GRU</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#lstm经典描述"><span class="post-toc-number">1.</span> <span class="post-toc-text">LSTM经典描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#经典rnn模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">经典RNN模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lstm总览与核心结构"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">LSTM总览与核心结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lstm细节解剖"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">LSTM细节解剖</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lstm总结"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">LSTM总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#图文简介描述lstm"><span class="post-toc-number">2.</span> <span class="post-toc-text">图文简介描述LSTM</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总体架构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">总体架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据流动"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">数据流动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遗忘门"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">遗忘门</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新旧信息合并"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">新旧信息合并</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#输出特别的值"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">输出特别的值</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#lstm变体"><span class="post-toc-number">3.</span> <span class="post-toc-text">LSTM变体</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#观察口连接"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">观察口连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#组队遗忘"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">组队遗忘</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gru"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">GRU</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#rnn梯度问题"><span class="post-toc-number">4.</span> <span class="post-toc-text">RNN梯度问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#rnn梯度推导"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">RNN梯度推导</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决梯度爆炸"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">解决梯度爆炸</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gru解决梯度消失"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">GRU解决梯度消失</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -228,6 +234,11 @@
 <p>如果需要的历史信息距离当前位置很远，则RNN无法学习到过去的信息。这就是<strong>不能长期依赖</strong>的问题。</p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/image/paper/12_RNN-longtermdependencies.png" style="display:block; margin:auto" width="50%"></p>
 <h2 id="lstm总览与核心结构">LSTM总览与核心结构</h2>
+<ul>
+<li>LSTM可以记住一些记忆，捕获长依赖问题</li>
+<li>也可以让ERROR根据输入，依照不同强度流动</li>
+</ul>
+<p>见后面GRU解决梯度消失</p>
 <p><strong>总览</strong></p>
 <p>所有的RNN有着重复的结构，如下图，比如内部是一个简单的<code>tanh</code> 层。</p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/image/paper/08_LSTM3-SimpleRNN.png" style="display:block; margin:auto" width="50%"></p>
@@ -318,12 +329,87 @@ z_t = \sigma (W_z \cdot [h_{t-1}, x_t])
 \]</span> 候选隐藏层<span class="math inline">\(\hat h_t\)</span>的计算由<span class="math inline">\(h_{t-1}\)</span>和<span class="math inline">\(x_t\)</span>一起计算得到。所以计算<span class="math inline">\(\hat h_t\)</span>之前，要先计算<span class="math inline">\(h_{t-1}\)</span>的重置比例。</p>
 <p><code>重置门</code><span class="math inline">\(r_t\)</span>负责<strong><span class="math inline">\(h_{t-1}\)</span>对</strong>于生成<strong>新的候选<span class="math inline">\(\hat h_t\)</span>的作用比例</strong> <span class="math display">\[
 r_t = \sigma (W_r \cdot [h_{t-1}, x_t])
-\]</span> 新候选状态<span class="math inline">\(\hat h_t\)</span>的计算 <span class="math display">\[
+\]</span> <code>新记忆</code><span class="math inline">\(\hat h_t\)</span>的计算 <span class="math display">\[
 \hat h_t = \tanh (W \cdot [r_t * h_{t-1}, x_t])
-\]</span> <code>最终新状态</code><span class="math inline">\(h_t\)</span>由<span class="math inline">\(h_{t-1}\)</span>和<span class="math inline">\(\hat h_t\)</span>计算得到，分别的保留比例是<span class="math inline">\(1-z_t\)</span>和<span class="math inline">\(z_t\)</span> <span class="math display">\[
+\]</span> <code>最终记忆</code><span class="math inline">\(h_t\)</span>由<span class="math inline">\(h_{t-1}\)</span>和<span class="math inline">\(\hat h_t\)</span>计算得到，分别的保留比例是<span class="math inline">\(1-z_t\)</span>和<span class="math inline">\(z_t\)</span> <span class="math display">\[
 h_t = (1 - z_t) * h_{t-1} + z_t * \hat h_t
 \]</span></p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/image/paper/32_LSTM3-var-GRU.png" style="display:block; margin:auto" width="70%"></p>
+<p><code>更新门</code> <span class="math inline">\(z_t\)</span>：过去的信息有多重要。 <span class="math inline">\(z=1\)</span>， 则过去信息非常重要，完全保留下来</p>
+<p><code>重置门</code><span class="math inline">\(r_t\)</span>： 旧记忆对新记忆的贡献程度。<span class="math inline">\(r=0\)</span>， 则当前新记忆和旧记忆不想关。</p>
+<h1 id="rnn梯度问题">RNN梯度问题</h1>
+<h2 id="rnn梯度推导">RNN梯度推导</h2>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/rnn-.png" style="display:block; margin:auto" width="70%"></p>
+<p>简单点 <span class="math display">\[
+\begin {align}
+&amp; h_t = Wh_{t-1} + W^{(hx)} x_t \\ \\
+&amp; \hat y_t =W^{(s)} f(h_t)  \\ \\
+\end{align}
+\]</span> 总的误差是之前每个时刻的误差之和 <span class="math display">\[
+\frac{\partial E}{\partial W} = \sum_{t=1}^T \frac{\partial E_t}{\partial W}
+\]</span> 每一时刻的误差又是之前每个时刻的误差之和，应用链式法则 <span class="math display">\[
+\frac{\partial E_t}{\partial W} = 
+\frac{\partial E_t}{\partial y_t} \frac{\partial y_t}{\partial h_t}
+\sum_{k=1}^t 
+\frac{\partial h_t}{\partial h_k} \frac{\partial h_k}{\partial W}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial E_t}{\partial W} = \sum_{k=1}^t 
+\frac{\partial E_t}{\partial y_t} 
+\frac{\partial y_t}{\partial h_t}
+\color{blue} {\frac{\partial h_t}{\partial h_k}}
+\frac{\partial h_k}{\partial W}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial E_t}{\partial W} = \sum_{k=1}^t 
+\frac{\partial E_k}{\partial y_k} \frac{\partial y_k}{\partial h_k}\frac{\partial h_k}{\partial h_{k-1}} \frac{\partial h_{k-1}}{\partial W}
+\]</span></p>
+<p>而<span class="math inline">\(\frac{\partial h_t}{\partial h_k}\)</span>会变得非常大或者非常小！！ <span class="math display">\[
+\frac{\partial h_t}{\partial h_k} = \prod_{j=k+1}^t \frac{\partial h_j}{\partial h_{j-1}} 
+=  \prod_{j=k+1}^t W^T \times \rm{diag}[f^{\prime}(j_{j-1})]
+\]</span> 而导数矩阵<code>雅克比矩阵</code> <span class="math display">\[
+\frac{\partial h_j}{\partial h_{j-1}} = [ \frac{\partial h_{j}}{\partial h_{j-1,1}}, \cdots , \frac{\partial h_{j}}{\partial h_{j-1,d_h}}]
+=
+\begin{bmatrix}
+ \frac{\partial h_{j,1}}{\partial h_{j-1,1}} &amp; \cdots &amp; \frac{\partial h_{j,1}}{\partial h_{j-1,d_h}} \\
+ \vdots &amp; \ddots &amp; \vdots \\
+  \frac{\partial h_{j,d_h}}{\partial h_{j-1,1}} &amp; \cdots &amp; \frac{\partial h_{j,d_h}}{\partial h_{j-1,d_h}} \\
+\end{bmatrix}
+\]</span> 合并起来，得到最终的 <span class="math display">\[
+\frac{\partial E}{\partial W} = \sum_{t=1}^T\sum_{k=1}^t 
+\frac{\partial E_t}{\partial y_t} 
+\frac{\partial y_t}{\partial h_t}
+(\prod_{j=k+1}^t \frac{\partial h_j}{\partial h_{j-1}})
+\frac{\partial h_k}{\partial W}
+\]</span> 两个不等式 <span class="math display">\[
+\| \frac{\partial h_j}{\partial h_{j-1}}\| \le \| W^T\| \cdot \|\rm{diag}[f^{\prime}(h_{j-1})] \| \le \beta_W \beta_h
+\]</span> 所以有，会变得非常大或者非常小。会产生梯度消失或者梯度爆炸问题。 <span class="math display">\[
+\| \frac{\partial h_t}{\partial h_k} \| =\| \prod_{j=k+1}^t \frac{\partial h_j}{\partial h_{j-1}}  \| 
+\le \color{blue}{ (\beta_W \beta_h)^{t-k}}
+\]</span> <code>梯度</code> 是过去对未来影响力的一个度量方法。如果梯度消失了不确定<span class="math inline">\(t\)</span>和<span class="math inline">\(k\)</span>之间是否有关系，或者是因为参数错误 。</p>
+<h2 id="解决梯度爆炸">解决梯度爆炸</h2>
+<p>原始梯度 <span class="math display">\[
+\mathbf {\hat g} =\frac{\partial E}{\partial W} \\ \\ \\
+\]</span> 如果<span class="math inline">\(\mathbf {\hat g} &gt; 阈值\)</span>， 则更新 <span class="math display">\[
+\mathbf {\hat g} = \frac{\text{threshold}}{\|\mathbf {\hat g}\|} \mathbf {\hat g}
+\]</span> <img src="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/clip-grads.png" style="display:block; margin:auto" width="60%"></p>
+<h2 id="gru解决梯度消失">GRU解决梯度消失</h2>
+<ul>
+<li>LSTM可以记住一些记忆，捕获长依赖问题</li>
+<li>也可以让ERROR根据输入，依照不同强度流动</li>
+</ul>
+<p>RNN的前向和反向传播，都会经过每一个节点</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/rnn-direct.png" style="display:block; margin:auto" width="60%"></p>
+<p><strong>GRU可以自动地去创建一些短连接，也可以自动地删除一些不必要的连接</strong>。（门的功能）</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/gru-shortcut-connection.png" style="display:block; margin:auto" width="60%"></p>
+<p>RNN会读取之前所有信息，并且更新所有信息。</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/rnn-whole-read-update.png" style="display:block; margin:auto" width="60%"></p>
+<p>GRU</p>
+<ul>
+<li>选择可读部分，读取</li>
+<li>选择可写部分，更新</li>
+</ul>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/nlp/rnn/gru-select-read-update.png" style="display:block; margin:auto" width="60%"></p>
 
         </div>
 
@@ -331,7 +417,7 @@ h_t = (1 - z_t) * h_{t-1} + z_t * \hat h_t
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-07T02:53:00.466Z" itemprop="dateUpdated">2018-03-07 10:53:00</time>
+    最后更新时间：<time datetime="2018-03-28T09:24:15.050Z" itemprop="dateUpdated">2018-03-28 17:24:15</time>
 </span><br>
 
 
@@ -423,7 +509,7 @@ h_t = (1 - z_t) * h_{t-1} + z_t * \hat h_t
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/10/17/25_谷歌翻译论文笔记/" id="post-next" class="post-nav-link">
+      <a href="/2017/10/17/谷歌翻译论文笔记/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
         <h4 class="title">谷歌翻译论文笔记</h4>
       </a>
