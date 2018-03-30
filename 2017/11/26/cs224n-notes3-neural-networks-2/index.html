@@ -20,13 +20,13 @@
     
     
     <meta name="keywords" content="正则化,范数,Dropout,数据预处理,PCA,白化,BN">
-    <meta name="description" content="过拟合 过拟合 训练数据很少，或者训练次数很多，会导致过拟合。避免过拟合的方法有如下几种：  early stop 数据集扩增 正则化 （L1， L2权重衰减） Dropout  现在一般用L2正则化+Dropout。 过拟合时，拟合系数一般都很大。过拟合需要顾及到所有的数据点，意味着拟合函数波动很">
+    <meta name="description" content="过拟合 过拟合 训练数据很少，或者训练次数很多，会导致过拟合。避免过拟合的方法有如下几种：  early stop 数据集扩增 正则化 （L1， L2权重衰减） Dropout 决策树剪枝（尽管不属于神经网络）  现在一般用L2正则化+Dropout。 过拟合时，拟合系数一般都很大。过拟合需要顾及">
 <meta name="keywords" content="正则化,范数,Dropout,数据预处理,PCA,白化,BN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络-过拟合-预处理-BN">
 <meta property="og:url" content="http://plmsmile.github.io/2017/11/26/cs224n-notes3-neural-networks-2/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
-<meta property="og:description" content="过拟合 过拟合 训练数据很少，或者训练次数很多，会导致过拟合。避免过拟合的方法有如下几种：  early stop 数据集扩增 正则化 （L1， L2权重衰减） Dropout  现在一般用L2正则化+Dropout。 过拟合时，拟合系数一般都很大。过拟合需要顾及到所有的数据点，意味着拟合函数波动很大。  看到，在某些很小的区间内里，函数值的变化很剧烈。意味着这些小区间的导">
+<meta property="og:description" content="过拟合 过拟合 训练数据很少，或者训练次数很多，会导致过拟合。避免过拟合的方法有如下几种：  early stop 数据集扩增 正则化 （L1， L2权重衰减） Dropout 决策树剪枝（尽管不属于神经网络）  现在一般用L2正则化+Dropout。 过拟合时，拟合系数一般都很大。过拟合需要顾及到所有的数据点，意味着拟合函数波动很大。  看到，在某些很小的区间内里，函数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/overfit.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/compare-neurons-num.jpg">
@@ -41,10 +41,10 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/NB5.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/NB6.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/NB8.png">
-<meta property="og:updated_time" content="2018-03-20T08:16:21.130Z">
+<meta property="og:updated_time" content="2018-03-30T06:23:39.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络-过拟合-预处理-BN">
-<meta name="twitter:description" content="过拟合 过拟合 训练数据很少，或者训练次数很多，会导致过拟合。避免过拟合的方法有如下几种：  early stop 数据集扩增 正则化 （L1， L2权重衰减） Dropout  现在一般用L2正则化+Dropout。 过拟合时，拟合系数一般都很大。过拟合需要顾及到所有的数据点，意味着拟合函数波动很大。  看到，在某些很小的区间内里，函数值的变化很剧烈。意味着这些小区间的导">
+<meta name="twitter:description" content="过拟合 过拟合 训练数据很少，或者训练次数很多，会导致过拟合。避免过拟合的方法有如下几种：  early stop 数据集扩增 正则化 （L1， L2权重衰减） Dropout 决策树剪枝（尽管不属于神经网络）  现在一般用L2正则化+Dropout。 过拟合时，拟合系数一般都很大。过拟合需要顾及到所有的数据点，意味着拟合函数波动很大。  看到，在某些很小的区间内里，函数">
 <meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/overfit.png">
     
         <link rel="alternate" type="application/atom+xml" title="PLM&#39;s Notes" href="/atom.xml">
@@ -213,6 +213,7 @@
 <li>数据集扩增</li>
 <li>正则化 （L1， <strong>L2权重衰减</strong>）</li>
 <li>Dropout</li>
+<li>决策树剪枝（尽管不属于神经网络）</li>
 </ul>
 <p>现在一般用L2正则化+Dropout。</p>
 <p><strong>过拟合时</strong>，<strong>拟合系数一般都很大</strong>。过拟合需要顾及到所有的数据点，意味着<strong>拟合函数波动很大</strong>。</p>
@@ -501,7 +502,7 @@ E(x) = E(\mu), \quad D(x) = \frac{b}{b-1} E(\sigma^2)
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-20T08:16:21.130Z" itemprop="dateUpdated">2018-03-20 16:16:21</time>
+    最后更新时间：<time datetime="2018-03-30T06:23:39.828Z" itemprop="dateUpdated">2018-03-30 14:23:39</time>
 </span><br>
 
 
