@@ -32,7 +32,9 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/data-process.jpg">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/image/nlp/cs224n/notes3/data-pca-process.jpg">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/layer-batch-norm.jpg">
-<meta property="og:updated_time" content="2018-03-30T10:46:39.604Z">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd_batch.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd-whole.png">
+<meta property="og:updated_time" content="2018-03-30T14:26:58.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络优化">
 <meta name="twitter:description" content="任何数学技巧都不能弥补信息的缺失。本文介绍网络优化方法   神经网络的问题 神经网络有很强的表达能力。但有优化问题和泛化问题。主要通过优化和正则化来提升网络。 优化问题 优化问题的难点  网络是一个非凸函数，深层网络的梯度消失问题，很难优化 网络结构多样性，很难找到通用优化方法 参数多、数据大，训练效率低 参数多，存在高维变量的非凸优化  低维空间非凸优化：存在局部最">
@@ -171,7 +173,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经网络的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">神经网络的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">优化问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛化问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">泛化问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参数初始化"><span class="post-toc-number">2.</span> <span class="post-toc-text">参数初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对称权重问题"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">对称权重问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高斯分布初始化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">高斯分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#均匀分布初始化"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">均匀分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#xavier均匀分布初始化"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Xavier均匀分布初始化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据预处理"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据预处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要归一化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">为什么要归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准归一化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">标准归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缩放归一化"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">缩放归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#白化"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">白化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#逐层归一化"><span class="post-toc-number">4.</span> <span class="post-toc-text">逐层归一化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原因"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批量归一化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">批量归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#层归一化"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">层归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批归和层归对比"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">批归和层归对比</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经网络的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">神经网络的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">优化问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛化问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">泛化问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参数初始化"><span class="post-toc-number">2.</span> <span class="post-toc-text">参数初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对称权重问题"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">对称权重问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高斯分布初始化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">高斯分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#均匀分布初始化"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">均匀分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#xavier均匀分布初始化"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Xavier均匀分布初始化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据预处理"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据预处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要归一化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">为什么要归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准归一化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">标准归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缩放归一化"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">缩放归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#白化"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">白化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#逐层归一化"><span class="post-toc-number">4.</span> <span class="post-toc-text">逐层归一化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原因"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批量归一化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">批量归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#层归一化"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">层归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批归和层归对比"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">批归和层归对比</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其它归一化"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">其它归一化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#梯度下降法的改进"><span class="post-toc-number">5.</span> <span class="post-toc-text">梯度下降法的改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度下降法"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">梯度下降法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习率递减方法"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">学习率递减方法</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -337,7 +339,7 @@ x^{(i)} = \frac {x^{(i)} - \min(x)}{\max(x) - \min (x)}
 <li>如果层的净输入的分布是<strong>动态变化</strong>的，则<strong>无法使用批量归一化</strong>。如循环神经网络</li>
 </ul>
 <h2 id="层归一化">层归一化</h2>
-<p>对每个样本，对各个维度做一个归一化。</p>
+<p>对每个样本，对所有维度做一个归一化，即对<strong>同层的所有神经元</strong>的输入做归一化。</p>
 <ul>
 <li><code>层归一化</code>是<strong>对一个中间层的所有神经元进行归一化</strong></li>
 <li>批量归一化是对一个中间层的单个神经元进行归一化</li>
@@ -362,6 +364,45 @@ x^{(i)} = \frac {x^{(i)} - \min(x)}{\max(x) - \min (x)}
 <li>层归一化：针对每一个样本，对所有维度做归一化。可以用在RNN上，减小梯度消失和梯度爆炸。</li>
 </ul>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/layer-batch-norm.jpg" style="display:block; margin:auto" width="70%"></p>
+<h2 id="其它归一化">其它归一化</h2>
+<p><strong>权重归一化</strong></p>
+<p>对神经网络的连接权重进行归一化。</p>
+<p><strong>局部相应归一化</strong></p>
+<p>对同层的神经元进行归一化。但是局部响应归一化，用在激活函数之后，对邻近的神经元进行局部归一化。</p>
+<h1 id="梯度下降法的改进">梯度下降法的改进</h1>
+<h2 id="梯度下降法">梯度下降法</h2>
+<p><code>Mini-Batch</code>梯度下降法。设<span class="math inline">\(f(\mathbf x ^{(i)}, \theta)\)</span> 是神经网络。</p>
+<p>在第<span class="math inline">\(t\)</span>次迭代(epoch)时，选取<span class="math inline">\(m\)</span>个训练样本<span class="math inline">\(\{\mathbf x^{(i)}, y^{(i)} \}_{i=1}^m\)</span>。 计算梯度<span class="math inline">\(\mathbf g_t\)</span> <span class="math display">\[
+\mathbf g_t = \frac{1}{m} \sum_{i \in I_t} \frac {\partial J(y^{(i)}, f(\mathbf x ^{(i)}, \theta))}{\partial \theta} 
++ \lambda \|\theta\| ^2   
+\]</span> 更新参数： <span class="math display">\[
+\theta_t = \theta_{t-1} - \alpha \mathbf g_t \;, \quad \quad \alpha \ge 0 \\
+\]</span></p>
+<p><span class="math display">\[
+\theta_t = \theta_{t-1}+ \Delta \theta_t
+\]</span></p>
+<p>可以看出</p>
+<ul>
+<li>SGD，整体下降，但局部会来回震荡</li>
+<li>MBGD，一个batch来说，batch越大，下降越快，越平滑</li>
+<li>MBGD，整体来说，batch越小，下降越明显</li>
+</ul>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd_batch.png" style="display:block; margin:auto" width="70%"></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd-whole.png" style="display:block; margin:auto" width="71%"></p>
+<p>主要通过<code>学习率衰减</code>和<code>动量法</code>来改进。</p>
+<h2 id="学习率递减方法">学习率递减方法</h2>
+<p><strong>1. 按迭代次数递减</strong></p>
+<p>设置<span class="math inline">\(\beta = 0.96\)</span>为衰减率</p>
+<p><code>反时衰减</code> <span class="math display">\[
+\alpha_t = \alpha_0 \cdot \frac {1} {1 + \beta \times t}
+\]</span> <code>指数衰减</code> : <span class="math display">\[
+\alpha_t = \alpha_0 \cdot \beta^t
+\]</span> <code>自然指数衰减</code> <span class="math display">\[
+\alpha_t = \alpha_0 \cdot e^{-\beta \cdot t}
+\]</span> <strong>2. AdaGrad</strong></p>
+<p><code>Adaptive Gradient</code> 自适应调整每个参数的学习率</p>
+<p><strong>3. RMSprop</strong></p>
+<p><strong>4. AdaDelta</strong></p>
 
         </div>
 
@@ -369,7 +410,7 @@ x^{(i)} = \frac {x^{(i)} - \min(x)}{\max(x) - \min (x)}
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-30T10:46:39.604Z" itemprop="dateUpdated">2018-03-30 18:46:39</time>
+    最后更新时间：<time datetime="2018-03-30T14:26:58.061Z" itemprop="dateUpdated">2018-03-30 22:26:58</time>
 </span><br>
 
 
@@ -454,9 +495,9 @@ x^{(i)} = \frac {x^{(i)} - \min(x)}{\max(x) - \min (x)}
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/03/29/34-my-interviews/" id="post-next" class="post-nav-link">
+      <a href="/2018/03/25/33-attention-summary/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">面试经验</h4>
+        <h4 class="title">各种注意力总结</h4>
       </a>
     </div>
   
