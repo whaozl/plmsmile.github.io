@@ -34,7 +34,11 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/layer-batch-norm.jpg">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd_batch.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd-whole.png">
-<meta property="og:updated_time" content="2018-03-30T15:10:40.253Z">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/momentumjpg.jpg">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/optimizers.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/optimizer-1.gif">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/optimizer-2.gif">
+<meta property="og:updated_time" content="2018-03-31T08:18:58.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络优化">
 <meta name="twitter:description" content="任何数学技巧都不能弥补信息的缺失。本文介绍网络优化方法   神经网络的问题 神经网络有很强的表达能力。但有优化问题和泛化问题。主要通过优化和正则化来提升网络。 优化问题 优化问题的难点  网络是一个非凸函数，深层网络的梯度消失问题，很难优化 网络结构多样性，很难找到通用优化方法 参数多、数据大，训练效率低 参数多，存在高维变量的非凸优化  低维空间非凸优化：存在局部最">
@@ -173,7 +177,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经网络的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">神经网络的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">优化问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛化问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">泛化问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参数初始化"><span class="post-toc-number">2.</span> <span class="post-toc-text">参数初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对称权重问题"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">对称权重问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高斯分布初始化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">高斯分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#均匀分布初始化"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">均匀分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#xavier均匀分布初始化"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Xavier均匀分布初始化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据预处理"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据预处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要归一化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">为什么要归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准归一化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">标准归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缩放归一化"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">缩放归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#白化"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">白化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#逐层归一化"><span class="post-toc-number">4.</span> <span class="post-toc-text">逐层归一化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原因"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批量归一化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">批量归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#层归一化"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">层归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批归和层归对比"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">批归和层归对比</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其它归一化"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">其它归一化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#梯度下降法的改进"><span class="post-toc-number">5.</span> <span class="post-toc-text">梯度下降法的改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度下降法"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">梯度下降法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习率递减方法"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">学习率递减方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动量法"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">动量法</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#神经网络的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">神经网络的问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化问题"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">优化问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#泛化问题"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">泛化问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参数初始化"><span class="post-toc-number">2.</span> <span class="post-toc-text">参数初始化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对称权重问题"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">对称权重问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高斯分布初始化"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">高斯分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#均匀分布初始化"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">均匀分布初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#xavier均匀分布初始化"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Xavier均匀分布初始化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据预处理"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据预处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要归一化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">为什么要归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准归一化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">标准归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缩放归一化"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">缩放归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#白化"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">白化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#逐层归一化"><span class="post-toc-number">4.</span> <span class="post-toc-text">逐层归一化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原因"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批量归一化"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">批量归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#层归一化"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">层归一化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#批归和层归对比"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">批归和层归对比</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其它归一化"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">其它归一化</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#梯度下降法的改进"><span class="post-toc-number">5.</span> <span class="post-toc-text">梯度下降法的改进</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度下降法"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">梯度下降法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习率递减"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">学习率递减</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动量法"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">动量法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#adam"><span class="post-toc-number">5.4.</span> <span class="post-toc-text">Adam</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度截断"><span class="post-toc-number">5.5.</span> <span class="post-toc-text">梯度截断</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#超参数优化"><span class="post-toc-number">6.</span> <span class="post-toc-text">超参数优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化内容和难点"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">优化内容和难点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#超参数设置-搜索"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">超参数设置-搜索</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贝叶斯优化"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">贝叶斯优化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态资源分配"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">动态资源分配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#神经架构搜索"><span class="post-toc-number">6.5.</span> <span class="post-toc-text">神经架构搜索</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -214,7 +218,7 @@
 </ul>
 <p>低维空间非凸优化：存在局部最优点，难在初始化参数和逃离局部最优点</p>
 <p>高维空间非凸优化：难在如何逃离<code>鞍点</code>。 鞍点是梯度为0，但一些维度是最高点，另一些维度是最低点。</p>
-<p>梯度下降法很难逃离鞍点。</p>
+<p>梯度下降法<strong>很难逃离鞍点</strong>。</p>
 <p><strong>梯度下降法面临的问题</strong></p>
 <ul>
 <li>如何初始化参数</li>
@@ -375,12 +379,58 @@ x^{(i)} = \frac {x^{(i)} - \min(x)}{\max(x) - \min (x)}
 <p>在第<span class="math inline">\(t\)</span>次迭代(epoch)时，选取<span class="math inline">\(m\)</span>个训练样本<span class="math inline">\(\{\mathbf x^{(i)}, y^{(i)} \}_{i=1}^m\)</span>。 计算梯度<span class="math inline">\(\mathbf g_t\)</span> <span class="math display">\[
 \mathbf g_t = \frac{1}{m} \sum_{i \in I_t} \frac {\partial J(y^{(i)}, f(\mathbf x ^{(i)}, \theta))}{\partial \theta} 
 + \lambda \|\theta\| ^2   
-\]</span> 更新参数： <span class="math display">\[
-\theta_t = \theta_{t-1} - \alpha \mathbf g_t \;, \quad \quad \alpha \ge 0 \\
+\]</span> 更新参数，其中学习率<span class="math inline">\(\alpha \ge 0\)</span> ： <span class="math display">\[
+\theta_t = \theta_{t-1} - \alpha \mathbf g_t 
 \]</span></p>
 <p><span class="math display">\[
 \theta_t = \theta_{t-1}+ \Delta \theta_t
 \]</span></p>
+<p><strong>1. BGD</strong></p>
+<p>Batch Gradient Descent</p>
+<p><code>意义</code>：每一轮选择所有整个数据集去计算梯度更新参数</p>
+<p><code>优点</code></p>
+<ul>
+<li>凸函数，可以保证收敛到全局最优点；非凸函数，保证收敛到局部最优点</li>
+</ul>
+<p><code>缺点</code></p>
+<ul>
+<li>批量梯度下降非常慢。因为在整个数据集上计算</li>
+<li>训练次数多时，耗费内存</li>
+<li>不允许在线更新模型，例如更新实例</li>
+</ul>
+<p><strong>2. SGD</strong></p>
+<p>Stochastic Gradient Descent</p>
+<p><code>意义</code>：每轮值选择一条数据去计算梯度更新参数</p>
+<p><code>优点</code></p>
+<ul>
+<li>算法收敛快（BGD每轮会计算很多相似样本的梯度，冗余的）</li>
+<li>可以在线更新</li>
+<li>有一定几率跳出比较差的局部最优而到达更好的局部最优或者全局最优</li>
+</ul>
+<p><code>缺点</code></p>
+<ul>
+<li>容易收敛到局部最优，并且容易困在鞍点</li>
+</ul>
+<p><strong>3. Mini-BGD</strong></p>
+<p>Mini-Batch Gradient Descent</p>
+<p><code>意义</code>： 每次迭代只计算一个mini-batch的梯度去更新参数</p>
+<p>优点</p>
+<ul>
+<li>计算效率高，收敛较为稳定</li>
+</ul>
+<p><code>缺点</code></p>
+<ul>
+<li>更新方向依赖于当前batch算出的梯度，不稳定</li>
+</ul>
+<p><strong>4. 梯度下降法的难点</strong></p>
+<ol style="list-style-type: decimal">
+<li>学习率<span class="math inline">\(\alpha\)</span>难以选择。太小，导致收敛缓慢；太大，造成较大波动妨碍收敛</li>
+<li>学习率一直相同是不合理的。出现频率低的特征，大学习率；出现频率小的特征，小学习率</li>
+<li>按迭代次数和loss阈值在训练时去调整学习率。然而次数和阈值难以设定，无法适应所有数据</li>
+<li>很难逃离鞍点。梯度为0，一些特征是最高点（上升），一些特征是最低点（下降）</li>
+<li>更新方向依赖于当前batch算出的梯度，不稳定</li>
+</ol>
+<p>主要通过<strong>学习率递减</strong>和<strong>动量法</strong>来优化梯度下降法。</p>
 <p>可以看出</p>
 <ul>
 <li>SGD，整体下降，但局部会来回震荡</li>
@@ -389,8 +439,7 @@ x^{(i)} = \frac {x^{(i)} - \min(x)}{\max(x) - \min (x)}
 </ul>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd_batch.png" style="display:block; margin:auto" width="70%"></p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/sgd-whole.png" style="display:block; margin:auto" width="71%"></p>
-<p>主要通过<code>学习率衰减</code>和<code>动量法</code>来改进。</p>
-<h2 id="学习率递减方法">学习率递减方法</h2>
+<h2 id="学习率递减">学习率递减</h2>
 <p><strong>0 指数加权平均</strong></p>
 <p>求10天的平均温度，可以直接利用平均数求，每天的权值是一样的，且要保存所有的数值才能计算。 <span class="math display">\[
 v_{avg} = \frac {v_1 + \cdots + v_{100}}{100}
@@ -402,6 +451,7 @@ v_t = \beta * v_{t-1} + (1-\beta) \theta_t
 <p><span class="math display">\[
 v_{100} = 0.1 \cdot \theta_{100} + 0.1(0.9)^1 \cdot \theta_{99} + 0.1 (0.9)^2 \cdot \theta_{98} + 0.1(0.9)^3 \cdot \theta_{97} + \ldots
 \]</span></p>
+<p>离当前越近，权值越大。越远，权值越小（指数递减），也有一定权值。</p>
 <p><strong>1. 按迭代次数递减</strong></p>
 <p>设置<span class="math inline">\(\beta = 0.96\)</span>为衰减率</p>
 <p><code>反时衰减</code> <span class="math display">\[
@@ -412,35 +462,154 @@ v_{100} = 0.1 \cdot \theta_{100} + 0.1(0.9)^1 \cdot \theta_{99} + 0.1 (0.9)^2 \c
 \alpha_t = \alpha_0 \cdot e^{-\beta \cdot t}
 \]</span> <strong>2. AdaGrad</strong></p>
 <p><code>Adaptive Gradient</code></p>
-<p>意义：每次迭代时，根据历史梯度累积量，来减小梯度。初始学习率<span class="math inline">\(\alpha\)</span>不变，实际学习率减小。<span class="math inline">\(\alpha = \frac {\alpha_0} {\sqrt {G_t + \epsilon}}\)</span> <span class="math display">\[
+<p><code>意义</code>：每次迭代时，根据历史梯度累积量来减小学习率，减小梯度。<strong>梯度平方的累计值</strong>来减小梯度</p>
+<p>初始学习率<span class="math inline">\(\alpha_0\)</span>不变，实际学习率减小。<span class="math inline">\(\alpha = \frac {\alpha_0} {\sqrt {G_t + \epsilon}}\)</span> <span class="math display">\[
 G_t = \sum_{i=1}^t g_i^2
 \]</span></p>
 <p><span class="math display">\[
 \Delta \theta_t = - \frac {\alpha_0}{\sqrt {G_t + \epsilon}} \cdot g_t
 \]</span></p>
-<p>缺点：经过一些迭代，学习率已非常小，但依然没有找到最优点。难以继续找到最优点了。</p>
+<p><code>优点</code></p>
+<ul>
+<li>累积梯度<span class="math inline">\(G_t\)</span>的<span class="math inline">\(\frac{1}{\sqrt{G_t + \epsilon}}\)</span>实际上构成了一个约束项<br>
+</li>
+<li>前期<span class="math inline">\(G_t\)</span>较小， 约束值大，能够放大梯度</li>
+<li>后期<span class="math inline">\(G_t\)</span>较大， 约束值小，能够约束梯度</li>
+<li>适合处理稀疏梯度</li>
+</ul>
+<p><code>缺点</code></p>
+<ul>
+<li>经过一些迭代，学习率会变非常小，参数难以更新。过早停止训练</li>
+<li>依赖于人工设置的全局学习率<span class="math inline">\(\alpha_0\)</span></li>
+<li><span class="math inline">\(\alpha_0\)</span>设置过大，约束项大，则对梯度的调节太大</li>
+</ul>
 <p><strong>3. RMSprop</strong></p>
-<p>意义：计算<strong>梯度<span class="math inline">\(\mathbf g_t\)</span>平方</strong>的<code>指数递减移动平均</code> <span class="math display">\[
+<p>意义：计算<strong>梯度<span class="math inline">\(\mathbf g_t\)</span>平方</strong>的<code>指数递减移动平均</code>， 即<strong>梯度平方的平均值</strong>来减小梯度 <span class="math display">\[
 G_t = \beta G_{t-1} + (1-\beta) \cdot \mathbf g_t^2
 \]</span></p>
 <p><span class="math display">\[
 \Delta \theta_t = - \frac {\alpha_0}{\sqrt {G_t + \epsilon}} \cdot \mathbf g_t
 \]</span></p>
-<p>优点：学习率不是一直递减，而是可大可小。</p>
+<p><code>优点</code></p>
+<ul>
+<li>解决了AdaGrad学习率一直递减过早停止训练的问题，学习率可大可小</li>
+<li>训练初中期，加速效果不错，很快；训练后期，反复在局部最小值抖动</li>
+<li><strong>适合处理非平稳目标</strong>，对于RNN效果很好</li>
+</ul>
+<p><code>缺点</code></p>
+<ul>
+<li>依然依赖于全局学习率<span class="math inline">\(\alpha_0\)</span></li>
+</ul>
 <p><strong>4. AdaDelta</strong></p>
-<p>意义：不初始化学习率。计算<strong>梯度更新差平方</strong>的<code>指数衰减移动平均</code> <span class="math display">\[
+<p><code>意义</code> 不初始化学习率。计算<strong>梯度更新差平方</strong>的<code>指数衰减移动平均</code>来作为分子学习率， <span class="math display">\[
+G_t = \beta G_{t-1} + (1-\beta) \cdot \mathbf g_t^2
+\]</span></p>
+<p><span class="math display">\[
 \Delta X_{t-1}^2 = \beta \Delta X_{t-2}^2 + (1-\beta) \Delta \theta_{t-1}^2
 \]</span></p>
 <p><span class="math display">\[
 \Delta \theta_t = - \frac { \sqrt {\Delta X_{t-1}^2 + \epsilon}}{\sqrt {G_t + \epsilon}} \cdot \mathbf g_t
 \]</span></p>
-<p>优点：初始学习率<span class="math inline">\(\alpha_0\)</span>改成了动态计算的<span class="math inline">\(\sqrt {\Delta X_{t-1}^2 + \epsilon}\)</span> ，一定程度上平抑了学习率的波动。</p>
+<p><code>优点</code></p>
+<ul>
+<li>初始学习率<span class="math inline">\(\alpha_0\)</span>改成了动态计算的<span class="math inline">\(\sqrt {\Delta X_{t-1}^2 + \epsilon}\)</span> ，一定程度上平抑了学习率的波动。</li>
+</ul>
 <h2 id="动量法">动量法</h2>
-<p>使用最近一段时间的平均梯度，来代替当前时刻的梯度，作为更新方向。</p>
+<p>结合<strong>前面更新的方向</strong>和<strong>当前batch的方向</strong>，来更新参数。</p>
+<p>解决了MBGD的不稳定性，增加了<code>稳定性</code>。可以<code>加速</code>或者<code>减速</code>。</p>
 <p><strong>1. 普通动量法</strong></p>
-<p>设<span class="math inline">\(\rho = 0.9\)</span>为动量因子 <span class="math display">\[
+<p>设<span class="math inline">\(\rho = 0.9\)</span>为动量因子，计算<strong>负梯度</strong>的<code>移动加权平均</code> <span class="math display">\[
 \Delta \theta_t = \rho \cdot \Delta \theta_{t-1} - \alpha \cdot \mathbf g_t
 \]</span></p>
+<p>当前梯度与最近时刻的梯度方向：</p>
+<ul>
+<li>前后<strong>梯度方向一致</strong>：参数更新幅度变大，<strong>会加速</strong></li>
+<li>前后<strong>梯度方向不一致</strong>：参数更新幅度变小，<strong>会减速</strong></li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>迭代初期，梯度方向一致，动量法加速，更快到达最优点</li>
+<li>迭代后期，梯度方向不一致，在收敛值附近震荡，动量法会减速，增加稳定性</li>
+</ul>
+<p>当前梯度叠加上上次的梯度，可以近似地看成二阶梯度。</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/momentumjpg.jpg" style="display:block; margin:auto" width="70%"></p>
+<h2 id="adam">Adam</h2>
+<p><code>Adaptive Momentum Estimation</code> = <code>RMSProp</code> + <code>Momentum</code>， 即<strong>自适应学习率+稳定性</strong>（动量法）。</p>
+<p>意义：计算梯度<span class="math inline">\(\mathbf g_t\)</span>的指数权值递减移动平均(<code>动量</code>)，计算梯度平方<span class="math inline">\(\mathbf g_t^2\)</span>的指数权值递减移动平均(<code>自适应alpha</code>)</p>
+<p>设<span class="math inline">\(\beta_1 = 0.9\)</span>， <span class="math inline">\(\beta_2 = 0.99\)</span> 为衰减率 <span class="math display">\[
+M_t = \beta_1M_{t-1} + (1-\beta_1) \mathbf g_t \quad \quad \sim E(\mathbf g_t)
+\]</span></p>
+<p><span class="math display">\[
+G_t = \beta_2 G_{t-1} + (1-\beta_2) \mathbf g_t^2 \quad \quad \sim E(\mathbf g_t^2)
+\]</span></p>
+<p><span class="math display">\[
+\hat M_t = \frac {M_t}{1 - \beta_1^t}, \quad \hat G_t = \frac{G_t}{1 - \beta_2^t} \quad \quad \text{初始化偏差修正}
+\]</span></p>
+<p><span class="math display">\[
+\Delta \theta_t = - \frac {\alpha_0}{\sqrt{\hat G_t + \epsilon}} \hat M_t 
+\]</span></p>
+<p><code>优点</code></p>
+<ul>
+<li>有RMSprop的处理<strong>非稳态</strong>目标的优点，有Adagrad处理<strong>稀疏梯度</strong>的优点</li>
+<li>对内存需求比较小，高效地计算</li>
+<li>为不同的参数计算不同的自适应学习率</li>
+<li>适用于大多数的非凸优化</li>
+<li>超参数好解释，只需极少量的调参</li>
+</ul>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/optimizers.png" style="display:block; margin:auto" width="80%"></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/optimizer-1.gif" style="display:block; margin:auto" width="70%"></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/optimizer-2.gif" style="display:block; margin:auto" width="70%"></p>
+<h2 id="梯度截断">梯度截断</h2>
+<p>一般按模截断，如果<span class="math inline">\(\|\mathbf g_t\|^2 &gt; b\)</span>， 则 <span class="math display">\[
+\mathbf g_t = \frac{b}{\|\mathbf g_t\|} \mathbf g_t
+\]</span></p>
+<h1 id="超参数优化">超参数优化</h1>
+<h2 id="优化内容和难点">优化内容和难点</h2>
+<p><strong>优化内容</strong></p>
+<ul>
+<li>网络结构：神经元之间连接关系、层数、每层的神经元数量、激活函数类型等</li>
+<li>优化参数：优化方法、学习率、小批量样本数量</li>
+<li>正则化系数</li>
+</ul>
+<p><strong>优化难点</strong></p>
+<ul>
+<li>参数优化是组合优化问题，没有梯度下降法来优化，没有通用的有效的方法</li>
+<li>评估一组超参数配置的实际代价非常高</li>
+</ul>
+<p><strong>配置说明</strong></p>
+<ul>
+<li>有<span class="math inline">\(K\)</span>个超参数， 每个超参数配置表示为1个向量<span class="math inline">\(\mathbf x \in X\)</span></li>
+<li><span class="math inline">\(f(\mathbf x)\)</span> 是衡量超参数配置<span class="math inline">\(\mathbf x\)</span>效果的函数</li>
+<li><span class="math inline">\(f(\mathbf x)\)</span>不是<span class="math inline">\(\mathbf x\)</span>的连续函数，<span class="math inline">\(\mathbf x\)</span>也不同。 无法使用梯度下降等优化方法</li>
+</ul>
+<h2 id="超参数设置-搜索">超参数设置-搜索</h2>
+<p>超参数设置：人工搜索、网格搜索、随机搜索。</p>
+<p>缺点：没有利用到不同超参数组合之间的相关性，搜索方式都比较低效。</p>
+<p><strong>1. 网格搜索</strong></p>
+<p>对于<span class="math inline">\(K\)</span>个超参数，第<span class="math inline">\(k\)</span>个参数有<span class="math inline">\(m_k\)</span>种取值。总共的配置数量： <span class="math display">\[
+N = m_1 \times m_2 \times \cdots \times m_K
+\]</span> 如果超参数是连续的，可以根据经验选择一些经验值，比如学习率 <span class="math display">\[
+\alpha \in \{0.01, 0.1, 0.5, 1.0\}
+\]</span> 对这些超参数的不同组合，分别训练一个模型，测试在开发集上的性能。选取一组性能最好的配置。</p>
+<p><strong>2. 随机搜索</strong></p>
+<p>有的超参数对模型影响力有限（正则化），有的超参数对模型性能影响比较大。网格搜索会遍历所有的可能性。</p>
+<p>随机搜索：对超参数进行随机组合，选择一个性能最好的配置。</p>
+<p>优点：比网格搜索好，更容易实现，更有效。</p>
+<h2 id="贝叶斯优化">贝叶斯优化</h2>
+<p>根据当前已经试验的超参数组合，来预测下一个可能带来的最大收益的组合。</p>
+<p>贝叶斯优化过程：根据已有的N组试验结果来建立高斯过程，计算<span class="math inline">\(f(\mathbf x)\)</span>的后验分布。</p>
+<h2 id="动态资源分配">动态资源分配</h2>
+<p>在早期阶段，估计出一组配置的效果会比较差，则中止这组配置的评估。把更多的资源留给其他配置。</p>
+<p>这是多臂赌博机的泛化问题：最优赌博机。在给定有限次数的情况下，玩赌博机，找到收益最大的臂。</p>
+<h2 id="神经架构搜索">神经架构搜索</h2>
+<p>通过神经网络来自动实现网络架构的设计。</p>
+<ul>
+<li>变长字符串 -- 描述神经网络的架构</li>
+<li>控制器 -- 生成另一个子网络的架构描述</li>
+<li>控制器 -- RNN来实现</li>
+<li>控制器训练 -- 强化学习来完成</li>
+<li>奖励信号 -- 生成的子网络在开发集上的准确率</li>
+</ul>
 
         </div>
 
@@ -448,7 +617,7 @@ G_t = \beta G_{t-1} + (1-\beta) \cdot \mathbf g_t^2
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-30T15:10:40.253Z" itemprop="dateUpdated">2018-03-30 23:10:40</time>
+    最后更新时间：<time datetime="2018-03-31T08:18:58.444Z" itemprop="dateUpdated">2018-03-31 16:18:58</time>
 </span><br>
 
 
@@ -528,7 +697,14 @@ G_t = \beta G_{t-1} + (1-\beta) \cdot \mathbf g_t^2
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/31/36-alime-chat/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">36-alime-chat</h4>
+      </a>
+    </div>
   
 
   

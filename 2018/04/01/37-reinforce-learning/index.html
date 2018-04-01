@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>强化学习 | PLM&#39;s Notes | 好好学习，天天笔记</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="强化学习">
+    <meta name="description" content="强化学习基础 强化学习是指一个智能体从与环境的交互中不断学习去完成特定的目标。 强化学习不需要给出正确策略作为监督信息，只需要给出策略的（延迟）回报，并通过调整策略来取得最大化的期望回报。 定义   智能体、环境 环境状态\(s\)，智能体的动作\(a\)，智能体的策略\(\pi(a\mid s)\)，状">
+<meta name="keywords" content="强化学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习">
+<meta property="og:url" content="http://plmsmile.github.io/2018/04/01/37-reinforce-learning/index.html">
+<meta property="og:site_name" content="PLM&#39;s Notes">
+<meta property="og:description" content="强化学习基础 强化学习是指一个智能体从与环境的交互中不断学习去完成特定的目标。 强化学习不需要给出正确策略作为监督信息，只需要给出策略的（延迟）回报，并通过调整策略来取得最大化的期望回报。 定义   智能体、环境 环境状态\(s\)，智能体的动作\(a\)，智能体的策略\(\pi(a\mid s)\)，状态转移概率\(p(s_{t+1}\mid s_t, a_t)\)，即使奖励\">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/agent-env-interact.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/markov-decision-process.png">
+<meta property="og:updated_time" content="2018-04-01T03:34:00.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习">
+<meta name="twitter:description" content="强化学习基础 强化学习是指一个智能体从与环境的交互中不断学习去完成特定的目标。 强化学习不需要给出正确策略作为监督信息，只需要给出策略的（延迟）回报，并通过调整策略来取得最大化的期望回报。 定义   智能体、环境 环境状态\(s\)，智能体的动作\(a\)，智能体的策略\(\pi(a\mid s)\)，状态转移概率\(p(s_{t+1}\mid s_t, a_t)\)，即使奖励\">
+<meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/agent-env-interact.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="PLM&#39;s Notes" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="https://plmsmile.github.io/about" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">PLM</h5>
+          <a href="mailto:plmsmile@126.com" title="plmsmile@126.com" class="mail">plmsmile@126.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于我
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/plmsmile" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">强化学习</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">强化学习</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-01T01:30:47.000Z" itemprop="datePublished" class="page-time">
+  2018-04-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/强化学习/">强化学习</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">强化学习基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔科夫决策过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">马尔科夫决策过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目标函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">值函数</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-37-reinforce-learning"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">强化学习</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-01 09:30:47" datetime="2018-04-01T01:30:47.000Z"  itemprop="datePublished">2018-04-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/强化学习/">强化学习</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="" style="display:block; margin:auto" width="70%"></p>
+<h1 id="强化学习基础">强化学习基础</h1>
+<p>强化学习是指一个<strong>智能体</strong>从与<strong>环境</strong>的<strong>交互</strong>中不断学习去完成特定的目标。</p>
+<p>强化学习不需要给出正确策略作为监督信息，只需要给出<code>策略的（延迟）回报</code>，并通过<strong>调整策略</strong>来取得最大化的期望回报。</p>
+<h2 id="定义">定义</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>智能体、环境</li>
+<li>环境状态<span class="math inline">\(s\)</span>，智能体的动作<span class="math inline">\(a\)</span>，智能体的策略<span class="math inline">\(\pi(a\mid s)\)</span>，状态转移概率<span class="math inline">\(p(s_{t+1}\mid s_t, a_t)\)</span>，即使奖励<span class="math inline">\(r(s, a, s \prime)\)</span></li>
+</ol>
+</blockquote>
+<p><strong>1. 智能体和环境</strong></p>
+<p><strong>智能体</strong></p>
+<ul>
+<li>感知环境的状态和反馈的奖励，进行学习和决策</li>
+<li><code>决策</code> ：根据 -- 环境状态 -- 做出不同的动作</li>
+<li><code>学习</code>： 根据 -- 反馈奖励 -- 调整策略</li>
+</ul>
+<p><strong>环境</strong></p>
+<ul>
+<li>智能体外部的所有事物</li>
+<li>收到 -- 智能体的动作 -- 改变状态</li>
+<li>给 -- 智能体 -- 反馈奖励</li>
+</ul>
+<p><strong>2. 基本要素</strong></p>
+<p><code>状态s</code></p>
+<p>环境的状态，状态空间<span class="math inline">\(\mathcal S\)</span>， 离散/连续</p>
+<p><code>动作a</code></p>
+<p>智能体的行为，动作空间<span class="math inline">\(\mathcal A\)</span>， 离散/连续</p>
+<p><code>策略</code><span class="math inline">\(\pi(a\mid s)\)</span></p>
+<p>智能体 根据 -- 环境状态s -- 决定下一步的动作a 的函数</p>
+<p><code>状态转移概率</code><span class="math inline">\(p(s \prime \mid s, a)\)</span></p>
+<p>根据 -- 当前状态<span class="math inline">\(s\)</span>和智能体的动作<span class="math inline">\(a\)</span> -- 环境状态变为<span class="math inline">\(s \prime\)</span>的概率</p>
+<p><code>即时奖励</code><span class="math inline">\(r(s, a, s\prime)\)</span></p>
+<p>环境给智能体的奖励，标量函数。根据 -- 环境当前状态 、智能体执行的动作、环境新状态</p>
+<p><strong>3. 智能体的策略</strong></p>
+<p><span class="math inline">\(\pi(a \mid s)\)</span> 智能体根据环境状态决定下一步的动作。分为确定性策略和<code>随机性策略</code>。 <span class="math display">\[
+\pi(a\mid s) \triangleq p(a\mid s) , \quad \quad \sum_{a \in \mathcal A} \pi(a\mid s) = 1
+\]</span> <img src="http://otafnwsmg.bkt.clouddn.com/img/rl/agent-env-interact.png" style="display:block; margin:auto" width="50%"></p>
+<h2 id="马尔科夫决策过程">马尔科夫决策过程</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>马尔可夫过程，<span class="math inline">\(p(s_{t+1}\mid s_t)\)</span></li>
+<li>马尔可夫决策过程，<span class="math inline">\(p(s_{t+1} \mid s_t, a_t)\)</span></li>
+<li>轨迹，给初始状态，智能体与环境的一次交互过程</li>
+</ol>
+</blockquote>
+<p><strong>1. 马尔可夫过程</strong></p>
+<p>状态序列<span class="math inline">\(s_0, s_1, \cdots, s_t\)</span>具有马尔可夫性，<span class="math inline">\(s_{t+1}\)</span>只依赖于<span class="math inline">\(s_t\)</span> <span class="math display">\[
+p(s_{t+1}\mid s_t, \cdots, s_0) = p(s_{t+1} \mid s_t)
+\]</span> <strong>2. 马尔可夫决策过程</strong></p>
+<p><span class="math inline">\(s_{t+1}\)</span>依赖于<span class="math inline">\(s_t\)</span>和<span class="math inline">\(a_t\)</span>， 即<strong>环境新状态</strong>依赖于<strong>当前状态</strong>和<strong>当前智能体的动作</strong>。 <span class="math display">\[
+p(s_{t+1} \mid s_t, a_t, \cdots, s_0, a_0) = p(s_{t+1}\mid s_t, a_t)
+\]</span> 智能体与环境的交互是一个马尔可夫决策过程。</p>
+<p><strong>3. 轨迹</strong></p>
+<p>给定策略<span class="math inline">\(\pi(a\mid s)\)</span>， <code>轨迹</code>是智能体与环境的一次交互过程，是一个马尔可夫决策过程，如下： <span class="math display">\[
+\tau = s_0, a_0, s_1, r_1, \cdots, s_{T-1}, a_{T-1}, s_{T}, r_{T}
+\]</span> 其中<span class="math inline">\(r_t = r(s_{t-1}, a_{t-1}, s_t)\)</span>是时刻<span class="math inline">\(t\)</span>的即时奖励：</p>
+<p>轨迹的概率</p>
+<ul>
+<li>初始状态</li>
+<li>所有时刻概率的乘积</li>
+<li>智能体执行动作，环境更新状态</li>
+</ul>
+<p><span class="math display">\[
+p(\tau) = p(s_0) \prod_{t=0}^{T-1}\pi(a_t \mid s_t) p(s_{t+1} \mid s_t, a_t)
+\]</span></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/markov-decision-process.png" style="display:block; margin:auto" width="70%"></p>
+<h2 id="目标函数">目标函数</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>一个轨迹的总回报。<span class="math inline">\(G(\tau) = \sum_{t=0}^{T-1} r_{t+1}\)</span></li>
+<li>一个策略的期望回报。<span class="math inline">\(E_{\tau \sim p(\tau)} [G(\tau)]\)</span>。 所有轨迹的回报的期望</li>
+<li>强化学习的目标。学一个策略<span class="math inline">\(\pi_{\theta}(a \mid s)\)</span>， 最大化这个策略的期望回报</li>
+</ol>
+</blockquote>
+<p><strong>1. 一个轨迹的总回报与折扣回报</strong></p>
+<p><span class="math inline">\(r_t = r(s_{t-1}, a_{t-1}, s_t)\)</span>是<span class="math inline">\(t\)</span>时刻， 环境给智能体的<strong>奖励</strong>。</p>
+<p>给定策略<span class="math inline">\(\pi(a\mid s)\)</span>， 智能体与环境<code>一次交互过程</code>(回合，<code>试验</code>)为轨迹<span class="math inline">\(\tau\)</span></p>
+<p><code>总回报</code>是<strong>所有时刻的累积奖励</strong>： <span class="math display">\[
+G(\tau) = \sum_{t=0}^{T-1} r(s_{t-1}, a_{t-1}, s_t) =  \sum_{t=0}^{T-1} r_{t+1}
+\]</span> <code>折扣回报</code> 引入折扣率，降低远期回报的权重 <span class="math display">\[
+G(\tau) = \sum_{t=0}^{T-1} \gamma^t r_{t+1}, \quad \quad \gamma \in [0, 1]
+\]</span> 折扣率<span class="math inline">\(\gamma\)</span>, <span class="math inline">\(\gamma \sim 0\)</span>， 在意短期回报；<span class="math inline">\(\gamma \sim 1\)</span>， 在意长期回报</p>
+<p><strong>2. 一个策略的期望回报</strong></p>
+<p>给一个策略<span class="math inline">\(\pi(a\mid s)\)</span>， 有多个轨迹。<strong>一个策略的期望回报</strong>：该策略下所有轨迹总回报的期望值。 <span class="math display">\[
+E_{\tau \sim p(\tau)} [G(\tau)] =E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1}]
+\]</span> <strong>3. 强化学习的目标</strong></p>
+<p>强化学习的目标是 <strong>学习到一个策略<span class="math inline">\(\pi_{\theta}(a\mid s)\)</span></strong>，来<strong>最大化这个策略的期望回报</strong>。希望智能体能够获得尽可能多地回报。 <span class="math display">\[
+J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t+1}]
+\]</span></p>
+<h2 id="值函数">值函数</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>状态值函数。<span class="math inline">\(V^\pi(s)\)</span>, 初始状态为s，执行策略<span class="math inline">\(\pi\)</span>得到的期望回报。</li>
+<li>贝尔曼方程迭代计算值函数</li>
+<li>状态-动作值函数。$Q^(s, a) <span class="math inline">\(， 初始状态为s，进行动作a，执行策略\)</span>$得到的期望回报</li>
+<li>V函数与Q函数的关系。<span class="math inline">\(V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]\)</span></li>
+<li>值函数的作用。评估策略<span class="math inline">\(\pi(a \mid s)\)</span>， 对好的动作a（<span class="math inline">\(Q^\pi(s, a)\)</span>大 ），增大其概率<span class="math inline">\(\pi(a \mid s)\)</span></li>
+</ol>
+</blockquote>
+<p><strong>1. 状态值函数</strong></p>
+<p>状态值函数是<strong>初始状态为<span class="math inline">\(s\)</span></strong>，<strong>执行策略<span class="math inline">\(\pi\)</span>得到的期望回报</strong>。（因为有多个轨迹，每个轨迹的初始状态都是<span class="math inline">\(\tau_{s_0} = s\)</span>） <span class="math display">\[
+V^\pi(s) = E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1} \mid \tau_{s_0} = s]
+\]</span> <strong>2. 贝尔曼方程迭代计算值函数</strong></p>
+<p><strong>当前状态的值函数</strong>，可以<strong>通过下个状态的值函数</strong>进行<strong>递推计算</strong>。</p>
+<p>核心：<strong><span class="math inline">\(V^\pi(s) \sim r(s, a, s \prime) + V^\pi(s\prime)\)</span></strong>。 有动态规划的意思</p>
+<ul>
+<li>关键在于<span class="math inline">\(s \sim s\prime\)</span></li>
+<li><code>两层转换</code> ： <span class="math inline">\(s \sim a\)</span>， <span class="math inline">\(s, a \sim s\prime\)</span></li>
+<li>策略<span class="math inline">\(\pi(a\mid s)\)</span> 和状态转移概率<span class="math inline">\(p(s\prime \mid s, a)\)</span></li>
+<li>对这两层可能性的所有值函数，求期望即可</li>
+</ul>
+<p>给定<code>策略</code><span class="math inline">\(\pi(a\mid s)\)</span>、<code>状态转移概率</code><span class="math inline">\(p(s\prime \mid s, a)\)</span>、<code>奖励</code><span class="math inline">\(r(s, a, s\prime)\)</span>， <strong>迭代计算值函数</strong>： <span class="math display">\[
+V^\pi(s) = E[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span></p>
+<p><span class="math display">\[
+V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span></p>
+<p><strong>3. 状态-动作值函数</strong></p>
+<p>状态-动作值函数是 <strong>初始状态为<span class="math inline">\(s\)</span></strong>并<strong>进行动作<span class="math inline">\(a\)</span></strong>， <strong>执行策略<span class="math inline">\(\pi\)</span></strong>得到的<code>期望总回报</code>。 也称为<strong>Q函数</strong>。 <span class="math display">\[
+Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span> Q函数的贝尔曼方程 <span class="math display">\[
+Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + 
+\gamma E_{a\prime \sim \pi(a\prime \mid s\prime)}[Q^\pi(s\prime, a\prime)]]
+\]</span> <strong>4. V函数与Q函数</strong></p>
+<ul>
+<li><p>V函数要 先确定动作<span class="math inline">\(s \sim a\)</span>， 再确定新状态<span class="math inline">\(s, a \sim s\prime\)</span></p></li>
+<li><p>Q函数是确定了动作a的V函数</p></li>
+</ul>
+<p>状态值函数是所有动作a的Q函数的期望 <span class="math display">\[
+V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
+\]</span> <strong>5. 值函数的作用</strong></p>
+<p>值函数用来对策略<span class="math inline">\(\pi(a\mid s)\)</span>进行评估。</p>
+<p>如果在状态s，有一个动作a使得<span class="math inline">\(Q^\pi(s, a) &gt; V^\pi(s)\)</span></p>
+<ul>
+<li>s状态，执行动作a 比 s状态 所有动作的期望，都要好。状态a高于所有状态的平均值</li>
+<li>说明执行动作a比当前策略<span class="math inline">\(\pi(a \mid s)\)</span>好</li>
+<li>调整参数使<span class="math inline">\(\pi(a \mid s)\)</span>的概率增加</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-01T03:34:00.032Z" itemprop="dateUpdated">2018-04-01 11:34:00</time>
+</span><br>
+
+
+        
+        <br>原始链接：<a href="/2018/04/01/37-reinforce-learning/" target="_blank" rel="external">http://plmsmile.github.io/2018/04/01/37-reinforce-learning/</a>
+        
+    </div>
+    <footer>
+        <a href="http://plmsmile.github.io">
+            <img src="/img/avatar.jpg" alt="PLM">
+            PLM
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/强化学习/">强化学习</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/&title=《强化学习》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/&title=《强化学习》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《强化学习》 — PLM's Notes&url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/&via=http://plmsmile.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/31/36-alime-chat/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">36-alime-chat</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>PLM &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/&title=《强化学习》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/&title=《强化学习》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《强化学习》 — PLM's Notes&url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/&via=http://plmsmile.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://plmsmile.github.io/2018/04/01/37-reinforce-learning/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aQXKDMAwF0N7/0uk2i0K+JKcz2I8VQwjmZaFIln5+4uP1dlxdf//06vrVk+9XWXZgYGA8lvG6PZLXTajJebLuJRUDA+MARhIK77+VhOP7e5J1L69jYGBgBGE0D8f3KSAGBgbGnFEtO6uhFgMDA2NSxFYL0SR97D0TAwPjNEa+6/7/51/pb2BgYDyK8Soek839XjEcvRUGBsbWjDzAVcvLxVtpySoYGBgHMFaVkb07kyZoYbsNAwNjI8a86s3Da5I+5k2CPzJcDAyMrRl5yTpvcObtzEICioGBcQDjGw2DyYhG3gTFwMA4gZEnYUm1mAfraqIZPRMDA+MYRhLseq9bffIo4GJgYGzEyG/thc5e27K8GYeBgXEAo1o6VhlJWzQfufgwLYKBgbEdo9dWzJfJU8ZeewADA+McxqrGQN4MmFfevYQVAwPjiYxk6CFpBuTJX3Oc4v5TDAyMAxjVxarjqvcB9/67UXMCAwNja8Zkyd5L9IJ74W8AAwNjU0ae0q0Ku72Ntg9pJQYGxpGM5Erv/vtUrzl8hoGBcQyjl+rliWC1MC4PW2BgYGzHeBWPeaqX88r1NwYGxqaM6lDFvGEwKVwXzIxgYGA8ljEvICdFb/I3UChiMTAwtmbkgbI31NVrM+QrYmBgYEzOV/1AiwMuBgbGMYxJyVodWo3aAxgYGFszvjFCkdyZF7rLttswMDAeyKiWjvNXSUjVwhgDA2NTxi/+q+TzDqs2XQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.0"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.0" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
