@@ -19,9 +19,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="强化学习">
+    <meta name="keywords" content="智能体,环境,值函数,动态规划,蒙特卡罗方法">
     <meta name="description" content="强化学习基础 强化学习是指一个智能体从与环境的交互中不断学习去完成特定的目标。 强化学习不需要给出正确策略作为监督信息，只需要给出策略的（延迟）回报，并通过调整策略来取得最大化的期望回报。 定义   智能体、环境 环境状态\(s\)，智能体的动作\(a\)，智能体的策略\(\pi(a\mid s)\)，状">
-<meta name="keywords" content="强化学习">
+<meta name="keywords" content="智能体,环境,值函数,动态规划,蒙特卡罗方法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="强化学习">
 <meta property="og:url" content="http://plmsmile.github.io/2018/04/01/37-reinforce-learning/index.html">
@@ -30,7 +30,9 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/agent-env-interact.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/markov-decision-process.png">
-<meta property="og:updated_time" content="2018-04-01T03:34:00.032Z">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/strategy-iter.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/value-iter.png">
+<meta property="og:updated_time" content="2018-04-01T13:31:22.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习">
 <meta name="twitter:description" content="强化学习基础 强化学习是指一个智能体从与环境的交互中不断学习去完成特定的目标。 强化学习不需要给出正确策略作为监督信息，只需要给出策略的（延迟）回报，并通过调整策略来取得最大化的期望回报。 定义   智能体、环境 环境状态\(s\)，智能体的动作\(a\)，智能体的策略\(\pi(a\mid s)\)，状态转移概率\(p(s_{t+1}\mid s_t, a_t)\)，即使奖励\">
@@ -169,7 +171,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">强化学习基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔科夫决策过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">马尔科夫决策过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目标函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">值函数</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">强化学习基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔科夫决策过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">马尔科夫决策过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目标函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">值函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度强化学习"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">深度强化学习</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#值函数的学习方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">值函数的学习方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态规划算法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">动态规划算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-策略迭代"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动规-策略迭代</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-值迭代"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动规-值迭代</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#蒙特卡罗方法"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">蒙特卡罗方法</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -290,7 +292,7 @@ J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t+1}]
 <ol style="list-style-type: decimal">
 <li>状态值函数。<span class="math inline">\(V^\pi(s)\)</span>, 初始状态为s，执行策略<span class="math inline">\(\pi\)</span>得到的期望回报。</li>
 <li>贝尔曼方程迭代计算值函数</li>
-<li>状态-动作值函数。$Q^(s, a) <span class="math inline">\(， 初始状态为s，进行动作a，执行策略\)</span>$得到的期望回报</li>
+<li>状态-动作值函数。<span class="math inline">\(Q^\pi(s, a)\)</span>， 初始状态为s，进行动作a，执行策略<span class="math inline">\(\pi\)</span>得到的期望回报</li>
 <li>V函数与Q函数的关系。<span class="math inline">\(V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]\)</span></li>
 <li>值函数的作用。评估策略<span class="math inline">\(\pi(a \mid s)\)</span>， 对好的动作a（<span class="math inline">\(Q^\pi(s, a)\)</span>大 ），增大其概率<span class="math inline">\(\pi(a \mid s)\)</span></li>
 </ol>
@@ -334,6 +336,84 @@ V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
 <li>说明执行动作a比当前策略<span class="math inline">\(\pi(a \mid s)\)</span>好</li>
 <li>调整参数使<span class="math inline">\(\pi(a \mid s)\)</span>的概率增加</li>
 </ul>
+<h2 id="深度强化学习">深度强化学习</h2>
+<p>有些任务的状态和动作非常多，并且是连续的。普通方法很难去计算。</p>
+<p>可以使用更复杂的函数（深度神经网络）使智能体来感知更复杂的环境状态，建立更复杂的策略。</p>
+<p>深度强化学习</p>
+<ul>
+<li>强化学习 -- 定义问题和优化目标</li>
+<li>深度学习 -- 解决状态表示、策略表示等问题</li>
+</ul>
+<h1 id="值函数的学习方法">值函数的学习方法</h1>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>穷举策略</li>
+<li>迭代去根据策略的值函数去优化策略：动态规划（已知模型p和r）和蒙特卡罗（不知模型）</li>
+</ol>
+</blockquote>
+<p>值函数（<span class="math inline">\(V^\pi(s)\)</span>、<span class="math inline">\(Q^\pi(s, a)\)</span> ）用来对策略<span class="math inline">\(\pi(a \mid s)\)</span>进行评估。</p>
+<p><strong>1. 穷举策略法</strong></p>
+<p>如果策略有限，可以对所有策略进行评估，选出最优策略 <span class="math display">\[
+\forall s, \qquad \pi^* = \arg \max_\limits{\pi} V^\pi(s)
+\]</span> 策略空间<span class="math inline">\(\vert \mathcal A\vert^{\vert \mathcal S\vert}\)</span>非常大，根本无法搜索。</p>
+<p><strong>2. 迭代法优化策略</strong></p>
+<p>步骤如下，直到收敛</p>
+<ol style="list-style-type: decimal">
+<li>随机初始化一个策略</li>
+<li><strong>计算该策略的值函数</strong>：<code>动态规划</code>， <code>蒙特卡罗</code></li>
+<li>根据值函数来设置新的策略</li>
+</ol>
+<p>比如</p>
+<p>给一个初始策略<span class="math inline">\(\pi(a\mid s)\)</span>， 根据<span class="math inline">\(Q^\pi(s, a)\)</span>去不断迭代去优化，得到新的策略函数<span class="math inline">\(\pi^\prime (a\mid s)\)</span>（确定性策略），直到收敛。 <span class="math display">\[
+\pi^\prime (a\mid s) = 
+\begin {cases}
+&amp; 1  &amp; a  = \arg \max_\limits{\hat a}Q^\pi(s, \hat a) \\ 
+&amp; 0 &amp;  \text{others}\\
+\end {cases}
+\]</span> <strong>新策略的值函数</strong>会不断变大： <span class="math display">\[
+Q^{\pi^\prime}(s, \hat a) \ge Q^\pi(s, \hat a)
+\]</span></p>
+<h2 id="动态规划算法">动态规划算法</h2>
+<p>基于模型的强化学习，叫做模型相关的强化学习，或有模型的强化学习。</p>
+<p>若已知模型：状态转移概率<span class="math inline">\(p(s \prime \mid s, a)\)</span> 和奖励<span class="math inline">\(r(s, a, s\prime)\)</span> ，可以通过<code>贝尔曼方程</code>来迭代计算值函数。</p>
+<p>已知模型时，计算策略的值函数，可以用动态规划来计算。</p>
+<ul>
+<li>策略迭代算法</li>
+<li>值迭代算法</li>
+</ul>
+<p><strong>限制条件</strong></p>
+<ul>
+<li>要求模型已知</li>
+<li>效率太低（可以通过神经网络来近似计算值函数）</li>
+</ul>
+<h2 id="动规-策略迭代">动规-策略迭代</h2>
+<ol style="list-style-type: decimal">
+<li>策略迭代：计算当前策略下，每个状态的值函数<span class="math inline">\(V^\pi(s)\)</span>， 再计算<span class="math inline">\(Q^\pi(s, a)\)</span> <span class="math display">\[
+   V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+   \]</span></li>
+</ol>
+<p><span class="math display">\[
+   Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+   \]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>策略评估：根据值函数来更新策略（选择最大的a，更新为固定策略）</li>
+</ol>
+<p><span class="math display">\[
+\forall s, \qquad \pi(s) = \arg \max_\limits{a} Q(s, a)
+\]</span></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/strategy-iter.png" style="display:block; margin:auto" width="70%"></p>
+<h2 id="动规-值迭代">动规-值迭代</h2>
+<p>最优值函数：最优策略<span class="math inline">\(\pi^*\)</span>对应的值函数称。 <span class="math display">\[
+V^*(s) = \max_\limits{a} Q^*(s, a)
+\]</span> 贝尔曼最优方程 <span class="math display">\[
+V^*(s) = \max_\limits{a} E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma V^*(s^\prime)]
+\]</span></p>
+<p><span class="math display">\[
+Q^*(s, a) =  E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma \max_\limits{a\prime}Q^*(s^\prime, a^\prime)]
+\]</span></p>
+<p>值迭代方法直接去优化贝尔曼最优方差，迭代计算最优值函数。</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/value-iter.png" style="display:block; margin:auto" width="70%"></p>
+<h2 id="蒙特卡罗方法">蒙特卡罗方法</h2>
 
         </div>
 
@@ -341,7 +421,7 @@ V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-01T03:34:00.032Z" itemprop="dateUpdated">2018-04-01 11:34:00</time>
+    最后更新时间：<time datetime="2018-04-01T13:31:22.080Z" itemprop="dateUpdated">2018-04-01 21:31:22</time>
 </span><br>
 
 
@@ -366,7 +446,7 @@ V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/强化学习/">强化学习</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/值函数/">值函数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态规划/">动态规划</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/智能体/">智能体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境/">环境</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蒙特卡罗方法/">蒙特卡罗方法</a></li></ul>
 
 
             
