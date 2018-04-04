@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/alime/ali-assist.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/alime/alime-assist-flow.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/nlp/alime/cnn.png">
-<meta property="og:updated_time" content="2018-04-04T10:05:19.205Z">
+<meta property="og:updated_time" content="2018-04-04T13:03:41.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里小蜜论文">
 <meta name="twitter:description" content="AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine  AliMe Chat 概览 1. IR Model Information Retrieval。有一个QA对知识库，给一个问题，选择最相似的问题Pair，得出答案。 缺点：很难处理那些不在QA知识库里面的Long tail问句 2. Generati">
@@ -172,7 +172,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#alime-chat"><span class="post-toc-number">1.</span> <span class="post-toc-text">AliMe Chat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概览"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#qa知识库"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">QA知识库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ir模型"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">IR模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成式模型"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">生成式模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打分模型"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">打分模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#评价方法"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">评价方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#阿里小蜜助手"><span class="post-toc-number">2.</span> <span class="post-toc-text">阿里小蜜助手</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统概览"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">系统概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#意图分类"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">意图分类</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#alime-chat"><span class="post-toc-number">1.</span> <span class="post-toc-text">AliMe Chat</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概览"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#qa知识库"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">QA知识库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ir模型"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">IR模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#生成式模型"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">生成式模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打分模型"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">打分模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#评价方法"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">评价方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#阿里小蜜助手"><span class="post-toc-number">2.</span> <span class="post-toc-text">阿里小蜜助手</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统概览"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">系统概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#意图分类"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">意图分类</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#taskbot"><span class="post-toc-number">3.</span> <span class="post-toc-text">TaskBot</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#intent-network"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Intent network</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#neural-belief-tracker"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Neural belief tracker</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#policy-networker"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Policy networker</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -359,6 +359,28 @@ P_{\rm{top}_1} = \frac{N_{合适} + N_{一般}}{N_{所有}}
 <li>多个卷积池化层或者RNN能实现一个更好的结果，但是扩展性不好？为什么？</li>
 </ul>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/nlp/alime/cnn.png" style="display:block; margin:auto" width="70%"></p>
+<h1 id="taskbot">TaskBot</h1>
+<p>主要是以强化学习为中心的端到端的对话管理，由下面三个部分组成：</p>
+<h2 id="intent-network">Intent network</h2>
+<blockquote>
+<p>处理用户的输入</p>
+</blockquote>
+<p>使用单层CNN对用户的问句进行编码，得到用户的意图语义向量</p>
+<h2 id="neural-belief-tracker">Neural belief tracker</h2>
+<blockquote>
+<p>提取记录用户的slot信息</p>
+</blockquote>
+<ul>
+<li>使用BiLSTM-CRF来提取用户每次输入的slot信息</li>
+<li>根据上一轮系统的回答和当前用户的问句生成当前的Context信息，给到后面的Policy Network</li>
+<li>优点是：BiLSTM可以挖掘出当前词的Context信息，而CRF能有效地对标记序列进行建模</li>
+</ul>
+<h2 id="policy-networker">Policy networker</h2>
+<blockquote>
+<p>决定系统的操作，继续反问用户或者直接产生相应的实际操作</p>
+</blockquote>
+<p>这也是强化学习的核心点，主要包含Episode，Reward，State和Action四个部分。 <strong>Episode</strong> 在某个场景下，识别出用户该场景的意图，则认为一个Episode开始；执行目的操作或者退出，则认为Episode结束 <strong>Reward</strong> 收集线上用户的反馈，并根据正负给出相应的Reward。特别注意要使用预训练的环境 <strong>State</strong> 结合当前新的Slot状态（Context）、历史的Slot信息和用户的当前问句信息，使用线性层+Softmax直接算出各个Actions的概率 <strong>Action</strong> Action就是系统可以给用户的一些反馈操作，比如继续询问用户、执行一个真实的操作等等。</p>
+<p>该Taskbot的瓶颈主要是难以确定用户退出的原因，从而很难给出一些确定的惩罚。</p>
 
         </div>
 
@@ -366,7 +388,7 @@ P_{\rm{top}_1} = \frac{N_{合适} + N_{一般}}{N_{所有}}
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-04T10:05:19.205Z" itemprop="dateUpdated">2018-04-04 18:05:19</time>
+    最后更新时间：<time datetime="2018-04-04T13:03:41.177Z" itemprop="dateUpdated">2018-04-04 21:03:41</time>
 </span><br>
 
 
