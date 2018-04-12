@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://plmsmile.github.io/"/>
-  <updated>2018-04-12T05:55:32.569Z</updated>
+  <updated>2018-04-12T06:02:22.428Z</updated>
   <id>http://plmsmile.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://plmsmile.github.io/2018/04/12/39-squard-models/"/>
     <id>http://plmsmile.github.io/2018/04/12/39-squard-models/</id>
     <published>2018-04-12T05:54:12.000Z</published>
-    <updated>2018-04-12T05:55:32.569Z</updated>
+    <updated>2018-04-12T06:02:22.428Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="" style="display:block; margin:auto" width="70%"></p><h1 id="qanet">QANet</h1><p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/cnn/cnn_self_attention.png" style="display:block; margin:auto" width="100%"></p>]]></content>
+    <content type="html"><![CDATA[<p><img src="" style="display:block; margin:auto" width="70%"></p><h1 id="qanet">QANet</h1><p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/cnn/cnn_self_attention.png" style="display:block; margin:auto" width="100%"></p><h1 id="bidaf">BiDAF</h1><p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/bidaf.png" style="display:block; margin:auto" width="100%"></p>]]></content>
     
     <summary type="html">
     
@@ -422,9 +422,9 @@
       <category term="机器学习" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="SVM" scheme="http://plmsmile.github.io/tags/SVM/"/>
+    
+      <category term="机器学习" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="拉格朗日对偶性" scheme="http://plmsmile.github.io/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AF%B9%E5%81%B6%E6%80%A7/"/>
     
@@ -734,11 +734,11 @@
       <category term="cs224n" scheme="http://plmsmile.github.io/categories/cs224n/"/>
     
     
-      <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
-    
       <category term="cs224n" scheme="http://plmsmile.github.io/tags/cs224n/"/>
     
       <category term="assignment" scheme="http://plmsmile.github.io/tags/assignment/"/>
+    
+      <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
     
       <category term="cbow" scheme="http://plmsmile.github.io/tags/cbow/"/>
     
