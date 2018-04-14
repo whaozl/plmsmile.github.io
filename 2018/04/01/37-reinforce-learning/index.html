@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/markov-decision-process.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/strategy-iter.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/value-iter.png">
-<meta property="og:updated_time" content="2018-04-07T14:12:15.911Z">
+<meta property="og:updated_time" content="2018-04-14T10:11:39.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习">
 <meta name="twitter:description" content="强化学习基础 强化学习是指一个智能体从与环境的交互中不断学习去完成特定的目标。 强化学习不需要给出正确策略作为监督信息，只需要给出策略的（延迟）回报，并通过调整策略来取得最大化的期望回报。 定义   智能体、环境 环境状态\(s\)，智能体的动作\(a\)，智能体的策略\(\pi(a\mid s)\)，状态转移概率\(p(s_{t+1}\mid s_t, a_t)\)，即使奖励\">
@@ -171,7 +171,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">强化学习基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔科夫决策过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">马尔科夫决策过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目标函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">值函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度强化学习"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">深度强化学习</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#值函数的学习方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">值函数的学习方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态规划算法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">动态规划算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-策略迭代"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动规-策略迭代</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-值迭代"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动规-值迭代</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#蒙特卡罗方法"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">蒙特卡罗方法</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">强化学习基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔科夫决策过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">马尔科夫决策过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目标函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">值函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贝尔曼贝尔曼最优方程"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">贝尔曼&贝尔曼最优方程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度强化学习"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">深度强化学习</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#值函数的学习方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">值函数的学习方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态规划算法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">动态规划算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-策略迭代算法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动规-策略迭代算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-值迭代算法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动规-值迭代算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#蒙特卡罗方法"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">蒙特卡罗方法</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -312,13 +312,13 @@ V^\pi(s) = E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1} \mid \tau_{s_0} = s]
 <p>给定<code>策略</code><span class="math inline">\(\pi(a\mid s)\)</span>、<code>状态转移概率</code><span class="math inline">\(p(s\prime \mid s, a)\)</span>、<code>奖励</code><span class="math inline">\(r(s, a, s\prime)\)</span>， <strong>迭代计算值函数</strong>： <span class="math display">\[
 V^\pi(s) = E[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
 \]</span></p>
-<p><span class="math display">\[
+<p><strong>V函数的贝尔曼方程</strong> <span class="math display">\[
 V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
 \]</span></p>
 <p><strong>3. 状态-动作值函数</strong></p>
 <p>状态-动作值函数是 <strong>初始状态为<span class="math inline">\(s\)</span></strong>并<strong>进行动作<span class="math inline">\(a\)</span></strong>， <strong>执行策略<span class="math inline">\(\pi\)</span></strong>得到的<code>期望总回报</code>。 也称为<strong>Q函数</strong>。 <span class="math display">\[
 Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
-\]</span> Q函数的贝尔曼方程 <span class="math display">\[
+\]</span> <strong>Q函数的贝尔曼方程</strong> <span class="math display">\[
 Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + 
 \gamma E_{a\prime \sim \pi(a\prime \mid s\prime)}[Q^\pi(s\prime, a\prime)]]
 \]</span> <strong>4. V函数与Q函数</strong></p>
@@ -329,13 +329,44 @@ Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) +
 <p>状态值函数是所有动作a的Q函数的期望 <span class="math display">\[
 V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
 \]</span> <strong>5. 值函数的作用</strong></p>
-<p>值函数用来对策略<span class="math inline">\(\pi(a\mid s)\)</span>进行评估。</p>
-<p>如果在状态s，有一个动作a使得<span class="math inline">\(Q^\pi(s, a) &gt; V^\pi(s)\)</span></p>
+<p>值函数用来对策略<span class="math inline">\(\pi(a\mid s)\)</span>进行评估。如果在状态s，有一个动作a使得<span class="math inline">\(Q^\pi(s, a) &gt; V^\pi(s)\)</span></p>
 <ul>
 <li>s状态，执行动作a 比 s状态 所有动作的期望，都要好。状态a高于所有状态的平均值</li>
 <li>说明执行动作a比当前策略<span class="math inline">\(\pi(a \mid s)\)</span>好</li>
 <li>调整参数使<span class="math inline">\(\pi(a \mid s)\)</span>的概率增加</li>
 </ul>
+<h2 id="贝尔曼贝尔曼最优方程">贝尔曼&amp;贝尔曼最优方程</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>V(s)函数Q(s,a)函数</li>
+<li>贝尔曼方程（选择所有可能的均值）</li>
+<li>贝尔曼最优方程（直接选择最大值）</li>
+</ol>
+</blockquote>
+<p><strong>1. V函数与Q函数</strong></p>
+<p>V函数：以<strong>s为初始状态</strong>，执行策略<span class="math inline">\(\pi\)</span>得到的<code>期望回报</code>（所有轨迹回报的均值） <span class="math display">\[
+V^\pi(s) = E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1} \mid \tau_{s_0} = s]
+\]</span> Q函数：以<strong>s为初始状态，执行动作a</strong>，执行策略<span class="math inline">\(\pi\)</span>得到的期望回报 <span class="math display">\[
+Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span> 利用V函数去计算Q函数 <span class="math display">\[
+Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span></p>
+<p><strong>2. 贝尔曼方程</strong></p>
+<p><span class="math inline">\(V(s)\)</span>的贝尔曼方程，选择<strong>所有a的期望回报</strong>， 也是<strong>Q函数的均值</strong>，<span class="math inline">\(V(s)=E_a[Q(s, a)]\)</span> <span class="math display">\[
+V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span></p>
+<p><span class="math display">\[
+V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
+\]</span></p>
+<p>Q函数的贝尔曼方程 <span class="math display">\[
+Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma E_{a\prime \sim \pi(a\prime \mid s\prime)}[Q^\pi(s\prime, a\prime)]]
+\]</span></p>
+<p><strong>3. 贝尔曼最优方程</strong></p>
+<p>V函数的贝尔曼最优方程，实际上是<strong>直接选择所有a中的最大回报</strong> ： <span class="math display">\[
+V^*(s) = \max_\limits{a} E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma V^*(s^\prime)]
+\]</span> Q函数的贝尔曼最优方程 <span class="math display">\[
+Q^*(s, a) =  E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma \max_\limits{a\prime}Q^*(s^\prime, a^\prime)]
+\]</span></p>
 <h2 id="深度强化学习">深度强化学习</h2>
 <p>有些任务的状态和动作非常多，并且是连续的。普通方法很难去计算。</p>
 <p>可以使用更复杂的函数（深度神经网络）使智能体来感知更复杂的环境状态，建立更复杂的策略。</p>
@@ -348,7 +379,8 @@ V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
 <blockquote>
 <ol style="list-style-type: decimal">
 <li>穷举策略</li>
-<li>迭代去根据策略的值函数去优化策略：动态规划（已知模型p和r）和蒙特卡罗（不知模型）</li>
+<li>迭代去根据策略的值函数去优化策略</li>
+<li>动态规划（已知状态转移概率<span class="math inline">\(p(s^\prime \mid s, a)\)</span>和奖励函数<span class="math inline">\(r(s, a, s^\prime)\)</span>），蒙特卡罗方法（不知模型）</li>
 </ol>
 </blockquote>
 <p>值函数（<span class="math inline">\(V^\pi(s)\)</span>、<span class="math inline">\(Q^\pi(s, a)\)</span> ）用来对策略<span class="math inline">\(\pi(a \mid s)\)</span>进行评估。</p>
@@ -364,7 +396,7 @@ V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
 <li>根据值函数来设置新的策略</li>
 </ol>
 <p>比如</p>
-<p>给一个初始策略<span class="math inline">\(\pi(a\mid s)\)</span>， 根据<span class="math inline">\(Q^\pi(s, a)\)</span>去不断迭代去优化，得到新的策略函数<span class="math inline">\(\pi^\prime (a\mid s)\)</span>（确定性策略），直到收敛。 <span class="math display">\[
+<p>给一个初始策略<span class="math inline">\(\pi(a\mid s)\)</span>， 根据<span class="math inline">\(Q^\pi(s, a)\)</span>去不断迭代去优化，得到新的策略函数<span class="math inline">\(\pi^\prime (a\mid s)\)</span>（<strong>确定性策略</strong>），直到收敛。 <span class="math display">\[
 \pi^\prime (a\mid s) = 
 \begin {cases}
 &amp; 1  &amp; a  = \arg \max_\limits{\hat a}Q^\pi(s, \hat a) \\ 
@@ -374,50 +406,83 @@ V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
 Q^{\pi^\prime}(s, \hat a) \ge Q^\pi(s, \hat a)
 \]</span></p>
 <h2 id="动态规划算法">动态规划算法</h2>
-<p>基于模型的强化学习，叫做模型相关的强化学习，或有模型的强化学习。</p>
-<p>若已知模型：状态转移概率<span class="math inline">\(p(s \prime \mid s, a)\)</span> 和奖励<span class="math inline">\(r(s, a, s\prime)\)</span> ，可以通过<code>贝尔曼方程</code>来迭代计算值函数。</p>
-<p>已知模型时，计算策略的值函数，可以用动态规划来计算。</p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>思想：已知模型，通过贝尔曼方程来<strong>迭代计算值函数</strong>，通过<strong>值函数去优化策略</strong>为固定策略</li>
+<li>两种方法：策略迭代-贝尔曼方程（所有可能的均值），值迭代-贝尔曼最优方程（直接）</li>
+<li>缺点：要求模型已知，效率太低</li>
+</ol>
+</blockquote>
+<p>基于模型的强化学习，叫做<code>模型相关的强化学习</code>，或有模型的强化学习。</p>
+<p><strong>1. 动态规划思想</strong></p>
 <ul>
-<li>策略迭代算法</li>
-<li>值迭代算法</li>
+<li>已知模型：状态转移概率<span class="math inline">\(p(s \prime \mid s, a)\)</span> 和奖励<span class="math inline">\(r(s, a, s\prime)\)</span></li>
+<li>可以通过贝尔曼方程或贝尔曼最优方程来<strong>迭代计算值函数<span class="math inline">\(V(s)\)</span> </strong>，再<strong>通过<span class="math inline">\(V(s)\)</span>去计算<span class="math inline">\(Q(s,a)\)</span></strong></li>
+<li>通过值函数来优化策略，一般为优化为固定策略<span class="math inline">\(\pi(s)=a\)</span>。</li>
 </ul>
-<p><strong>限制条件</strong></p>
+<p><strong>2. 两种方法</strong></p>
+<ul>
+<li>策略迭代算法 ： 贝尔曼方程更新值函数，算出所有值函数，计算均值</li>
+<li>值迭代算法：贝尔曼最优方程更新值函数，直接优化计算最大值</li>
+</ul>
+<p><strong>3. 缺点</strong></p>
 <ul>
 <li>要求模型已知：<span class="math inline">\(p(s \prime \mid s, a)\)</span>、 <span class="math inline">\(r(s, a, s\prime)\)</span></li>
-<li>效率太低（可以通过神经网络来近似计算值函数）</li>
+<li>效率太低：可以通过神经网络来近似计算值函数</li>
 </ul>
-<h2 id="动规-策略迭代">动规-策略迭代</h2>
+<h2 id="动规-策略迭代算法">动规-策略迭代算法</h2>
+<blockquote>
 <ol style="list-style-type: decimal">
-<li>策略迭代：计算当前策略下，每个状态的值函数<span class="math inline">\(V^\pi(s)\)</span>， 再计算<span class="math inline">\(Q^\pi(s, a)\)</span> <span class="math display">\[
-   V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
-   \]</span></li>
+<li>已知模型：状态转移概率<span class="math inline">\(p(s^\prime \mid s, a)\)</span>和奖励函数<span class="math inline">\(r(s, a, s^\prime)\)</span></li>
+<li>使用<code>贝尔曼方程</code>迭代计算<span class="math inline">\(V^{\pi}(s)\)</span>，<strong>求均值</strong>， <span class="math inline">\(V^{\pi}(s) = E_{a}E_{s^\prime}[r(s,a,s^\prime)+ \gamma V^\pi(s\prime)]\)</span></li>
+<li>利用<span class="math inline">\(V^{\pi}(s)\)</span>去计算<span class="math inline">\(Q^{\pi}(s,a)\)</span>。<strong>求均值</strong>，<span class="math inline">\(Q^\pi(s, a) = E_{s\prime} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]\)</span></li>
+<li>根据<span class="math inline">\(Q^\pi(s, a)\)</span>更新策略<span class="math inline">\(\pi(s)=a\)</span>，选择最好的动作a，<strong>更新为固定策略</strong></li>
 </ol>
-<p><span class="math display">\[
-   Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
-   \]</span></p>
-<ol start="2" style="list-style-type: decimal">
-<li>策略评估：根据值函数来更新策略（选择最大的a，更新为固定策略）</li>
-</ol>
-<p><span class="math display">\[
+</blockquote>
+<p><strong>1. 初始化策略</strong> <span class="math display">\[
+\forall s, \forall a, \quad \pi(a \mid s) = \frac{1}{\vert \cal A\vert}
+\]</span> <strong>2. 使用贝尔曼方程迭代计算值函数<span class="math inline">\(V^\pi(s)\)</span></strong> <span class="math display">\[
+\forall s, \quad 
+V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span> <strong>3. 利用值函数<span class="math inline">\(V^\pi(s)\)</span>计算<span class="math inline">\(Q^\pi(s, a)\)</span></strong> <span class="math display">\[
+Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span> <strong>4. 根据<span class="math inline">\(Q^\pi(s, a)​\)</span>更新策略，选择最好的动作a，更新为固定策略</strong> <span class="math display">\[
 \forall s, \qquad \pi(s) = \arg \max_\limits{a} Q(s, a)
-\]</span></p>
-<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/strategy-iter.png" style="display:block; margin:auto" width="70%"></p>
-<h2 id="动规-值迭代">动规-值迭代</h2>
-<p>最优值函数：最优策略<span class="math inline">\(\pi^*\)</span>对应的值函数称。 <span class="math display">\[
+\]</span> <img src="http://otafnwsmg.bkt.clouddn.com/img/rl/strategy-iter.png" style="display:block; margin:auto" width="70%"></p>
+<h2 id="动规-值迭代算法">动规-值迭代算法</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>最优值函数：最优策略对应的值函数</li>
+<li>贝尔曼最优方程：<span class="math inline">\(V^*(s) = \max_\limits{a} E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma V^*(s^\prime)]\)</span> ，直接选择最大的a</li>
+<li>值迭代算法：最优方程更新值函数<span class="math inline">\(V(s)\)</span>， 计算<span class="math inline">\(Q(s,a)\)</span>， 更新策略<span class="math inline">\(\pi(s)=a\)</span></li>
+</ol>
+</blockquote>
+<p><strong>1. 最优值函数</strong></p>
+<p><strong>最优策略<span class="math inline">\(\pi^*\)</span>对应的值函数</strong>就是<code>最优值函数</code> <span class="math display">\[
 V^*(s) = \max_\limits{a} Q^*(s, a)
-\]</span> 贝尔曼最优方程 <span class="math display">\[
+\]</span> <strong>2. 贝尔曼最优方程</strong> <span class="math display">\[
 V^*(s) = \max_\limits{a} E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma V^*(s^\prime)]
 \]</span></p>
 <p><span class="math display">\[
 Q^*(s, a) =  E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma \max_\limits{a\prime}Q^*(s^\prime, a^\prime)]
 \]</span></p>
-<p>值迭代方法直接去优化贝尔曼最优方差，迭代计算最优值函数。</p>
+<p><strong>3. 值迭代算法</strong></p>
+<p>值迭代算法：使用<strong>贝尔曼最优方程去更新值函数</strong>，收敛时的值函数就是最优值函数，对应的策略也是最优的策略。</p>
+<p>1、 <strong>初始化值函数</strong> <span class="math display">\[
+\forall s \in S, \quad V(s) = 0
+\]</span> 2、 <strong>使用贝尔曼最优方程更新<span class="math inline">\(V(s)\)</span>，直到收敛</strong> <span class="math display">\[
+\forall s \in S, \quad V^*(s) = \max_\limits{a} E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma V^*(s^\prime)]
+\]</span> 3、 <strong>计算<span class="math inline">\(Q(s,a)\)</span></strong> <span class="math display">\[
+Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]
+\]</span> 4、 <strong>更新策略<span class="math inline">\(\pi(s)=a\)</span></strong> <span class="math display">\[
+\forall s, \quad \pi(s) = \arg \max_\limits{a} Q(s, a)
+\]</span> 5、 <strong>输出策略<span class="math inline">\(\pi\)</span></strong></p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/value-iter.png" style="display:block; margin:auto" width="70%"></p>
 <h2 id="蒙特卡罗方法">蒙特卡罗方法</h2>
 <blockquote>
 <ol style="list-style-type: decimal">
 <li>蒙特卡罗方法</li>
-<li>利用和探索<span class="math inline">\(\epsilon 贪心法\)</span></li>
+<li>利用和探索<span class="math inline">\(\epsilon 贪心法​\)</span></li>
 <li>同策略和异策略</li>
 </ol>
 </blockquote>
@@ -463,7 +528,7 @@ Q^\pi(s, a) = E_{\tau \sim p(\tau)} [G(\tau) \mid \tau_{s_0} = s, \tau_{a_0} = a
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-07T14:12:15.911Z" itemprop="dateUpdated">2018-04-07 22:12:15</time>
+    最后更新时间：<time datetime="2018-04-14T10:11:39.677Z" itemprop="dateUpdated">2018-04-14 18:11:39</time>
 </span><br>
 
 
