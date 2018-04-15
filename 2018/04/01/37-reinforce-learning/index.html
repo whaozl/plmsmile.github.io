@@ -32,7 +32,10 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/markov-decision-process.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/strategy-iter.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/value-iter.png">
-<meta property="og:updated_time" content="2018-04-14T10:11:39.677Z">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/sarsa.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/q-learning.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/deep-qnet.png">
+<meta property="og:updated_time" content="2018-04-15T10:16:47.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习">
 <meta name="twitter:description" content="强化学习基础 强化学习是指一个智能体从与环境的交互中不断学习去完成特定的目标。 强化学习不需要给出正确策略作为监督信息，只需要给出策略的（延迟）回报，并通过调整策略来取得最大化的期望回报。 定义   智能体、环境 环境状态\(s\)，智能体的动作\(a\)，智能体的策略\(\pi(a\mid s)\)，状态转移概率\(p(s_{t+1}\mid s_t, a_t)\)，即使奖励\">
@@ -171,7 +174,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">强化学习基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔科夫决策过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">马尔科夫决策过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目标函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">值函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贝尔曼贝尔曼最优方程"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">贝尔曼&贝尔曼最优方程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度强化学习"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">深度强化学习</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#值函数的学习方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">值函数的学习方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态规划算法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">动态规划算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-策略迭代算法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动规-策略迭代算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-值迭代算法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动规-值迭代算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#蒙特卡罗方法"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">蒙特卡罗方法</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">强化学习基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#马尔科夫决策过程"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">马尔科夫决策过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标函数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">目标函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">值函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#贝尔曼和贝尔曼最优方程"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">贝尔曼和贝尔曼最优方程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度强化学习"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">深度强化学习</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#值函数的学习方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">值函数的学习方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态规划算法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">动态规划算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-策略迭代算法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动规-策略迭代算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动规-值迭代算法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">动规-值迭代算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#蒙特卡罗采样学习方法"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">蒙特卡罗采样学习方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时序差分学习算法"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">时序差分学习算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sarsa算法"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">SARSA算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#q学习算法"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">Q学习算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度q网络"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">深度Q网络</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -277,9 +280,9 @@ p(\tau) = p(s_0) \prod_{t=0}^{T-1}\pi(a_t \mid s_t) p(s_{t+1} \mid s_t, a_t)
 <p>给定策略<span class="math inline">\(\pi(a\mid s)\)</span>， 智能体与环境<code>一次交互过程</code>(回合，<code>试验</code>)为轨迹<span class="math inline">\(\tau\)</span></p>
 <p><code>总回报</code>是<strong>所有时刻的累积奖励</strong>： <span class="math display">\[
 G(\tau) = \sum_{t=0}^{T-1} r(s_{t-1}, a_{t-1}, s_t) =  \sum_{t=0}^{T-1} r_{t+1}
-\]</span> <code>折扣回报</code> 引入折扣率，降低远期回报的权重 <span class="math display">\[
+\]</span> <code>折扣回报</code> 引入折扣率，降低远期回报的权重（T无限大时）。 <span class="math display">\[
 G(\tau) = \sum_{t=0}^{T-1} \gamma^t r_{t+1}, \quad \quad \gamma \in [0, 1]
-\]</span> 折扣率<span class="math inline">\(\gamma\)</span>, <span class="math inline">\(\gamma \sim 0\)</span>， 在意短期回报；<span class="math inline">\(\gamma \sim 1\)</span>， 在意长期回报</p>
+\]</span> <code>折扣率</code><span class="math inline">\(\gamma\)</span>： <span class="math inline">\(\gamma \sim 0\)</span>， 在意短期回报；<span class="math inline">\(\gamma \sim 1\)</span>， 在意长期回报</p>
 <p><strong>2. 一个策略的期望回报</strong></p>
 <p>给一个策略<span class="math inline">\(\pi(a\mid s)\)</span>， 有多个轨迹。<strong>一个策略的期望回报</strong>：该策略下所有轨迹总回报的期望值。 <span class="math display">\[
 E_{\tau \sim p(\tau)} [G(\tau)] =E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1}]
@@ -335,10 +338,10 @@ V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]
 <li>说明执行动作a比当前策略<span class="math inline">\(\pi(a \mid s)\)</span>好</li>
 <li>调整参数使<span class="math inline">\(\pi(a \mid s)\)</span>的概率增加</li>
 </ul>
-<h2 id="贝尔曼贝尔曼最优方程">贝尔曼&amp;贝尔曼最优方程</h2>
+<h2 id="贝尔曼和贝尔曼最优方程">贝尔曼和贝尔曼最优方程</h2>
 <blockquote>
 <ol style="list-style-type: decimal">
-<li>V(s)函数Q(s,a)函数</li>
+<li><span class="math inline">\(V(s)\)</span>函数和<span class="math inline">\(Q(s,a)\)</span>函数</li>
 <li>贝尔曼方程（选择所有可能的均值）</li>
 <li>贝尔曼最优方程（直接选择最大值）</li>
 </ol>
@@ -478,12 +481,13 @@ Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V
 \forall s, \quad \pi(s) = \arg \max_\limits{a} Q(s, a)
 \]</span> 5、 <strong>输出策略<span class="math inline">\(\pi\)</span></strong></p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/value-iter.png" style="display:block; margin:auto" width="70%"></p>
-<h2 id="蒙特卡罗方法">蒙特卡罗方法</h2>
+<h2 id="蒙特卡罗采样学习方法">蒙特卡罗采样学习方法</h2>
 <blockquote>
 <ol style="list-style-type: decimal">
-<li>蒙特卡罗方法</li>
-<li>利用和探索<span class="math inline">\(\epsilon 贪心法​\)</span></li>
-<li>同策略和异策略</li>
+<li>蒙特卡罗方法：随机游走采集样本，估计 <span class="math inline">\(Q^\pi(s, a) \approx \frac{1}{N} \sum_{n=1}^NG(\tau^{(n)})\)</span>，根据Q去改进策略</li>
+<li><span class="math inline">\(\epsilon 贪心法\)</span>: 依概率选择<span class="math inline">\(\pi^\epsilon (s) = \pi(s)\)</span></li>
+<li>同策略和异策略：采样与改进策略相同为同策略</li>
+<li>需要拿到完整的轨迹才能对策略评估更新模型，效率较低</li>
 </ol>
 </blockquote>
 <p>模型无关的强化学习也称为无模型的强化学习。蒙特卡罗方法：</p>
@@ -496,21 +500,21 @@ Q^\pi(s, a) = E_{\tau \sim p(\tau)} [G(\tau) \mid \tau_{s_0} = s, \tau_{a_0} = a
 \]</span> 模型未知，Q函数可以通过采样来计算。</p>
 <p><strong>1. 蒙特卡罗方法</strong></p>
 <ul>
-<li>从状态<span class="math inline">\(s\)</span>、 动作<span class="math inline">\(a\)</span>开始<strong>随机游走</strong>， 采集样本</li>
+<li>从状态<span class="math inline">\(s\)</span>、 动作<span class="math inline">\(a\)</span>开始<strong>随机游走</strong>探索环境， <strong>采集N个样本</strong>（N个轨迹）</li>
 <li>得到N个轨迹<span class="math inline">\(\tau^{(1)}, \cdots, \tau^{(N)}\)</span>，得到它们的总回报<span class="math inline">\(G(\tau^{(1)}), \cdots, G(\tau^{(N)})\)</span></li>
 <li>利用<strong>轨迹的总回报去估计出<span class="math inline">\(Q^\pi(s, a)\)</span></strong> 。 <span class="math inline">\(Q^\pi(s, a) \approx \hat Q^\pi(s, a) = \frac{1}{N} \sum_{n=1}^NG(\tau^{(n)})\)</span></li>
-<li>基于<span class="math inline">\(Q^\pi(s, a)\)</span> 去<strong>策略改进</strong></li>
+<li>基于<span class="math inline">\(Q^\pi(s, a)\)</span> 去<strong>策略改进</strong>， <strong><span class="math inline">\(\epsilon\)</span>贪心法</strong></li>
 <li>在新的策略下，再去估计Q，再去改进，直到收敛</li>
 </ul>
 <p><strong>2. 利用和探索</strong></p>
-<p>如果采用确定性策略</p>
+<p>如果采用<code>确定性策略</code> :</p>
 <ul>
 <li>则每次试验得到的轨迹是一样的</li>
 <li>只能计算出<span class="math inline">\(Q^\pi(s, \pi(s))\)</span> ，无法计算出<span class="math inline">\(Q^\pi(s, a\prime)\)</span>，即无法计算出其它的<span class="math inline">\(a\prime\)</span>的Q函数</li>
 <li>只对当前环境进行了利用，而没有探索</li>
 <li>而试验的轨迹应该覆盖所有的状态和动作，以找到更好的策略</li>
 </ul>
-<p>采用<span class="math inline">\(\epsilon\)</span>贪心法 <span class="math display">\[
+<p>采用<strong><span class="math inline">\(\epsilon\)</span>贪心法</strong> <span class="math display">\[
 \pi^\epsilon(s) =
 \begin {cases}
 &amp; \pi(s)  &amp; \text{依概率 } 1-\epsilon \\ 
@@ -521,6 +525,125 @@ Q^\pi(s, a) = E_{\tau \sim p(\tau)} [G(\tau) \mid \tau_{s_0} = s, \tau_{a_0} = a
 <li>同策略：采样策略<span class="math inline">\(\pi^\epsilon(s)\)</span>， 改进策略<span class="math inline">\(\pi^\epsilon(s)\)</span>， 相同</li>
 <li>异策略：采样策略<span class="math inline">\(\pi^\epsilon(s)\)</span>， 改进策略<span class="math inline">\(\pi(s)\)</span>， 不同。可以使用重要性采样、重要性权重来优化<span class="math inline">\(\pi\)</span></li>
 </ul>
+<h2 id="时序差分学习算法">时序差分学习算法</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>无需知道完整轨迹就能对策略进行评估。蒙特卡罗+动态规划</li>
+<li><strong>增量计算<span class="math inline">\(\hat Q_N^\pi(s,a)\)</span></strong>。 <span class="math inline">\(\hat Q_N^\pi(s,a) = \hat Q_{N-1}^\pi(s,a) + \alpha \cdot \left(G(\tau ^{(N)}) - \hat Q_{N-1}^\pi(s,a) \right)\)</span></li>
+<li>贝尔曼<strong>估计轨迹的回报</strong>。<span class="math inline">\(G(\tau_{0:T}^{(N)}) = r(s, a, s^\prime) + \gamma \cdot \hat Q^\pi_{N-1}(s^\prime, a^ \prime)\)</span></li>
+</ol>
+</blockquote>
+<p>蒙特卡罗方法需要拿到完整的轨迹，才能对策略进行评估。</p>
+<p>时序差分学习（temporal-difference learning）结合了动态规划和蒙特卡罗方法。</p>
+<p><strong>1. 增量计算<span class="math inline">\(\hat Q_N^\pi(s,a)\)</span></strong></p>
+<p>蒙特卡罗方法：从状态<span class="math inline">\(s\)</span>，动作<span class="math inline">\(a\)</span>开始，随机游走，采样N个样本</p>
+<p><span class="math inline">\(G(\tau ^{(N)})\)</span> ：第N词试验的总回报</p>
+<p><span class="math inline">\(\hat Q_N^\pi(s,a)\)</span> ：第N次试验后值函数的平均值，推导如下： <span class="math display">\[
+\begin{align}
+\hat Q_N^\pi(s,a) 
+&amp; = \frac{1}{N} \sum_{i=1}^NG(\tau ^{(i)}) \\
+&amp; = \frac{1}{N} \left(G(\tau ^{(N)}) + \color{blue}{\sum_{i=1}^{N-1}G(\tau ^{(i)})} \right) \\
+&amp; = \frac{1}{N} \left(G(\tau ^{(N)}) + \color{blue}{(N-1) \hat Q_{N-1}^\pi(s,a)} \right) \\
+&amp; = \hat Q_{N-1}^\pi(s,a) +  \frac{1}{N} \left(G(\tau ^{(N)}) - \hat Q_{N-1}^\pi(s,a)\right)
+\end{align}
+\]</span> <strong>值函数</strong><span class="math inline">\(\hat Q_{N}^\pi (s, a)\)</span> ： <strong>第N次后的平均</strong> = <strong>N-1次后的平均</strong> + <strong>一个增量</strong>， <span class="math inline">\(\alpha\)</span>是一个较小的权值。 <span class="math display">\[
+\hat Q_N^\pi(s,a)  = \hat Q_{N-1}^\pi(s,a) + \alpha \cdot \left(G(\tau ^{(N)}) - \hat Q_{N-1}^\pi(s,a) \right)
+\]</span> <strong>增量</strong> ：实际回报与估计回报直接的误差。 <span class="math display">\[
+\delta = G(\tau ^{(N)}) - \hat Q_{N-1}^\pi(s,a)
+\]</span> <strong>2. 贝尔曼方程估计<span class="math inline">\(G(\tau ^{(N)})\)</span></strong></p>
+<p>从<span class="math inline">\(s, a\)</span>开始，采样下一步的状态和动作<span class="math inline">\((s^\prime, a^\prime)\)</span> ，得到奖励<span class="math inline">\(r(s, a, s^\prime)\)</span>。</p>
+<p><strong>无需得到完整的轨迹去计算总回报</strong>，使用贝尔曼方程去估计第N次试验后面<span class="math inline">\((s^\prime, a^\prime)\)</span>的总回报。</p>
+<p>使用N-1次实验后的<span class="math inline">\(\hat Q^\pi_{N-1}(s^\prime, a^\prime)\)</span>，去估计第N次试验中后续<span class="math inline">\((s^\prime, a^\prime)\)</span>的总回报 <span class="math inline">\(G(\tau_{1:T}^{(N)} \mid \tau_{s_1} = s^\prime, \tau_{a_1} = a^\prime)\)</span>。 <span class="math display">\[
+\begin{align}
+G(\tau_{0:T}^{(N)}) 
+&amp; =r(s, a, s^\prime) + \gamma \cdot \color{blue}{G(\tau_{1:T}^{(N)} \mid \tau_{s_1} = s^\prime, \tau_{a_1} = a^\prime)}\\
+&amp; \approx r(s, a, s^\prime) + \gamma \cdot \color{blue}{\hat Q^\pi_{N-1}(s^\prime, a^ \prime)} 
+\end{align}
+\]</span> <strong>3. 两种算法</strong></p>
+<ul>
+<li>SARSA：同策略的时序差分学习算法</li>
+<li>Q学习算法：</li>
+</ul>
+<p><strong>4. 总结</strong> <span class="math display">\[
+Q(s, a) \leftarrow  Q(s, a) + \alpha \cdot (G(\tau) - Q(s, a))
+\]</span></p>
+<p><span class="math display">\[
+G(\tau) \leftarrow r(s, a, s^\prime) + \gamma \cdot Q(s^\prime, a^\prime)
+\]</span></p>
+<p><span class="math display">\[
+Q(s, a) \leftarrow  Q(s, a) + \alpha \cdot 
+(\underbrace{ r+ \gamma \cdot Q(s^\prime, a^\prime)}_{\color{blue}{实际值}} - 
+\underbrace{Q(s, a)}_{\color{blue}{预期值}})
+\]</span></p>
+<p><span class="math display">\[
+Q(s, a) \leftarrow  Q(s, a) + \alpha \cdot (r+ \gamma \cdot Q(s^\prime, a^\prime) - Q(s, a)
+\]</span></p>
+<h2 id="sarsa算法">SARSA算法</h2>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>当前<span class="math inline">\(s, a\)</span>， 奖励<span class="math inline">\(r(s, a, s^\prime)\)</span>， 新的<span class="math inline">\(s^\prime, a^\prime\)</span>， 优化<span class="math inline">\(Q(s,a)\)</span></li>
+<li>贝尔曼<strong>估计实际奖励<span class="math inline">\(G(\tau)\)</span></strong>：<span class="math inline">\(r+ \gamma \cdot Q(s^\prime, a^\prime)\)</span></li>
+<li><strong>增量计算Q</strong>：<span class="math inline">\(Q(s, a) \leftarrow Q(s, a) + \alpha \cdot (r+ \gamma \cdot Q(s^\prime, a^\prime) - Q(s, a)\)</span></li>
+<li><strong>更新策略<span class="math inline">\(\pi(s)\)</span></strong> ：<span class="math inline">\(\pi(s) = \arg \max_\limits{a \in \cal A} Q(s, a)\)</span></li>
+<li>SARAS：优化所有<span class="math inline">\(Q(s,a)\)</span>直到收敛。对每一个<span class="math inline">\(s,a\)</span>，每一步状态转移，计算Q，直到s为终止状态</li>
+</ol>
+</blockquote>
+<p>SARAS<code>State Action Reward State Action</code>算法，是一种同策略的时序差分学习算法。</p>
+<p><strong>1. 思想目的</strong></p>
+<p>要算出<span class="math inline">\(\hat Q_N^\pi(s,a)\)</span>，只需知道下面三项：</p>
+<ul>
+<li>当前状态和动作<span class="math inline">\((s, a)\)</span></li>
+<li>得到的奖励<span class="math inline">\(r(s, a, s^\prime)\)</span></li>
+<li>下一步的状态和动作<span class="math inline">\((s^\prime, a^\prime)\)</span></li>
+</ul>
+<p>不断优化Q函数，减少实际值和预期值的差距。</p>
+<p><strong>2. 核心计算</strong></p>
+<p>结合增量计算<span class="math inline">\(\hat Q_N^\pi(s,a)\)</span> ， 贝尔曼方程估计<span class="math inline">\(G(\tau ^{(N)})\)</span> <span class="math display">\[
+\hat Q_N^\pi(s,a)  = \hat Q_{N-1}^\pi(s,a) + \alpha \cdot \left(G(\tau ^{(N)}) - \hat Q_{N-1}^\pi(s,a) \right)
+\]</span></p>
+<p><span class="math display">\[
+G(\tau_{0:T}^{(N)}) = r(s, a, s^\prime) + \gamma \cdot \hat Q^\pi_{N-1}(s^\prime, a^ \prime)
+\]</span></p>
+<p>得到： <span class="math display">\[
+\hat Q_N^\pi(s,a) = (1-\alpha)\cdot \hat Q_{N-1}^\pi(s,a) + \alpha \cdot \left( r(s, a, s^\prime) + \gamma \cdot \hat Q^\pi_{N-1}(s^\prime, a^ \prime)\right)
+\]</span> <strong>简单点</strong>：</p>
+<p><span class="math display">\[
+Q(s, a) \leftarrow  Q(s, a) + \alpha \cdot (G(\tau) - Q(s, a))
+\]</span></p>
+<p><span class="math display">\[
+G(\tau) \leftarrow r(s, a, s^\prime) + \gamma \cdot Q(s^\prime, a^\prime)
+\]</span></p>
+<p><span class="math display">\[
+Q(s, a) \leftarrow  Q(s, a) + \alpha \cdot 
+(\underbrace{ r+ \gamma \cdot Q(s^\prime, a^\prime)}_{\color{blue}{实际值}} - 
+\underbrace{Q(s, a)}_{\color{blue}{预期值}})
+\]</span></p>
+<p><strong>3. SARSA算法步骤</strong></p>
+<p>输入：状态空间<span class="math inline">\(\cal S\)</span>， 动作空间<span class="math inline">\(\cal A\)</span>，折扣率<span class="math inline">\(\gamma\)</span>， 学习率<span class="math inline">\(\alpha\)</span></p>
+<p>输出：策略<span class="math inline">\(\pi(s)\)</span></p>
+<p>1 初始化</p>
+<p>随机初始化<span class="math inline">\(Q(s,a)\)</span>，平均初始化策略<span class="math inline">\(\pi(s)\)</span> <span class="math display">\[
+\forall s, \forall a, \quad \pi(a \mid s) = \frac{1}{\vert \cal A\vert}
+\]</span> 2 计算所有<span class="math inline">\(Q(s,a)\)</span>， 直到全部收敛</p>
+<p>选择初始状态<span class="math inline">\(s\)</span>，和动作<span class="math inline">\(a=\pi^\epsilon(s)\)</span>。从<span class="math inline">\((s, a)\)</span>开始向后执行，直到<span class="math inline">\(s\)</span>为终止状态</p>
+<p><strong>a. 执行动作，得到新状态和新动作</strong></p>
+<ul>
+<li>当前状态<span class="math inline">\(s\)</span>，动作<span class="math inline">\(a\)</span></li>
+<li>执行动作<span class="math inline">\(a\)</span>：得到奖励<span class="math inline">\(r\)</span>和新状态<span class="math inline">\(s^\prime\)</span></li>
+<li>选择新动作：<span class="math inline">\(a^\prime=\pi^\epsilon(s^\prime)\)</span></li>
+</ul>
+<p><strong>b. 增量计算 <span class="math inline">\(Q(s, a)\)</span></strong> <span class="math display">\[
+Q(s, a) \leftarrow Q(s, a) + \alpha\cdot \left( r + \gamma \cdot Q(s^\prime, a^\prime) - Q(s, a) \right)
+\]</span> <strong>c. 更新策略<span class="math inline">\(\pi(s)\)</span></strong> <span class="math display">\[
+\pi(s) = \arg \max_\limits{a \in \cal A} Q(s, a)
+\]</span> <strong>d. 状态前进</strong> <span class="math display">\[
+s \leftarrow s^\prime, \quad a \leftarrow a^\prime
+\]</span></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/sarsa.png" style="display:block; margin:auto" width="80%"></p>
+<h2 id="q学习算法">Q学习算法</h2>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/q-learning.png" style="display:block; margin:auto" width="80%"></p>
+<h2 id="深度q网络">深度Q网络</h2>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/deep-qnet.png" style="display:block; margin:auto" width="70%"></p>
 
         </div>
 
@@ -528,7 +651,7 @@ Q^\pi(s, a) = E_{\tau \sim p(\tau)} [G(\tau) \mid \tau_{s_0} = s, \tau_{a_0} = a
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-14T10:11:39.677Z" itemprop="dateUpdated">2018-04-14 18:11:39</time>
+    最后更新时间：<time datetime="2018-04-15T10:16:47.173Z" itemprop="dateUpdated">2018-04-15 18:16:47</time>
 </span><br>
 
 
