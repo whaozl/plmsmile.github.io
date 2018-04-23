@@ -157,7 +157,7 @@
     <link href="http://plmsmile.github.io/2018/04/01/37-reinforce-learning/"/>
     <id>http://plmsmile.github.io/2018/04/01/37-reinforce-learning/</id>
     <published>2018-04-01T01:30:47.000Z</published>
-    <updated>2018-04-22T06:18:20.682Z</updated>
+    <updated>2018-04-23T08:55:48.367Z</updated>
     
     <content type="html"><![CDATA[<p><img src="" style="display:block; margin:auto" width="70%"></p><blockquote><p>强化学习的基础知识。基本要素、轨迹、值函数、V函数和Q函数、贝尔曼方程。</p></blockquote><h1 id="强化学习定义">强化学习定义</h1><h2 id="概览">概览</h2><p>强化学习是指一个<strong>智能体</strong>从与<strong>环境</strong>的<strong>交互</strong>中不断学习去完成特定的目标。</p><p>强化学习不需要给出正确策略作为监督信息，只需要给出<code>策略的（延迟）回报</code>，并通过<strong>调整策略</strong>来取得最大化的期望回报。</p><blockquote><ol style="list-style-type: decimal"><li>智能体、环境</li><li>环境状态<span class="math inline">\(s\)</span>，智能体的动作<span class="math inline">\(a\)</span>，智能体的策略<span class="math inline">\(\pi(a\mid s)\)</span>，状态转移概率<span class="math inline">\(p(s_{t+1}\mid s_t, a_t)\)</span>，即使奖励<span class="math inline">\(r(s, a, s \prime)\)</span></li></ol></blockquote><h2 id="智能体和环境">智能体和环境</h2><p><strong>智能体</strong></p><ul><li>感知环境的状态和反馈的奖励，进行学习和决策</li><li><code>决策</code> ：根据 -- 环境状态 -- 做出不同的动作</li><li><code>学习</code>： 根据 -- 反馈奖励 -- 调整策略</li></ul><p><strong>环境</strong></p><ul><li>智能体外部的所有事物</li><li>收到 -- 智能体的动作 -- 改变状态</li><li>给 -- 智能体 -- 反馈奖励</li></ul><h2 id="个基本要素">5个基本要素</h2><p><strong>状态<span class="math inline">\(s\)</span></strong></p><p>环境的状态，状态空间<span class="math inline">\(\mathcal S\)</span>， 离散/连续</p><p><strong>动作<span class="math inline">\(a\)</span></strong></p><p>智能体的行为，动作空间<span class="math inline">\(\mathcal A\)</span>， 离散/连续</p><p><strong>策略<span class="math inline">\(\pi(a\mid s)\)</span></strong></p><p>智能体 根据 -- 环境状态s -- 决定下一步的动作a 的函数</p><p><strong>状态转移概率<span class="math inline">\(p(s \prime \mid s, a)\)</span></strong></p><p>根据 -- 当前状态<span class="math inline">\(s\)</span>和智能体的动作<span class="math inline">\(a\)</span> -- 环境状态变为<span class="math inline">\(s \prime\)</span>的概率</p><p><strong>即时奖励<span class="math inline">\(r(s, a, s\prime)\)</span></strong></p><p>环境给智能体的奖励，标量函数。根据 -- 环境当前状态 、智能体执行的动作、环境新状态</p><h2 id="智能体的策略">智能体的策略</h2><p><span class="math inline">\(\pi(a \mid s)\)</span> 智能体根据环境状态决定下一步的动作。分为确定性策略和<code>随机性策略</code>。 <span class="math display">\[\pi(a\mid s) \triangleq p(a\mid s) , \quad \quad \sum_{a \in \mathcal A} \pi(a\mid s) = 1\]</span> <img src="http://otafnwsmg.bkt.clouddn.com/img/rl/agent-env-interact.png" style="display:block; margin:auto" width="50%"></p><h1 id="马尔科夫决策过程">马尔科夫决策过程</h1><blockquote><ol style="list-style-type: decimal"><li>马尔可夫过程，<span class="math inline">\(p(s_{t+1}\mid s_t)\)</span></li><li>马尔可夫决策过程，<span class="math inline">\(p(s_{t+1} \mid s_t, a_t)\)</span></li><li>轨迹，给初始状态，智能体与环境的一次交互过程</li></ol></blockquote><h2 id="马尔可夫过程">马尔可夫过程</h2><p>状态序列<span class="math inline">\(s_0, s_1, \cdots, s_t\)</span>具有马尔可夫性，<span class="math inline">\(s_{t+1}\)</span>只依赖于<span class="math inline">\(s_t\)</span> <span class="math display">\[p(s_{t+1}\mid s_t, \cdots, s_0) = p(s_{t+1} \mid s_t)\]</span> ## 马尔可夫决策过程</p><p><span class="math inline">\(s_{t+1}\)</span>依赖于<span class="math inline">\(s_t\)</span>和<span class="math inline">\(a_t\)</span>， 即<strong>环境新状态</strong>依赖于<strong>当前状态</strong>和<strong>当前智能体的动作</strong>。 <span class="math display">\[p(s_{t+1} \mid s_t, a_t, \cdots, s_0, a_0) = p(s_{t+1}\mid s_t, a_t)\]</span> <strong>智能体与环境的交互</strong>是一个<code>马尔可夫决策过程</code>。</p><h2 id="轨迹">轨迹</h2><p>给定策略<span class="math inline">\(\pi(a\mid s)\)</span>， <strong>轨迹</strong>是智能体与环境的<strong>一次交互过程</strong>，是一个马尔可夫决策过程，如下： <span class="math display">\[\tau = s_0, a_0, s_1, r_1, \cdots, s_{T-1}, a_{T-1}, s_{T}, r_{T}\]</span> 其中<span class="math inline">\(r_t = r(s_{t-1}, a_{t-1}, s_t)\)</span>是时刻<span class="math inline">\(t\)</span>的即时奖励。</p><p>轨迹的概率</p><ul><li>初始状态</li><li>所有时刻概率的乘积</li><li><strong>智能体执行动作，环境更新状态</strong></li></ul><p><span class="math display">\[p(\tau) = p(s_0) \prod_{t=0}^{T-1}\pi(a_t \mid s_t) p(s_{t+1} \mid s_t, a_t)\]</span></p><p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/markov-decision-process.png" style="display:block; margin:auto" width="70%"></p><h1 id="目标函数">目标函数</h1><blockquote><ol style="list-style-type: decimal"><li>一个轨迹的总回报。<span class="math inline">\(G(\tau) = \sum_{t=0}^{T-1} r_{t+1}\)</span></li><li>一个策略的期望回报。<span class="math inline">\(E_{\tau \sim p(\tau)} [G(\tau)]\)</span>。 所有轨迹的回报的期望</li><li>强化学习的目标。学一个策略<span class="math inline">\(\pi_{\theta}(a \mid s)\)</span>， 最大化这个策略的期望回报</li></ol></blockquote><h2 id="轨迹的总回报">轨迹的总回报</h2><p><strong>1. 某一时刻的奖励</strong></p><p><span class="math inline">\(r_t = r(s_{t-1}, a_{t-1}, s_t)\)</span>是<span class="math inline">\(t\)</span>时刻， 环境给智能体的<strong>奖励</strong>。</p><p>给定策略<span class="math inline">\(\pi(a\mid s)\)</span>， 智能体与环境<code>一次交互过程</code>(回合，试验)为轨迹<span class="math inline">\(\tau\)</span></p><p><strong>2. 一条轨迹的总回报</strong></p><p>总回报是一条轨迹所有时刻的累积奖励和。 <span class="math display">\[G(\tau) = \sum_{t=0}^{T-1} r(s_{t-1}, a_{t-1}, s_t) =  \sum_{t=0}^{T-1} r_{t+1}\]</span> <strong>3. 一条轨迹的折扣回报</strong></p><p>折扣回报引入<code>折扣率</code>，<strong>降低远期回报的权重</strong>（T无限大时）。 <span class="math display">\[G(\tau) = \sum_{t=0}^{T-1} \gamma^t r_{t+1}, \quad \quad \gamma \in [0, 1]\]</span> <code>折扣率</code><span class="math inline">\(\gamma\)</span></p><ul><li><span class="math inline">\(\gamma \sim 0\)</span>， 在意短期回报</li><li><span class="math inline">\(\gamma \sim 1\)</span>， 在意长期回报</li></ul><h2 id="策略的期望回报">策略的期望回报</h2><p>给一个策略<span class="math inline">\(\pi(a\mid s)\)</span>， <strong>有多个轨迹</strong>。</p><p>一个策略的<code>期望回报</code>：该策略下<strong>所有轨迹总回报的期望值</strong>。 <span class="math display">\[E_{\tau \sim p(\tau)} [G(\tau)] =E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1}]\]</span> ## 强化学习的目标</p><p>强化学习的目标是<strong>学习到一个策略<span class="math inline">\(\pi_{\theta}(a\mid s)​\)</span></strong>，来<strong>最大化这个策略的期望回报</strong>。<strong>希望智能体能够获得更多的回报</strong>。 <span class="math display">\[J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t+1}]\]</span></p><h1 id="值函数">值函数</h1><blockquote><ol style="list-style-type: decimal"><li>状态值函数。<span class="math inline">\(V^\pi(s)\)</span>, 初始状态为s，执行策略<span class="math inline">\(\pi\)</span>得到的期望回报。</li><li>贝尔曼方程迭代计算值函数</li><li>状态-动作值函数。<span class="math inline">\(Q^\pi(s, a)\)</span>， 初始状态为s，进行动作a，执行策略<span class="math inline">\(\pi\)</span>得到的期望回报</li><li>V函数与Q函数的关系。<span class="math inline">\(V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]\)</span></li><li>值函数的作用。评估策略<span class="math inline">\(\pi(a \mid s)\)</span>， 对好的动作a（<span class="math inline">\(Q^\pi(s, a)\)</span>大 ），增大其概率<span class="math inline">\(\pi(a \mid s)\)</span></li></ol></blockquote><h2 id="状态值函数">状态值函数</h2><p>状态值函数$V^(s) <span class="math inline">\(是**初始状态为\)</span>s<span class="math inline">\(**，**执行策略\)</span><span class="math inline">\(得到的期望回报**。（因为有多个轨迹，每个轨迹的初始状态都是\)</span>_{s_0} = s$） <span class="math display">\[V^\pi(s) = E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1} \mid \tau_{s_0} = s]\]</span> ## 贝尔曼方程迭代计算值函数</p><p><strong>当前状态的值函数</strong>，可以<strong>通过下个状态的值函数</strong>进行<strong>递推计算</strong>。</p><p>核心：<strong><span class="math inline">\(V^\pi(s) \sim r(s, a, s \prime) + V^\pi(s\prime)\)</span></strong>。 有动态规划的意思</p><ul><li>关键在于<span class="math inline">\(s \sim s\prime\)</span></li><li>选动作、选新状态 ： <span class="math inline">\(s \sim a\)</span>， <span class="math inline">\(s, a \sim s\prime\)</span></li><li>策略<span class="math inline">\(\pi(a\mid s)\)</span> 和状态转移概率<span class="math inline">\(p(s\prime \mid s, a)\)</span></li><li>对这两层可能性的所有值函数，求期望即可</li></ul><p>给定<code>策略</code><span class="math inline">\(\pi(a\mid s)\)</span>、<code>状态转移概率</code><span class="math inline">\(p(s\prime \mid s, a)\)</span>、<code>奖励</code><span class="math inline">\(r(s, a, s\prime)\)</span>， <strong>迭代计算值函数</strong>： <span class="math display">\[V^\pi(s) = E[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]\]</span></p><p><strong>V函数的贝尔曼方程</strong> <span class="math display">\[V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]\]</span></p><h2 id="状态-动作值函数">状态-动作值函数</h2><p>状态-动作值函数是 <strong>初始状态为<span class="math inline">\(s\)</span></strong>并<strong>进行动作<span class="math inline">\(a\)</span></strong>， <strong>执行策略<span class="math inline">\(\pi\)</span></strong>得到的<code>期望总回报</code>。 也称为<strong>Q函数</strong>。 <span class="math display">\[Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]\]</span> <strong>Q函数的贝尔曼方程</strong> <span class="math display">\[Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma E_{a\prime \sim \pi(a\prime \mid s\prime)}[Q^\pi(s\prime, a\prime)]]\]</span> ## V函数与Q函数</p><ul><li><p><span class="math inline">\(V(s)\)</span>函数要 先确定动作<span class="math inline">\(s \sim a\)</span>， 再确定新状态<span class="math inline">\(s, a \sim s\prime\)</span></p></li><li><p><span class="math inline">\(Q(s,a)\)</span>函数是确定动作a后的V函数</p></li></ul><p>V函数是所有动作a的Q函数的期望 <span class="math display">\[V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]\]</span> ## 值函数的作用</p><p><code>值函数</code>用<strong>来对策略<span class="math inline">\(\pi(a\mid s)\)</span>进行评估</strong>。</p><p>如果在状态s，有一个动作a使得<span class="math inline">\(Q^\pi(s, a) &gt; V^\pi(s)\)</span></p><ul><li>s状态，执行动作a 比 s状态 所有动作的期望，都要好。<strong>状态a高于所有状态的平均值</strong></li><li>说明执行动作a比当前策略<span class="math inline">\(\pi(a \mid s)\)</span>好</li><li><strong>调整参数使<span class="math inline">\(\pi(a \mid s)\)</span>的概率增加</strong></li></ul><h1 id="贝尔曼和贝尔曼最优方程">贝尔曼和贝尔曼最优方程</h1><blockquote><ol style="list-style-type: decimal"><li><span class="math inline">\(V(s)\)</span>函数和<span class="math inline">\(Q(s,a)\)</span>函数</li><li>贝尔曼方程（选择所有可能的均值）</li><li>贝尔曼最优方程（直接选择最大值）</li></ol></blockquote><h2 id="v函数与q函数">V函数与Q函数</h2><p>V函数：以<strong>s为初始状态</strong>，执行策略<span class="math inline">\(\pi\)</span>得到的<code>期望回报</code>（所有轨迹回报的均值） <span class="math display">\[V^\pi(s) = E_{\tau \sim p(\tau)} [\sum_{t=0}^{T-1}r_{t+1} \mid \tau_{s_0} = s]\]</span> Q函数：以<strong>s为初始状态，执行动作a</strong>，执行策略<span class="math inline">\(\pi\)</span>得到的期望回报 <span class="math display">\[Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]\]</span> 利用V函数去计算Q函数 <span class="math display">\[Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma V^\pi(s\prime)]\]</span></p><h2 id="贝尔曼方程">贝尔曼方程</h2><p><span class="math inline">\(V(s)\)</span>的贝尔曼方程，选择<strong>所有a的期望回报</strong>， 也是<strong>Q函数的均值</strong>，<span class="math inline">\(V(s)=E_a[Q(s, a)]\)</span> <span class="math display">\[V^\pi(s) = E_{a \sim \pi(a \mid s)}E_{s\prime \sim p(s\prime \mid s, a)}[ r(s, a, s\prime) + \gamma V^\pi(s\prime)]\]</span></p><p><span class="math display">\[V^\pi(s) = E_{a \sim \pi(a \mid s)}[Q^\pi(s, a)]\]</span></p><p><span class="math inline">\(Q(s,a)\)</span>函数的贝尔曼方程 <span class="math display">\[Q^\pi(s, a) = E_{s\prime \sim p(s\prime \mid s, a)} [r(s, a, s\prime) + \gamma E_{a\prime \sim \pi(a\prime \mid s\prime)}[Q^\pi(s\prime, a\prime)]]\]</span></p><h2 id="贝尔曼最优方程">贝尔曼最优方程</h2><p><span class="math inline">\(V(s)\)</span>函数的贝尔曼最优方程，实际上是<strong>直接选择所有a中的最大回报</strong> ： <span class="math display">\[V^*(s) = \max_\limits{a} E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma V^*(s^\prime)]\]</span> <span class="math inline">\(Q(s,a)\)</span>函数的贝尔曼最优方程 <span class="math display">\[Q^*(s, a) =  E_{s^\prime \sim p(s^\prime \mid s, a)}[r(s, a, s^\prime) + \gamma \max_\limits{a\prime}Q^*(s^\prime, a^\prime)]\]</span></p><h1 id="深度强化学习">深度强化学习</h1><p>有些任务的状态和动作非常多，并且是连续的。普通方法很难去计算。</p><p>可以使用更复杂的函数（深度神经网络）使智能体来感知更复杂的环境状态，建立更复杂的策略。</p><p>深度强化学习</p><ul><li><code>强化学习</code> -- <strong>定义问题和优化目标</strong></li><li><code>深度学习</code> -- 解决<strong>状态表示</strong>、<strong>策略表示</strong>等问题</li></ul>]]></content>
     
@@ -501,9 +501,9 @@
       <category term="机器学习" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="SVM" scheme="http://plmsmile.github.io/tags/SVM/"/>
-    
       <category term="机器学习" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="SVM" scheme="http://plmsmile.github.io/tags/SVM/"/>
     
       <category term="拉格朗日对偶性" scheme="http://plmsmile.github.io/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AF%B9%E5%81%B6%E6%80%A7/"/>
     
@@ -813,15 +813,15 @@
       <category term="cs224n" scheme="http://plmsmile.github.io/categories/cs224n/"/>
     
     
+      <category term="cs224n" scheme="http://plmsmile.github.io/tags/cs224n/"/>
+    
+      <category term="assignment" scheme="http://plmsmile.github.io/tags/assignment/"/>
+    
       <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
     
       <category term="cbow" scheme="http://plmsmile.github.io/tags/cbow/"/>
     
       <category term="skip-gram" scheme="http://plmsmile.github.io/tags/skip-gram/"/>
-    
-      <category term="cs224n" scheme="http://plmsmile.github.io/tags/cs224n/"/>
-    
-      <category term="assignment" scheme="http://plmsmile.github.io/tags/assignment/"/>
     
   </entry>
   
@@ -1272,11 +1272,11 @@
     
       <category term="Attention" scheme="http://plmsmile.github.io/tags/Attention/"/>
     
-      <category term="机器翻译" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
-    
       <category term="自然语言处理" scheme="http://plmsmile.github.io/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
       <category term="深度学习" scheme="http://plmsmile.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器翻译" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
     
   </entry>
   
@@ -1305,9 +1305,9 @@
     
       <category term="注意力" scheme="http://plmsmile.github.io/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B/"/>
     
-      <category term="机器翻译" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
-    
       <category term="自然语言处理" scheme="http://plmsmile.github.io/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+    
+      <category term="机器翻译" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
     
       <category term="Attention Model" scheme="http://plmsmile.github.io/tags/Attention-Model/"/>
     
@@ -1369,11 +1369,11 @@
       <category term="自然语言处理" scheme="http://plmsmile.github.io/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="机器翻译" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
-    
       <category term="自然语言处理" scheme="http://plmsmile.github.io/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
       <category term="深度学习" scheme="http://plmsmile.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器翻译" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E7%BF%BB%E8%AF%91/"/>
     
   </entry>
   
@@ -1633,9 +1633,9 @@
     
       <category term="神经网络" scheme="http://plmsmile.github.io/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="深度学习" scheme="http://plmsmile.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="卷积" scheme="http://plmsmile.github.io/tags/%E5%8D%B7%E7%A7%AF/"/>
+    
+      <category term="深度学习" scheme="http://plmsmile.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="tensorflow" scheme="http://plmsmile.github.io/tags/tensorflow/"/>
     
