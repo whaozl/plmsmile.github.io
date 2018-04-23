@@ -19,19 +19,22 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="策略函数">
-    <meta name="description" content="强化学习基础 、基于值函数的学习方法 基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\theta}">
-<meta name="keywords" content="策略函数">
+    <meta name="keywords" content="策略函数,策略梯度,REINFORCE,基准函数">
+    <meta name="description" content="强化学习基础 、基于值函数的学习方法  基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\thet">
+<meta name="keywords" content="策略函数,策略梯度,REINFORCE,基准函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于策略函数的学习方法">
 <meta property="og:url" content="http://plmsmile.github.io/2018/04/22/41-strategy-learning/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
-<meta property="og:description" content="强化学习基础 、基于值函数的学习方法 基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t+1">
+<meta property="og:description" content="强化学习基础 、基于值函数的学习方法  基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-23T05:52:19.428Z">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/reinforce.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/reinforce-base.png">
+<meta property="og:updated_time" content="2018-04-23T08:54:02.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于策略函数的学习方法">
-<meta name="twitter:description" content="强化学习基础 、基于值函数的学习方法 基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t+1">
+<meta name="twitter:description" content="强化学习基础 、基于值函数的学习方法  基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t">
+<meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/reinforce.png">
     
         <link rel="alternate" type="application/atom+xml" title="PLM&#39;s Notes" href="/atom.xml">
     
@@ -192,6 +195,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p><a href="https://plmsmile.github.io/2018/04/01/37-reinforce-learning/">强化学习基础</a> 、<a href="https://plmsmile.github.io/2018/04/21/40-value-learning/">基于值函数的学习方法</a></p>
+<p><img src="" style="display:block; margin:auto" width="60%"></p>
 <h1 id="基于策略函数的学习方法">基于策略函数的学习方法</h1>
 <h2 id="强化学习目标">强化学习目标</h2>
 <p>强化学习的目标是<strong>学习到一个策略<span class="math inline">\(\pi_{\theta}(a\mid s)\)</span></strong>，来<strong>最大化这个策略的期望回报</strong>。<strong>希望智能体能够获得更多的回报</strong>。本质上是策略搜索。 <span class="math display">\[
@@ -266,7 +270,7 @@ G(\tau_{t:T}) =  \sum_{i=t}^{T-1} \gamma ^{i-t} r_{i+1}
 \end{align}
 \]</span></p>
 <h2 id="reinforce算法">REINFORCE算法</h2>
-<p><strong>期望</strong>可以通过<strong>采样的方法来近似</strong>。对于当前策略<span class="math inline">\(\pi_\theta\)</span>，可以随机游走采集多个轨迹。<span class="math inline">\(\tau^{(1)},\cdots, \tau^{(N)}\)</span> <span class="math display">\[
+<p><strong>期望</strong>可以通过<strong>采样的方法来近似</strong>。对于当前策略<span class="math inline">\(\pi_\theta\)</span>，可以<strong>随机游走采集N个轨迹</strong>。<span class="math inline">\(\tau^{(1)},\cdots, \tau^{(N)}\)</span> <span class="math display">\[
 \begin{align}
 \frac{\partial J(\theta)}{\partial \theta} 
 &amp; \approx  \frac{1}{N}\sum_{n=1}^   N
@@ -274,8 +278,78 @@ G(\tau_{t:T}) =  \sum_{i=t}^{T-1} \gamma ^{i-t} r_{i+1}
 \sum_{t=0}^{T-1} \left(\frac{\partial}{\partial \theta}  \log\pi_{\theta}(a^{(n)}_t \mid s^{(n)}_t) \cdot \gamma^t G(\tau^{(n)}_{t:T})\right)
 \right] 
 \end{align}
-\]</span></p>
+\]</span> 可微分策略函数<span class="math inline">\(\pi_\theta(a\mid s)\)</span>，折扣率<span class="math inline">\(\gamma\)</span>，学习率<span class="math inline">\(\alpha\)</span></p>
+<p>初始化参数<span class="math inline">\(\theta\)</span>， 训练，直到<span class="math inline">\(\theta\)</span>收敛</p>
+<p>1、****根据<strong><span class="math inline">\(\pi_\theta(a\mid s)\)</span>生成一条轨迹</strong> <span class="math display">\[
+\tau = s_0, a_0, s_1,a_1, \cdots, s_{T-1}, a_{T-1}, s_{T}
+\]</span> 2、<strong>在每一时刻更新参数</strong> (0~T)</p>
+<ul>
+<li>计算<span class="math inline">\(G(\tau_{t:T})\)</span></li>
+<li><span class="math inline">\(\theta \leftarrow \theta + \alpha \cdot \gamma^tG(\tau_{t:T}) \cdot \frac{\partial}{\partial \theta} \log\pi_{\theta}(a_t \mid s_t)\)</span></li>
+</ul>
+<p>REINFORCE算法<code>缺点</code>：<strong>不同路径之间的方差很大，导致训练不稳定</strong>。</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/reinforce.png" style="display:block; margin:auto" width="60%"></p>
 <h2 id="带基准线的reinforce算法">带基准线的REINFORCE算法</h2>
+<p>由于不同轨迹之间的方差很大，导致训练不稳定，使用基准函数去减小策略梯度的方差。</p>
+<p><strong>1. 减小方差的办法</strong></p>
+<p>目标：估计函数<span class="math inline">\(f\)</span>的期望，同时要减小<span class="math inline">\(f\)</span>的方差。</p>
+<p>方法</p>
+<ul>
+<li>引入已知期望的函数<span class="math inline">\(g\)</span></li>
+<li><strong><span class="math inline">\(\hat f = f - \alpha(g - E[g])\)</span></strong></li>
+<li>推导可知： <span class="math inline">\(E[f] = E[\hat f]\)</span></li>
+<li>用<span class="math inline">\(g\)</span>去减小<span class="math inline">\(f\)</span>的方差， <span class="math inline">\(D(f)=Var(f)\)</span></li>
+</ul>
+<p><span class="math display">\[
+D(\hat f) = D(f) - 2\alpha \cdot \rm{Cov}(f,g) + \alpha^2 \cdot D(g)
+\]</span></p>
+<p><span class="math display">\[
+令\frac{\partial D(\hat f)}{\partial \alpha} = 0 \quad \to \quad \frac{D(\hat f)}{D(f)} = 1 - \rho^2(f, g)
+\]</span></p>
+<p>所以，<span class="math inline">\(f\)</span>和<span class="math inline">\(g\)</span>的相关性越高，<span class="math inline">\(D(\hat f)\)</span>越小。</p>
+<p><strong>2. 带基准线的REINFORCE算法核心</strong></p>
+<p>每个时刻<span class="math inline">\(t\)</span>的策略梯度 <span class="math display">\[
+\frac{\partial J_t(\theta)}{\partial \theta} =  
+E_{s_t,a_t}\left[
+\alpha \cdot \gamma^tG(\tau_{t:T}) \cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
+\right]
+\]</span> 为了<strong>减小策略梯度的方差</strong>，引入一个和<span class="math inline">\(a_t\)</span>无关的<strong>基准函数<span class="math inline">\(b(s_t)\)</span></strong>，策略梯度为： <span class="math display">\[
+\frac{\partial \hat J_t(\theta)}{\partial \theta} =  
+E_{s_t,a_t}\left[
+\alpha \cdot \gamma^t 
+\left( \color{blue} {G(\tau_{t:T})  - b(s_t)}\right)\cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
+\right]
+\]</span> 因为<span class="math inline">\(b(s_t)\)</span>与<span class="math inline">\(a_t\)</span>无关，可以证明得到：（使用积分求平均，<span class="math inline">\(\int_{a_t} \pi_{\theta}(a_t \mid s_t) \,{\rm d} a_t= 1\)</span>） <span class="math display">\[
+E_{a_t}\left[
+b(s_t)\cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
+\right] =  \frac{\partial}{\partial \theta} (b(s_t) \cdot 1) = 0
+\]</span> 所以得到：<span class="math inline">\(\frac{\partial J_t(\theta)}{\partial \theta} = \frac{\partial \hat J_t(\theta)}{\partial \theta}​\)</span></p>
+<p><strong>4. 基准函数的选择</strong></p>
+<p>为了减小策略梯度的方差，希望<strong><span class="math inline">\(b(s_t)\)</span>与<span class="math inline">\(G(\tau_{t:T})\)</span> 越相关越好</strong>，所以选择<strong><span class="math inline">\(b(s_t) = V(s_t)\)</span></strong>（<a href="https://plmsmile.github.io/2018/04/01/37-reinforce-learning/#%E5%80%BC%E5%87%BD%E6%95%B0">值函数</a>）。</p>
+<p>1、可学习的函数<span class="math inline">\(V_{\phi}(s_t)\)</span>来近似值函数，类似于<a href="https://plmsmile.github.io/2018/04/21/40-value-learning/#%E6%B7%B1%E5%BA%A6q%E7%BD%91%E7%BB%9C">Q网络</a> <span class="math display">\[
+\phi^* = \arg \min_{\phi} \left(V(s_t) - V_{\phi}(s_t)\right)^2
+\]</span> 2、<a href="https://plmsmile.github.io/2018/04/21/40-value-learning/#%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E9%87%87%E6%A0%B7%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95">蒙塔卡罗方法</a>进行估计值函数 也就是<a href="https://plmsmile.github.io/2018/04/21/40-value-learning/#%E6%80%BB%E4%BD%93%E6%80%9D%E6%83%B3-1">增量计算</a>Q(s,a)嘛。</p>
+<p><strong>5. 带基准线的REINFORCE算法步骤</strong></p>
+<p>输入</p>
+<ul>
+<li>状态空间和动作空间，<span class="math inline">\(\cal {S,A}\)</span></li>
+<li>可微分的策略函数<span class="math inline">\(\pi_\theta(a \mid s)\)</span></li>
+<li>可微分的状态值函数<span class="math inline">\(V_{\phi}(s_t)\)</span></li>
+<li>折扣率<span class="math inline">\(\gamma\)</span>，学习率<span class="math inline">\(\alpha, \beta\)</span></li>
+</ul>
+<p>随机初始化参数<span class="math inline">\(\theta, \phi\)</span></p>
+<p>不断训练，直到<span class="math inline">\(\theta\)</span>收敛</p>
+<p>1、<strong>根据策略<span class="math inline">\(\pi_\theta(a\mid s)\)</span>生成一条轨迹</strong> ：<span class="math inline">\(\tau = s_0, a_0, s_1,a_1, \cdots, s_{T-1}, a_{T-1}, s_{T}\)</span></p>
+<p>2、在每一时刻更新参数</p>
+<p>​ a. 计算<strong>当前时刻的轨迹回报<span class="math inline">\(G(\tau_{t:T})\)</span></strong></p>
+<p>​ b. <span class="math inline">\(\hat f\)</span>，当前真实回报与值函数的误差 <span class="math display">\[
+\delta \leftarrow  G(\tau_{t:T}) - V_{\phi} (s_t)
+\]</span> ​ c. 更新状态值函数的参数<span class="math inline">\(\phi\)</span> <span class="math display">\[
+\phi \leftarrow  \phi + \beta \cdot \delta \cdot \frac{\partial}{ \partial \phi} V_{\phi}(s_t)
+\]</span> ​ d. 更新策略函数的参数<span class="math inline">\(\theta\)</span></p>
+<p><span class="math display">\[
+\theta \leftarrow  \theta + \beta \cdot \gamma^t\delta \cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
+\]</span> <img src="http://otafnwsmg.bkt.clouddn.com/img/rl/reinforce-base.png" style="display:block; margin:auto" width="60%"></p>
 
         </div>
 
@@ -283,7 +357,7 @@ G(\tau_{t:T}) =  \sum_{i=t}^{T-1} \gamma ^{i-t} r_{i+1}
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-23T05:52:19.428Z" itemprop="dateUpdated">2018-04-23 13:52:19</time>
+    最后更新时间：<time datetime="2018-04-23T08:54:02.178Z" itemprop="dateUpdated">2018-04-23 16:54:02</time>
 </span><br>
 
 
@@ -308,7 +382,7 @@ G(\tau_{t:T}) =  \sum_{i=t}^{T-1} \gamma ^{i-t} r_{i+1}
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/策略函数/">策略函数</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REINFORCE/">REINFORCE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基准函数/">基准函数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/策略函数/">策略函数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/策略梯度/">策略梯度</a></li></ul>
 
 
             
