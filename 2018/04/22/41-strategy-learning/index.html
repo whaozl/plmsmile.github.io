@@ -19,9 +19,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="策略函数,策略梯度,REINFORCE,基准函数,Actot-Critic,强化学习算法总结">
+    <meta name="keywords" content="策略梯度,策略函数,REINFORCE,基准函数,Actot-Critic,强化学习算法总结">
     <meta name="description" content="强化学习基础 、基于值函数的学习方法  基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\thet">
-<meta name="keywords" content="策略函数,策略梯度,REINFORCE,基准函数,Actot-Critic,强化学习算法总结">
+<meta name="keywords" content="策略梯度,策略函数,REINFORCE,基准函数,Actot-Critic,强化学习算法总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于策略函数的学习方法">
 <meta property="og:url" content="http://plmsmile.github.io/2018/04/22/41-strategy-learning/index.html">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/actor-critic.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/reinforce-all.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/rl/four-compare.png">
-<meta property="og:updated_time" content="2018-04-24T08:24:35.853Z">
+<meta property="og:updated_time" content="2018-04-24T09:29:42.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于策略函数的学习方法">
 <meta name="twitter:description" content="强化学习基础 、基于值函数的学习方法  基于策略函数的学习方法 强化学习目标 强化学习的目标是学习到一个策略\(\pi_{\theta}(a\mid s)\)，来最大化这个策略的期望回报。希望智能体能够获得更多的回报。本质上是策略搜索。 \[ J(\theta) = E_{\tau \sim p_{\theta}(\tau)} [\sum_{t=0}^{T-1}\gamma ^tr_{t">
@@ -281,9 +281,9 @@ G(\tau_{t:T}) =  \sum_{i=t}^{T-1} \gamma ^{i-t} r_{i+1}
 \sum_{t=0}^{T-1} \left(\frac{\partial}{\partial \theta}  \log\pi_{\theta}(a^{(n)}_t \mid s^{(n)}_t) \cdot \gamma^t G(\tau^{(n)}_{t:T})\right)
 \right] 
 \end{align}
-\]</span> 可微分策略函数<span class="math inline">\(\pi_\theta(a\mid s)\)</span>，折扣率<span class="math inline">\(\gamma\)</span>，学习率<span class="math inline">\(\alpha\)</span></p>
+\]</span> 可微分策略函数<span class="math inline">\(\pi_\theta(a\mid s)​\)</span>，折扣率<span class="math inline">\(\gamma​\)</span>，学习率<span class="math inline">\(\alpha​\)</span></p>
 <p>初始化参数<span class="math inline">\(\theta\)</span>， 训练，直到<span class="math inline">\(\theta\)</span>收敛</p>
-<p>1、****根据<strong><span class="math inline">\(\pi_\theta(a\mid s)\)</span>生成一条轨迹</strong> <span class="math display">\[
+<p>1、<strong>根据<span class="math inline">\(\pi_\theta(a\mid s)\)</span>生成一条轨迹</strong> <span class="math display">\[
 \tau = s_0, a_0, s_1,a_1, \cdots, s_{T-1}, a_{T-1}, s_{T}
 \]</span> 2、<strong>在每一时刻更新参数</strong> (0~T)</p>
 <ul>
@@ -312,7 +312,7 @@ D(\hat f) = D(f) - 2\alpha \cdot \rm{Cov}(f,g) + \alpha^2 \cdot D(g)
 <p><span class="math display">\[
 令\frac{\partial D(\hat f)}{\partial \alpha} = 0 \quad \to \quad \frac{D(\hat f)}{D(f)} = 1 - \rho^2(f, g)
 \]</span></p>
-<p>所以，<span class="math inline">\(f\)</span>和<span class="math inline">\(g\)</span>的相关性越高，<span class="math inline">\(D(\hat f)\)</span>越小。</p>
+<p>所以<strong>，<span class="math inline">\(f\)</span>和<span class="math inline">\(g\)</span>的相关性越高，<span class="math inline">\(D(\hat f)\)</span>越小</strong>。</p>
 <p><strong>2. 带基准线的REINFORCE算法核心</strong></p>
 <p>每个时刻<span class="math inline">\(t\)</span>的策略梯度 <span class="math display">\[
 \frac{\partial J_t(\theta)}{\partial \theta} =  
@@ -345,15 +345,13 @@ b(s_t)\cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
 </ul>
 <p>随机初始化参数<span class="math inline">\(\theta, \phi\)</span></p>
 <p>不断训练，直到<span class="math inline">\(\theta\)</span>收敛</p>
-<p>1、<strong>根据策略<span class="math inline">\(\pi_\theta(a\mid s)\)</span>生成一条轨迹</strong> ：<span class="math inline">\(\tau = s_0, a_0, s_1,a_1, \cdots, s_{T-1}, a_{T-1}, s_{T}\)</span></p>
+<p>1、根据策略<span class="math inline">\(\pi_\theta(a\mid s)\)</span><strong>生成一条完整轨迹</strong> ：<span class="math inline">\(\tau = s_0, a_0, s_1,a_1, \cdots, s_{T-1}, a_{T-1}, s_{T}\)</span></p>
 <p>2、在每一时刻更新参数</p>
-<p>a、计算<strong>当前时刻的轨迹回报<span class="math inline">\(G(\tau_{t:T})\)</span></strong></p>
-<p>b、<span class="math inline">\(\hat f\)</span>，当前真实回报与值函数的误差 <span class="math display">\[
+<p>计算<strong>当前时刻的轨迹回报<span class="math inline">\(G(\tau_{t:T})\)</span></strong> ，再利用<code>基准函数(值函数)</code>进行修正，得到<span class="math inline">\(\delta\)</span> <span class="math display">\[
 \delta \leftarrow  G(\tau_{t:T}) - V_{\phi} (s_t)
-\]</span> c、更新状态值函数的参数<span class="math inline">\(\phi\)</span> <span class="math display">\[
+\]</span> 更新<strong>值函数<span class="math inline">\(V_\phi(s)\)</span>的参数<span class="math inline">\(\phi\)</span></strong> <span class="math display">\[
 \phi \leftarrow  \phi + \beta \cdot \delta \cdot \frac{\partial}{ \partial \phi} V_{\phi}(s_t)
-\]</span> d、更新策略函数的参数<span class="math inline">\(\theta\)</span></p>
-<p><span class="math display">\[
+\]</span> 更新<strong>策略函数<span class="math inline">\(\pi_\theta(a \mid s)\)</span>的参数<span class="math inline">\(\theta\)</span></strong> <span class="math display">\[
 \theta \leftarrow  \theta + \alpha \cdot \gamma^t\delta \cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
 \]</span> <code>缺点</code>： 需要根据策略采集一条完整的轨迹。</p>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/rl/reinforce-base.png" style="display:block; margin:auto" width="80%"></p>
@@ -445,7 +443,7 @@ b(s_t)\cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-24T08:24:35.853Z" itemprop="dateUpdated">2018-04-24 16:24:35</time>
+    最后更新时间：<time datetime="2018-04-24T09:29:42.602Z" itemprop="dateUpdated">2018-04-24 17:29:42</time>
 </span><br>
 
 
@@ -525,7 +523,14 @@ b(s_t)\cdot \frac{\partial}{\partial \theta}  \log\pi_{\theta}(a_t \mid s_t)
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/24/42-reinforce-conclusion-simple/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">强化学习算法小结</h4>
+      </a>
+    </div>
   
 
   
