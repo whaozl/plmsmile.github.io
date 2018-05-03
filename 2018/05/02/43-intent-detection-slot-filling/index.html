@@ -19,9 +19,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="论文笔记,注意力,意图检测,槽填充,RNN,对齐">
+    <meta name="keywords" content="论文笔记,意图检测,槽填充,RNN,注意力,对齐">
     <meta name="description" content="Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling  背景 语义理解的两个方面 1. 语义理解的两个主要方面 在对话系统中，Spoken language understandi">
-<meta name="keywords" content="论文笔记,注意力,意图检测,槽填充,RNN,对齐">
+<meta name="keywords" content="论文笔记,意图检测,槽填充,RNN,注意力,对齐">
 <meta property="og:type" content="article">
 <meta property="og:title" content="意图识别和槽填充">
 <meta property="og:url" content="http://plmsmile.github.io/2018/05/02/43-intent-detection-slot-filling/index.html">
@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/en-decoder-slot-filling.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/atten-rnn-slot-filling.png">
-<meta property="og:updated_time" content="2018-05-02T09:33:20.160Z">
+<meta property="og:updated_time" content="2018-05-03T05:59:02.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="意图识别和槽填充">
 <meta name="twitter:description" content="Attention-Based Recurrent Neural Network Models for Joint Intent Detection and Slot Filling  背景 语义理解的两个方面 1. 语义理解的两个主要方面 在对话系统中，Spoken language understanding（语言理解）很重要。主要是下面两个关键点：  理解说话人的意图 -- 意">
@@ -169,7 +169,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语义理解的两个方面"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">语义理解的两个方面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#槽填充"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">槽填充</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#两种方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">两种方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#seq2seq方法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Seq2Seq方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意力的rnn方法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">注意力的RNN方法</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语义理解的两个方面"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">语义理解的两个方面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#槽填充"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">槽填充</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#两种方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">两种方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#seq2seq方法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Seq2Seq方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基于注意力的rnn"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">基于注意力的RNN</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -290,7 +290,7 @@ e_{ij} = g(\mathbf s_{i-1}, \mathbf h_k)
 <p>计算新的状态 <span class="math display">\[
 s_i = f(\mathbf s_{i-1}, y_{i-1}, \mathbf h_i, \mathbf c_i)
 \]</span></p>
-<h2 id="注意力的rnn方法">注意力的RNN方法</h2>
+<h2 id="基于注意力的rnn">基于注意力的RNN</h2>
 <p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/atten-rnn-slot-filling.png" style="display:block; margin:auto" width="60%"></p>
 
         </div>
@@ -299,7 +299,7 @@ s_i = f(\mathbf s_{i-1}, y_{i-1}, \mathbf h_i, \mathbf c_i)
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-05-02T09:33:20.160Z" itemprop="dateUpdated">2018-05-02 17:33:20</time>
+    最后更新时间：<time datetime="2018-05-03T05:59:02.336Z" itemprop="dateUpdated">2018-05-03 13:59:02</time>
 </span><br>
 
 
@@ -379,7 +379,14 @@ s_i = f(\mathbf s_{i-1}, y_{i-1}, \mathbf h_i, \mathbf c_i)
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/03/44-reinforce-nlp/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">强化学习在NLP中的应用</h4>
+      </a>
+    </div>
   
 
   
