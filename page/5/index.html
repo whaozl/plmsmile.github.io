@@ -157,14 +157,14 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-25_谷歌翻译论文笔记"
+            <article id="post-Spark-SQL"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-10-17 13:25:38" datetime="2017-10-17T05:25:38.000Z"  itemprop="datePublished">2017-10-17</time>
+        <time class="post-time" title="2017-03-19 22:34:44" datetime="2017-03-19T14:34:44.000Z"  itemprop="datePublished">2017-03-19</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/大数据/">大数据</a></li></ul>
 
 
 
@@ -175,7 +175,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/17/25_谷歌翻译论文笔记/">谷歌翻译论文笔记</a>
+      <a class="post-title-link" href="/2017/03/19/Spark-SQL/">Spark-SQL</a>
     </h3>
   
 
@@ -185,29 +185,22 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-谷歌神经机器翻译系统
+        基础
+概念
+Spark SQL是用来处理结构化数据的模块。与基本RDD相比，Spark SQL提供了更多关于数据结构和计算方面的信息(在内部有优化效果)。通常通过SQL和Dataset API来和Spark SQL进行交互。
 
-
-简介
-神经机器翻译是自动翻译的端到端的学习方法，克服了传统的基于词典翻译的许多缺点。但仍然有以下的缺点
-
-训练和翻译都太慢了，花费代价很大
-缺乏鲁棒性，特别是输入句子包含生僻词汇
-精确度和速度也不行
-
-传统NMT缺点
-神经机器翻译(NMT)是自动翻译的端到端的学习方法。NMT一般由两个RNN组成，分别处理输入句子和生成目标句子。一般会使用注...
+SQL: 进行SQL查询，从各种结构化数据源(Json, Hive, Parquet)读取数据。返回Dataset/DataFrame。
+Dataset: ...
     
 
-        <a href="/2017/10/17/25_谷歌翻译论文笔记/" class="post-more waves-effect waves-button">
+        <a href="/2017/03/19/Spark-SQL/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经机器翻译/">神经机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark-SQL/">Spark SQL</a></li></ul>
 
     </div>
     
@@ -216,14 +209,14 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-谷歌翻译论文笔记"
+            <article id="post-博客搭建过程及问题"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-10-17 13:25:38" datetime="2017-10-17T05:25:38.000Z"  itemprop="datePublished">2017-10-17</time>
+        <time class="post-time" title="2017-03-13 22:52:41" datetime="2017-03-13T14:52:41.000Z"  itemprop="datePublished">2017-03-13</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/心得/">心得</a></li></ul>
 
 
 
@@ -234,7 +227,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/17/谷歌翻译论文笔记/">谷歌翻译论文笔记</a>
+      <a class="post-title-link" href="/2017/03/13/博客搭建过程及问题/">博客搭建过程及问题</a>
     </h3>
   
 
@@ -244,29 +237,26 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-谷歌神经机器翻译系统
+        一直都想搭建一个博客，今天终于把博客给初步搭建好了。搭建的过程其实不那么顺利，所以简答记录一下。
+搭建过程
 
+根据手把手搭建博客教程这篇文章来进行搭建，其中目前只看了它的第一页
+后期在hexo主题里面选择了even主题
+依照even-wiki来添加标签、分类和about页面
+修改主题目录下的_config.yml的menu，把home、tags等手动改成中文了
 
-简介
-神经机器翻译是自动翻译的端到端的学习方法，克服了传统的基于词典翻译的许多缺点。但仍然有以下的缺点
-
-训练和翻译都太慢了，花费代价很大
-缺乏鲁棒性，特别是输入句子包含生僻词汇
-精确度和速度也不行
-
-传统NMT缺点
-神经机器翻译(NMT)是自动翻译的端到端的学习方法。NMT一般由两个RNN组成，分别处理输入句子和生成目标句子。一般会使用注...
+遇到的坑
+...
     
 
-        <a href="/2017/10/17/谷歌翻译论文笔记/" class="post-more waves-effect waves-button">
+        <a href="/2017/03/13/博客搭建过程及问题/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经机器翻译/">神经机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心得/">心得</a></li></ul>
 
     </div>
     
@@ -275,14 +265,14 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-tips"
+            <article id="post-Spark-PairRDD"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-10-16 22:47:46" datetime="2017-10-16T14:47:46.000Z"  itemprop="datePublished">2017-10-16</time>
+        <time class="post-time" title="2017-03-13 19:37:06" datetime="2017-03-13T11:37:06.000Z"  itemprop="datePublished">2017-03-13</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/心得体会/">心得体会</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/大数据/">大数据</a></li></ul>
 
 
 
@@ -293,7 +283,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/16/tips/">那些年折磨过的问题</a>
+      <a class="post-title-link" href="/2017/03/13/Spark-PairRDD/">Spark的键值对RDD</a>
     </h3>
   
 
@@ -303,19 +293,20 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        搭建博客
-搭建博客
-12345678910111213141516171819202122232425mkdir PLMBlogscd PLMBlogs# install hexonpm install hexo-cli -g# inithexo init npm installhexo server# install pluginsnpm install hexo-deployer-g...
+        PairRDD及其创建
+键值对RDD称为PairRDD，通常用来做聚合计算。Spark为Pair RDD提供了许多专有的操作。
+1234# 创建pair rdd: map 或者 读取键值对格式自动转成pairrdd# 每行的第一个单词作为key，line作为valuepairs = lines.map(lambda line: (line.split(' ')[0], line))
+转...
     
 
-        <a href="/2017/10/16/tips/" class="post-more waves-effect waves-button">
+        <a href="/2017/03/13/Spark-PairRDD/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/latex/">latex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pyplot/">pyplot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中文/">中文</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心得/">心得</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PairRDD/">PairRDD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
 
     </div>
     
@@ -324,14 +315,14 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-Attention-based-NMT"
+            <article id="post-Spark-BaseRDD"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-10-12 16:12:39" datetime="2017-10-12T08:12:39.000Z"  itemprop="datePublished">2017-10-12</time>
+        <time class="post-time" title="2017-03-13 19:26:18" datetime="2017-03-13T11:26:18.000Z"  itemprop="datePublished">2017-03-13</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/大数据/">大数据</a></li></ul>
 
 
 
@@ -342,7 +333,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/12/Attention-based-NMT/">注意力机制和PyTorch实现机器翻译</a>
+      <a class="post-title-link" href="/2017/03/13/Spark-BaseRDD/">Spark的基础RDD</a>
     </h3>
   
 
@@ -352,27 +343,19 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
-Effective Approaches to Attention-based Neural Machine Translation
-前面阐述注意力理论知识，后面简单描述PyTorch利用注意力实现机器翻译
-
-简介
-
-Attention介绍
-在翻译的时候，选择性的选择一些重要信息。详情看这篇文章 。
-本着简单和有效的原则，本论文提出了两种注意力机制。
-Global
-每次...
+        RDD基础
+RDD是Spark中的核心抽象——弹性分布式数据集(Resilient Distributed Dataset)。其实RDD是分布式的元素集合，是一个不可变的分布式对象集合。每个RDD都会被分为多个分区，这些分区运行在不同的节点上。RDD可以包含任意对象。Spark会自动将这些RDD的数据分发到集群上，并将操作并行化执行。
+RDD当做我们通过转化操作构建出来的、记录如何计算数...
     
 
-        <a href="/2017/10/12/Attention-based-NMT/" class="post-more waves-effect waves-button">
+        <a href="/2017/03/13/Spark-BaseRDD/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器翻译/">机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注意力/">注意力</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RDD/">RDD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spark/">Spark</a></li></ul>
 
     </div>
     
@@ -381,14 +364,14 @@ Global
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-attention-model"
+            <article id="post-HDFS初步学习"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-10-10 11:40:01" datetime="2017-10-10T03:40:01.000Z"  itemprop="datePublished">2017-10-10</time>
+        <time class="post-time" title="2016-12-05 19:59:45" datetime="2016-12-05T11:59:45.000Z"  itemprop="datePublished">2016-12-05</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/大数据/">大数据</a></li></ul>
 
 
 
@@ -399,7 +382,7 @@ Global
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/10/attention-model/">图文介绍注意力机制</a>
+      <a class="post-title-link" href="/2016/12/05/HDFS初步学习/">HDFS初步学习</a>
     </h3>
   
 
@@ -409,285 +392,29 @@ Global
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Encoder-Decoder
-基本介绍
-举个翻译的例子，原始句子\(X = (x_1, x_2, \cdots, x_m)\) ，翻译成目标句子\(Y = (y_1, y_2, \cdots, y_n)\) 。
-现在采用Encoder-Decoder架构模型，如下图
+        HDFS是Hadoop的一个分布式文件系统
+HDFS设计原理
 
-Encoder会利用整个原始句子生成一个语义向量，Decoder再利用这个向量翻译成其它语言的句子。这样可以把握...
+                
+                    
+                    
+                
+                HDFS设计原理
+            
+
+
+提供了一个抽象访问界面，通过路径访问文件
+抽象界面上所展示的文件，存储在很多个服务器上...
     
 
-        <a href="/2017/10/10/attention-model/" class="post-more waves-effect waves-button">
+        <a href="/2016/12/05/HDFS初步学习/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention-Model/">Attention Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Encoder-Decoder/">Encoder-Decoder</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器翻译/">机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注意力/">注意力</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-pytorch-start"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-10-05 13:30:54" datetime="2017-10-05T05:30:54.000Z"  itemprop="datePublished">2017-10-05</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/PyTorch/">PyTorch</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/05/pytorch-start/">PyTorch快速上手</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        PyTorch介绍
-
-PyTorch
-Torch 是一个使用Lua 语言的神经网络库，而PyTorch是Torch在Python的衍生。
-PyTorch是一个基于python的科学计算包。本质上是Numpy的代替者，支持GPU、带有高级功能，可以用来搭建和训练深度神经网络；是一个深度学习框架，速度更快，弹性更好。
-PyTorch和Tensorflow
-Tensorflow 类似一...
-    
-
-        <a href="/2017/10/05/pytorch-start/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyTorch/">PyTorch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经网络/">神经网络</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-NMT"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-10-02 10:03:31" datetime="2017-10-02T02:03:31.000Z"  itemprop="datePublished">2017-10-02</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/02/NMT/">神经网络机器翻译</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-在机器翻译、语音识别、文本摘要等领域中，Sequence-to-sequence 模型都取得了了非常好的效果。神经机器翻译(Neural Machine Translation, NMT) 使用seq2seq模型取得了巨大的成功。
-
-本文参考谷歌NMT教程。
-Basic
-
-背景知识
-传统翻译是以词为核心一词一词翻译的，这样会切断句子本身的意思，翻译出来也很死板，不像我们人类说...
-    
-
-        <a href="/2017/10/02/NMT/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器翻译/">机器翻译</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-crf"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-09-28 11:17:59" datetime="2017-09-28T03:17:59.000Z"  itemprop="datePublished">2017-09-28</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/09/28/crf/">条件随机场</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        
-条件随机场(Conditional Random Field, CRF)是给定一组输入随机变量条件下另一组输出随机变量的条件概率分布模型。常常用于标注问题。隐马尔科夫模型和条件随机场是自然语言处理中最重要的算法。CRF最重要的就是根据观测序列，把标记序列给推测出来。
-
-概率无向图模型
-概率无向图模型又称为马尔科夫随机场，是一个可以由无向图表示的联合概率分布。一些类似内容。
-有一组...
-    
-
-        <a href="/2017/09/28/crf/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/条件随机场/">条件随机场</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-maxentmodel"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-09-20 17:39:12" datetime="2017-09-20T09:39:12.000Z"  itemprop="datePublished">2017-09-20</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/09/20/maxentmodel/">最大熵模型</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        最大熵原理
-预备知识
-离散型变量\(X\)的概率分布是\(\color{blue}{P(X)}\)。它的熵\(\color{blue}{H(X) \; or \; H(P)}\)越大，代表越均匀、越混乱、越不确定。各种熵点这里 \[
-\color{blue}{H(P)} =  \color{red} {- \sum_{x \in X}P(x) \log P(x)}
-\] 熵满足下面不...
-    
-
-        <a href="/2017/09/20/maxentmodel/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IIS/">IIS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/各种熵/">各种熵</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/最大熵模型/">最大熵模型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/期望/">期望</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-ml-ng-notes"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2017-08-20 21:38:54" datetime="2017-08-20T13:38:54.000Z"  itemprop="datePublished">2017-08-20</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/">机器学习</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/08/20/ml-ng-notes/">机器学习笔记</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        线性回归
-有\(m\)个样本\((x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \cdots, (x^{(m)}, y^{(m)})\)，假设函数有2个参数\(\theta_0, \theta_1\)，形式如下： \[
-h_\theta(x) = \theta_0 + \theta_1x
-\]
-代价函数
-代价函数 \[
-\color{red} {J...
-    
-
-        <a href="/2017/08/20/ml-ng-notes/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/梯度下降/">梯度下降</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逻辑回归/">逻辑回归</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HDFS/">HDFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/">Hadoop</a></li></ul>
 
     </div>
     
@@ -700,7 +427,7 @@ h_\theta(x) = \theta_0 + \theta_1x
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
     </div>
 </nav>
 

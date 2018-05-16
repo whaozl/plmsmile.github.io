@@ -721,12 +721,293 @@ DCN
 
         </li>
     
+        <li class="post-list-item fade">
+            <article id="post-36-alime-chat"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-31 14:23:20" datetime="2018-03-31T06:23:20.000Z"  itemprop="datePublished">2018-03-31</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/31/36-alime-chat/">阿里小蜜论文</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        AliMe Chat: A Sequence to Sequence and Rerank based Chatbot Engine
+
+AliMe Chat
+概览
+1. IR Model
+Information Retrieval。有一个QA对知识库，给一个问题，选择最相似的问题Pair，得出答案。
+缺点：很难处理那些不在QA知识库里面的Long tail问句
+2. Gener...
+    
+
+        <a href="/2018/03/31/36-alime-chat/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BM25/">BM25</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IR/">IR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chatbot/">chatbot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qa/">qa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seq2seq/">seq2seq</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-35-nerual-network-optim"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-30 13:54:34" datetime="2018-03-30T05:54:34.000Z"  itemprop="datePublished">2018-03-30</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/深度学习/">深度学习</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/30/35-nerual-network-optim/">网络优化</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+任何数学技巧都不能弥补信息的缺失。本文介绍网络优化方法
+
+
+神经网络的问题
+神经网络有很强的表达能力。但有优化问题和泛化问题。主要通过优化和正则化来提升网络。
+优化问题
+优化问题的难点
+
+网络是一个非凸函数，深层网络的梯度消失问题，很难优化
+网络结构多样性，很难找到通用优化方法
+参数多、数据大，训练效率低
+参数多，存在高维变量的非凸优化
+
+低维空间非凸优化：存在...
+    
+
+        <a href="/2018/03/30/35-nerual-network-optim/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化方法/">优化方法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/归一化/">归一化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/神经网络/">神经网络</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-33-attention-summary"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-25 14:14:12" datetime="2018-03-25T06:14:12.000Z"  itemprop="datePublished">2018-03-25</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/25/33-attention-summary/">各种注意力总结</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+一切都应该尽可能简单，但不能过于简单。
+
+
+本文主要是总结：注意力机制、注意力机制的变体、论文中常见的注意力
+
+
+注意力机制系统介绍
+问题背景
+计算能力不足
+神经网络有很强的能力。但是对于复杂任务，需要大量的输入信息和复杂的计算流程。计算机的计算能力是神经网络的一个瓶颈。
+减少计算复杂度
+常见的：局部连接、权值共享、汇聚操作。
+但仍然需要：尽量少增加模型复杂度（参...
+    
+
+        <a href="/2018/03/25/33-attention-summary/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Attention/">Attention</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-32-dynamic-coattention-network"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-15 08:33:16" datetime="2018-03-15T00:33:16.000Z"  itemprop="datePublished">2018-03-15</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/15/32-dynamic-coattention-network/">Dynamic Coattention Network (Plus)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        Dynamic Coattention Networks For Question Answering
+DCN+: Mixed Objective and Deep Residual Coattention for Question Answering
+
+先放四张图，分别是DCN的Encoder、Decoder，DCN+的Encoder和Objective。后面再详细总结
+
+
+D...
+    
+
+        <a href="/2018/03/15/32-dynamic-coattention-network/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DCN/">DCN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QA/">QA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coattention/">coattention</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-31-co-attention-vqa"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-03-14 16:56:27" datetime="2018-03-14T08:56:27.000Z"  itemprop="datePublished">2018-03-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/自然语言处理/">自然语言处理</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/03/14/31-co-attention-vqa/">协同注意力简介</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        
+只是记录一下Co-Attention，后续再补上本篇论文的全部笔记吧。
+
+论文：Hierarchical Question-Image Co-Attention for Visual Question Answering
+我的相关笔记：Attention-based NMT阅读笔记和NLP中的Attention笔记
+Co-Attention
+这里以VQA里面的两个例子记录一下C...
+    
+
+        <a href="/2018/03/14/31-co-attention-vqa/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VQA/">VQA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注意力/">注意力</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
     </ul>
 
     
 <nav id="page-nav">
     <div class="inner">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </div>
 </nav>
 
