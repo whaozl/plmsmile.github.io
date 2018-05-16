@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://plmsmile.github.io/"/>
-  <updated>2018-05-13T14:58:10.299Z</updated>
+  <updated>2018-05-16T03:34:28.776Z</updated>
   <id>http://plmsmile.github.io/</id>
   
   <author>
@@ -17,13 +17,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>RNet Gated Self-Matching Networks</title>
+    <link href="http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/"/>
+    <id>http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/</id>
+    <published>2018-05-15T02:46:49.000Z</published>
+    <updated>2018-05-16T03:34:28.776Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><ol style="list-style-type: decimal"><li>Gated Attention-based RNN 来获得question-aware passage representation，即编码P</li><li>Self-matching Attention来修正编码P，即P与自己做match，有效从全文中编码信息</li><li>Pointer Network预测开始和结束位置</li></ol></blockquote><p>论文地址：</p><ul><li><a href="http://www.aclweb.org/anthology/P17-1018" target="_blank" rel="noopener">Gated Self-Matching Networks for Reading Comprehension and Question Answering</a></li><li><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf" target="_blank" rel="noopener">R-NET: MACHINE READING COMPREHENSION WITH SELF-MATCHING NETWORKS</a></li></ul><p><img src="" style="display:block; margin:auto" width="60%"></p><h1 id="introduction">Introduction</h1><h2 id="经典模型">经典模型</h2><p><strong>1. Match-LSTM</strong></p><p><a href="https://plmsmile.github.io/2018/05/09/45-match-lstm/">Match-LSTM and Answer Pointer笔记</a></p><p><strong>2. Dynamic Coatteion Network</strong></p><p><a href="https://plmsmile.github.io/2018/03/15/32-dynamic-coattention-network/">DCN笔记</a>。<a href="https://plmsmile.github.io/2018/03/14/31-co-attention-vqa/">Coattention</a>同时处理P和Q，动态迭代预测答案的位置。</p><p><strong>3. Bi-Directional Attention Flow Network</strong></p><h2 id="本文模型概要">本文模型概要</h2><p><strong>1. BiRNN 分别编码P和Q</strong></p><p>分别编码Question和Passage</p><p><strong>2. gated matching layer 编码Q-Aware的Passage</strong></p><p><code>Gated Attention-based RNN</code>。在<a href="https://plmsmile.github.io/2018/05/09/45-match-lstm/#match-lstm">Match-LSTM</a>上添加了<strong>门机制</strong>。</p><ul><li>段落有多个部分，根据与Q的相关程度，分配重要性权值</li><li>忽略不重要的，强调重要的部分</li></ul><p><strong>3. self-matching layer</strong></p><p>再次从整个Passage中提取信息。它的<code>缺点</code>：</p><ul><li>RNN只能存储少部分上下文内容</li><li>一个候选答案不知道其他部分的线索</li></ul><p>解决方法：<strong>对P做self-match</strong>。使用Gated Attention-based RNN对P和P自己做match。</p><p><strong>4. pointer-network</strong></p><h1 id="模型">模型</h1><p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/rnet.png" style="display:block; margin:auto" width="60%"></p><p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/gan-selfmatch.png" style="display:block; margin:auto" width="60%"></p><p>BiRNN，GARNN（P+Q），GARNN-Selfmatch（P+P），Pointer Network</p><h2 id="birnn编码q和p">BiRNN编码Q和P</h2><p><span class="math inline">\(Q=\{w_t^Q\}_{t=1}^m\)</span>，<span class="math inline">\(P=\{w_t^P\}_{t=1}^n\)</span>。 P是n个单词，Q是m个单词。</p><p><strong>词向量和字符向量</strong></p><p><code>词向量</code>：<span class="math inline">\(\{e_t^Q\}_{t=1}^m\)</span>、<span class="math inline">\(\{e_t^P\}_{t=1}^n\)</span></p><p><code>字符向量</code>：<span class="math inline">\(\{c_t^Q\}_{t=1}^m\)</span>、<span class="math inline">\(\{c_t^P\}_{t=1}^n\)</span></p><p>字符向量，使用RNN，用每个单词的最后时刻的隐状态，作为字符向量。有助于处理OOV词汇。</p><p><strong>编码</strong> <span class="math display">\[\mathbf u_t^Q = \rm{BiRNN }(u_{t-1}^Q, [e_t^Q, c_t^Q])\]</span></p><p><span class="math display">\[\mathbf u_t^P = \rm{BiRNN }(u_{t-1}^P, [e_t^P, c_t^P])\]</span></p><h2 id="gated-attention-based-rnn">Gated Attention-based RNN</h2><p>要基于U（<span class="math inline">\(U^Q\)</span>）去编码P（<span class="math inline">\(U^P\)</span>） ，得到<strong>Question-Aware的Passage编码</strong>，<span class="math inline">\(V^P\)</span>。</p><p><strong>1. Attention RNN</strong></p><p><span class="math inline">\(p_t\)</span>与<span class="math inline">\(q_j\)</span>两个单词的<strong>相关性函数</strong>（能量函数） <span class="math display">\[s_j^t = v^T \tanh (W_u^Q\mathbf u_j^Q + W_u^P \mathbf u_t^P + W_v^P \mathbf v_{t-1}^P), \quad j = 1, \cdots, m\]</span> <span class="math inline">\(p_t\)</span>与所有Q单词的<strong>注意力权值</strong><span class="math inline">\(\mathbf \alpha^t\)</span> <code>doc 2 query attention</code> <span class="math display">\[\alpha_{j}^t = \rm{softmax}(s_j^t)\]</span> <span class="math inline">\(p_t\)</span>基于<span class="math inline">\(\mathbf \alpha^t\)</span><strong>对<span class="math inline">\(Q\)</span>的信息汇总</strong>（注意力）<code>attention pooling vector of the whole question</code> <span class="math display">\[\mathbf c_t = \sum_{i=1}^m \alpha_i^t \mathbf u_i^Q\]</span> 实际上：<span class="math inline">\(\mathbf c_t = \rm{attn}(U^Q, [\mathbf u_t^P, \mathbf v_{t-1}^P])​\)</span>。</p><p>注意力<strong>$c_t <span class="math inline">\(**和上一时刻隐状态**\)</span>v_{t-1}^P$</strong>，输入RNN，<strong>计算当前的信息</strong> <span class="math display">\[\mathbf v_t^P = \rm{RNN}(\mathbf v_{t-1}^P, \mathbf c_t)\]</span> 每个<span class="math inline">\(\mathbf v_t^P\)</span>动态地合并了来自整个Q的匹配信息。</p><p><strong>2. Match RNN</strong></p><p><a href="https://plmsmile.github.io/2018/05/09/45-match-lstm/#match-lstm">Match-LSTM</a>。在输入RNN计算时，把当前<span class="math inline">\(\mathbf u_t^P\)</span>也输入进去，带上Passage的信息。输入是<strong><span class="math inline">\(\rm{input}=[\mathbf u_t^P, \mathbf c_t]\)</span></strong>。 <span class="math display">\[\mathbf v_t^P = \rm{RNN}(\mathbf v_{t-1}^P, [\mathbf u_t^P, \mathbf c_t])\]</span> <strong>3. Gated Attention-based RNN</strong></p><p>用门机制去控制每个<span class="math inline">\(p_t\)</span>的重要程度。 <span class="math display">\[g_t = \rm{sigmoid}(W_g \cdot [\mathbf u_t^P, \mathbf c_t])\]</span></p><p><span class="math display">\[[\mathbf u_t^P, \mathbf c_t]^* = g_t \odot [\mathbf u_t^P, \mathbf c_t]\]</span></p><p><span class="math display">\[\mathbf v_t^P = \rm{RNN}(\mathbf v_{t-1}^P, [\mathbf u_t^P, \mathbf c_t]^*)\]</span></p><p>GARNN的<strong>门机制</strong></p><ul><li>与GRU和LSTM不同</li><li>门机制是基于<strong>当前<span class="math inline">\(p_t\)</span></strong>和它的对应的Q的<strong>注意力向量<span class="math inline">\(\mathbf c_t\)</span></strong>（包含当前<span class="math inline">\(p_t\)</span>和Q的关系）</li><li><code>模拟</code>了阅读理解中，<strong>只有<span class="math inline">\(P\)</span>的一部分才与问题相关</strong>的特点</li></ul><p>最终得到了<code>question-aware passage representation</code> ：<span class="math inline">\(\{\mathbf v_t^P\}_{t=1}^n\)</span>。它的缺点如下：</p><ul><li>对Passage的上下文感知太少</li><li>候选答案对它窗口之外的线索未知</li><li>Question和Passage在词法、句法上有区别</li></ul><h2 id="self-matching-attention">Self-Matching Attention</h2><p>为了充分利用Passage的上下文信息。<span class="math inline">\(\{\mathbf v_t^P\}_{t=1}^n\)</span></p><p><strong>对P做self-match</strong>。使用Gated Attention-based RNN对P和P自己做match。</p><p>注意力计算 <span class="math display">\[s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 1, \cdots, n\]</span></p><p><span class="math display">\[\alpha_{j}^t = \rm{softmax}(s_j^t)\]</span></p><p><span class="math display">\[\mathbf c_t = \sum_{i=1}^n \alpha_i^t \mathbf v_i^P\]</span></p><p>RNN计算 <span class="math display">\[\mathbf h_t^P = \rm{BiRNN}(\mathbf h_{t-1}^P, [\mathbf v_t^P, \mathbf c_t]^*)\]</span> Self-Matching根据当前p单词、Q，从整个Passage中提取信息。<strong>最终得到Passage的表达<span class="math inline">\(H^P\)</span></strong>。</p><h2 id="output-layer">Output Layer</h2><p>其实就是个<a href="https://plmsmile.github.io/2018/05/09/45-match-lstm/#answer-pointer%E5%B1%82">Pointer Network的边界模型</a>，预测起始和结束位置。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
+&lt;li&gt;Gated Attention-based RNN 来获得question-aware passage representation，即编码P&lt;/li&gt;
+&lt;li&gt;S
+      
+    
+    </summary>
+    
+      <category term="机器阅读理解" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/"/>
+    
+    
+      <category term="论文笔记" scheme="http://plmsmile.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="机器阅读" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Match-LSTM and Answer Pointer</title>
     <link href="http://plmsmile.github.io/2018/05/09/45-match-lstm/"/>
     <id>http://plmsmile.github.io/2018/05/09/45-match-lstm/</id>
     <published>2018-05-09T06:20:56.000Z</published>
-    <updated>2018-05-13T14:58:10.299Z</updated>
+    <updated>2018-05-15T07:11:40.345Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="https://arxiv.org/abs/1608.07905" target="_blank" rel="noopener">Machine Comprehension Using Match-LSTM and Answer Pointer</a></p><h1 id="背景">背景</h1><h2 id="阅读理解任务">阅读理解任务</h2><p>后面会详细补充。</p><p>传统解决问答的方法：语言分析、特征工程等，具体包括句法分析、命名实体识别、问题分类、语义分析等。</p><h2 id="squad数据集">Squad数据集</h2><ul><li>答案是文章中出现的任意长度片段</li><li>Wiki文章为主</li><li>众包人工标注产生</li><li>每个问题3人标注，降低了人工标注误差</li><li>数量较大：500多篇文章，2万多个段落，10万个问题</li><li>鼓励用自己的语言提问</li></ul><h2 id="match-lstm">Match-LSTM</h2><p><strong>1. 文本蕴含任务</strong></p><p>一个前提集合P，一个假设H。去预测P里是否能蕴含出H。</p><p><strong>2. Match-LSTM</strong></p><p>有K个前提<span class="math inline">\(\{P_1, \cdots, P_K\}\)</span>，1个假设<span class="math inline">\(H\)</span>。假设的长度为m。遍历假设的每一个词汇<span class="math inline">\(h_i\)</span></p><ul><li><p>在<span class="math inline">\(h_i\)</span>处，利用注意力机制，综合K个前提，得到一个向量<span class="math inline">\(p_i\)</span></p></li><li><p>聚合匹配<span class="math inline">\([h_i, p_i]\)</span>一起，给到LSTM</p></li></ul><p>其实类似于Attention-Based NMT的解码过程。</p><h2 id="pointer-net">Pointer-Net</h2><p>从一个输入序列中，选择一个位置作为输出。</p><ul><li>序列模型：选择多个位置，就组成一个序列</li><li>边界模型：选择开始和结束位置，中间的片段是答案</li></ul><h1 id="模型">模型</h1><p>段落<span class="math inline">\(P\)</span>有m个单词，问题<span class="math inline">\(Q\)</span>有n个单词。</p><h2 id="lstm编码层">LSTM编码层</h2><p>单向LSTM编码 <span class="math display">\[H^p = \rm{LSTM}(P), \quad H^q = \rm{LSTM}(Q)\]</span> 取每一时刻的隐状态，得到对文章和问题的编码。<span class="math inline">\(H^p \in \mathbb R^{m \times h}, H^q \in \mathbb R^{n \times h}\)</span>。<span class="math inline">\(h\)</span>是编码的维度。</p><h2 id="match-lstm层">Match-LSTM层</h2><p>这一层实际上是一个LSTM，<strong>输入依次是P中的各个单词<span class="math inline">\(p_i\)</span></strong>。每一时刻，利用注意力机制计算相对应的Q的编码。</p><p>问题--前提，段落--假设，看问题蕴含P的哪些部分。</p><p>先计算<code>注意力权值</code> <span class="math display">\[\overrightarrow{ G_i} = \tanh (W^qH^q + (W^p\mathbf h_i^p + W^r \overrightarrow{\mathbf h_{i-1}^r} + \mathbf b^p) \otimes \mathbf e_Q)\]</span></p><p><span class="math display">\[\overrightarrow{ \mathbf \alpha_i} = \rm{softmax}(\mathbf w^T  \overrightarrow{ G_i} + b \otimes \mathbf e_Q)\]</span></p><p>利用注意力机制，计算所有Q基于当前<span class="math inline">\(p_i\)</span>的<code>注意力</code>，把<strong>注意力和<span class="math inline">\(\mathbf h_i^p\)</span>拼接起来</strong> <span class="math display">\[\overrightarrow {\mathbf z_i} = [\mathbf h_i^p, \underbrace{H^q \overrightarrow{ \mathbf \alpha_i}}_{\color{blue}{\rm{attention}}}]\]</span> 把match后的结果，输入到LSTM， <span class="math display">\[\overrightarrow {\mathbf h_i^r} = \rm{LSTM}(\overrightarrow {\mathbf z_i}, \overrightarrow {\mathbf h_{i-1}^r})\]</span> 定义从右向左，得到<span class="math inline">\(\overleftarrow {\mathbf h_i^r}\)</span>。最终，拼接两个方向的向量，得到 <span class="math display">\[H^r = [\overrightarrow{H^r}, \overleftarrow{H^r}] \quad \in \mathbb R^{m \times 2h}\]</span></p><h2 id="answer-pointer层">Answer-Pointer层</h2><p>输入Match-LSTM层对Passage的编码结果<span class="math inline">\(H^r\)</span>，输出一个序列。</p><p><strong>序列模型</strong></p><p>不断生成一个序列<span class="math inline">\(\mathbf a = (a_1, a_2, \cdots)\)</span>，表示P中的位置。</p><p>在P的末尾设置一个停止标记，如果选择它，则停止迭代。新的<span class="math inline">\(\bar H^r \in \mathbb R^{(m+1) \times 2h}\)</span></p><p>1、计算<strong>注意力权值</strong><span class="math inline">\(\mathbf \beta_k\)</span>，<span class="math inline">\(\beta_{k,j}\)</span>表示，选<span class="math inline">\(p_j\)</span>作为<span class="math inline">\(a_k\)</span>的概率 <span class="math display">\[F_k = \tanh(V \bar H^r + (W^a \mathbf h_{k-1}^a + \mathbf b^a) \otimes \mathbf e_{(m+1)})\]</span></p><p><span class="math display">\[\mathbf \beta_k = \rm{softmax}(\mathbf v^TF_k + \mathbf c \otimes \mathbf e_{(m+1)})\]</span></p><p>2、使用<strong>注意力机制</strong>得到<strong>当前时刻需要的<span class="math inline">\(H^r\)</span>的信息</strong>，结合<strong>上一时刻的隐状态</strong>，输入到LSTM中 <span class="math display">\[\mathbf h_k^a = \overrightarrow{\rm{LSTM}} ( \underbrace{\bar H^r \mathbf \beta_k^T}_{\color{blue}{\rm{attention}}}, \mathbf h_{k-1}^r)\]</span> 答案的概率计算如下： <span class="math display">\[p(\mathbf a \mid H^r) = \prod_{k} p(a_k \mid a_1, \cdots, a_{k-1}, H^r)\]</span></p><p><span class="math display">\[p(a_k = j \mid a_1, \cdots, a_{k-1}, H^r) = \beta_{k,j}\]</span></p><p>目标函数： <span class="math display">\[- \sum_{n=1}^N \log p(\mathbf a_n \mid P_n, Q_n)\]</span> <strong>边界模型</strong></p><p>不用预测完整的序列，只<strong>预测开始和结束位置</strong>就可以了。 <span class="math display">\[p(\mathbf a \mid H^r) = p(a_s \mid H^r) \cdot p(a_e \mid a_s, H^r)\]</span></p>]]></content>
+    <content type="html"><![CDATA[<p><a href="https://arxiv.org/abs/1608.07905" target="_blank" rel="noopener">Machine Comprehension Using Match-LSTM and Answer Pointer</a></p><h1 id="背景">背景</h1><h2 id="阅读理解任务">阅读理解任务</h2><p>后面会详细补充。</p><p>传统解决问答的方法：语言分析、特征工程等，具体包括句法分析、命名实体识别、问题分类、语义分析等。</p><h2 id="squad数据集">Squad数据集</h2><ul><li>答案是文章中出现的任意长度片段</li><li>Wiki文章为主</li><li>众包人工标注产生</li><li>每个问题3人标注，降低了人工标注误差</li><li>数量较大：500多篇文章，2万多个段落，10万个问题</li><li>鼓励用自己的语言提问</li></ul><h2 id="match-lstm">Match-LSTM</h2><p><strong>1. 文本蕴含任务</strong></p><p>一个前提集合P，一个假设H。去预测P里是否能蕴含出H。</p><p><strong>2. Match-LSTM</strong></p><p>有K个前提<span class="math inline">\(\{P_1, \cdots, P_K\}\)</span>，1个假设<span class="math inline">\(H\)</span>。假设的长度为m。遍历假设的每一个词汇<span class="math inline">\(h_i\)</span></p><ul><li><p>在<span class="math inline">\(h_i\)</span>处，利用注意力机制，综合K个前提，得到一个向量<span class="math inline">\(p_i\)</span></p></li><li><p>聚合匹配<span class="math inline">\([h_i, p_i]\)</span>一起，给到LSTM</p></li></ul><p>其实类似于Attention-Based NMT的解码过程。</p><h2 id="pointer-net">Pointer-Net</h2><p>从一个输入序列中，选择一个位置作为输出。</p><ul><li>序列模型：选择多个位置，就组成一个序列</li><li>边界模型：选择开始和结束位置，中间的片段是答案</li></ul><h1 id="模型">模型</h1><p>段落<span class="math inline">\(P\)</span>有m个单词，问题<span class="math inline">\(Q\)</span>有n个单词。</p><h2 id="lstm编码层">LSTM编码层</h2><p>单向LSTM编码 <span class="math display">\[H^p = \rm{LSTM}(P), \quad H^q = \rm{LSTM}(Q)\]</span> 取每一时刻的隐状态，得到对文章和问题的编码。<span class="math inline">\(H^p \in \mathbb R^{m \times h}, H^q \in \mathbb R^{n \times h}\)</span>。<span class="math inline">\(h\)</span>是编码的维度。</p><h2 id="match-lstm层">Match-LSTM层</h2><p>这一层实际上是一个LSTM，<strong>输入依次是P中的各个单词<span class="math inline">\(p_i\)</span></strong>。每一时刻，利用注意力机制计算相对应的Q的编码。</p><p><strong>问题--前提，段落--假设，看问题蕴含P的哪些部分</strong>。</p><p>先计算<code>注意力权值</code> <span class="math display">\[\overrightarrow{ G_i} = \tanh (W^qH^q + (W^p\mathbf h_i^p + W^r \overrightarrow{\mathbf h_{i-1}^r} + \mathbf b^p) \otimes \mathbf e_Q)\]</span></p><p><span class="math display">\[\overrightarrow{ \mathbf \alpha_i} = \rm{softmax}(\mathbf w^T  \overrightarrow{ G_i} + b \otimes \mathbf e_Q)\]</span></p><p>利用注意力机制，计算所有Q基于当前<span class="math inline">\(p_i\)</span>的<code>注意力</code>，把<strong>注意力和<span class="math inline">\(\mathbf h_i^p\)</span>拼接起来</strong> <span class="math display">\[\overrightarrow {\mathbf z_i} = [\mathbf h_i^p, \underbrace{H^q \overrightarrow{ \mathbf \alpha_i}}_{\color{blue}{\rm{attention}}}]\]</span> 把match后的结果，输入到LSTM， <span class="math display">\[\overrightarrow {\mathbf h_i^r} = \rm{LSTM}(\overrightarrow {\mathbf z_i}, \overrightarrow {\mathbf h_{i-1}^r})\]</span> 定义从右向左，得到<span class="math inline">\(\overleftarrow {\mathbf h_i^r}\)</span>。最终，拼接两个方向的向量，得到 <span class="math display">\[H^r = [\overrightarrow{H^r}, \overleftarrow{H^r}] \quad \in \mathbb R^{m \times 2h}\]</span></p><h2 id="answer-pointer层">Answer-Pointer层</h2><p>输入Match-LSTM层对Passage的编码结果<span class="math inline">\(H^r\)</span>，输出一个序列。</p><p><strong>序列模型</strong></p><p>不断生成一个序列<span class="math inline">\(\mathbf a = (a_1, a_2, \cdots)\)</span>，表示P中的位置。</p><p>在P的末尾设置一个停止标记，如果选择它，则停止迭代。新的<span class="math inline">\(\bar H^r \in \mathbb R^{(m+1) \times 2h}\)</span></p><p>1、计算<strong>注意力权值</strong><span class="math inline">\(\mathbf \beta_k\)</span>，<span class="math inline">\(\beta_{k,j}\)</span>表示，选<span class="math inline">\(p_j\)</span>作为<span class="math inline">\(a_k\)</span>的概率 <span class="math display">\[F_k = \tanh(V \bar H^r + (W^a \mathbf h_{k-1}^a + \mathbf b^a) \otimes \mathbf e_{(m+1)})\]</span></p><p><span class="math display">\[\mathbf \beta_k = \rm{softmax}(\mathbf v^TF_k + \mathbf c \otimes \mathbf e_{(m+1)})\]</span></p><p>2、使用<strong>注意力机制</strong>得到<strong>当前时刻需要的<span class="math inline">\(H^r\)</span>的信息</strong>，结合<strong>上一时刻的隐状态</strong>，输入到LSTM中 <span class="math display">\[\mathbf h_k^a = \overrightarrow{\rm{LSTM}} ( \underbrace{\bar H^r \mathbf \beta_k^T}_{\color{blue}{\rm{attention}}}, \mathbf h_{k-1}^r)\]</span> 答案的概率计算如下： <span class="math display">\[p(\mathbf a \mid H^r) = \prod_{k} p(a_k \mid a_1, \cdots, a_{k-1}, H^r)\]</span></p><p><span class="math display">\[p(a_k = j \mid a_1, \cdots, a_{k-1}, H^r) = \beta_{k,j}\]</span></p><p>目标函数： <span class="math display">\[- \sum_{n=1}^N \log p(\mathbf a_n \mid P_n, Q_n)\]</span> <strong>边界模型</strong></p><p>不用预测完整的序列，只<strong>预测开始和结束位置</strong>就可以了。 <span class="math display">\[p(\mathbf a \mid H^r) = p(a_s \mid H^r) \cdot p(a_e \mid a_s, H^r)\]</span></p>]]></content>
     
     <summary type="html">
     
@@ -34,12 +64,16 @@
     
     </summary>
     
-      <category term="机器阅读" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E9%98%85%E8%AF%BB/"/>
+      <category term="机器阅读理解" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/"/>
     
     
       <category term="论文笔记" scheme="http://plmsmile.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
       <category term="机器阅读" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="Match-LSTM" scheme="http://plmsmile.github.io/tags/Match-LSTM/"/>
+    
+      <category term="Pointer Net" scheme="http://plmsmile.github.io/tags/Pointer-Net/"/>
     
   </entry>
   
@@ -312,11 +346,11 @@
       <category term="强化学习" scheme="http://plmsmile.github.io/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="值函数" scheme="http://plmsmile.github.io/tags/%E5%80%BC%E5%87%BD%E6%95%B0/"/>
-    
       <category term="智能体" scheme="http://plmsmile.github.io/tags/%E6%99%BA%E8%83%BD%E4%BD%93/"/>
     
       <category term="环境" scheme="http://plmsmile.github.io/tags/%E7%8E%AF%E5%A2%83/"/>
+    
+      <category term="值函数" scheme="http://plmsmile.github.io/tags/%E5%80%BC%E5%87%BD%E6%95%B0/"/>
     
       <category term="贝尔曼方程" scheme="http://plmsmile.github.io/tags/%E8%B4%9D%E5%B0%94%E6%9B%BC%E6%96%B9%E7%A8%8B/"/>
     
@@ -637,9 +671,9 @@
       <category term="机器学习" scheme="http://plmsmile.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="SVM" scheme="http://plmsmile.github.io/tags/SVM/"/>
+    
+      <category term="机器学习" scheme="http://plmsmile.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="拉格朗日对偶性" scheme="http://plmsmile.github.io/tags/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AF%B9%E5%81%B6%E6%80%A7/"/>
     
@@ -949,15 +983,15 @@
       <category term="cs224n" scheme="http://plmsmile.github.io/categories/cs224n/"/>
     
     
+      <category term="cs224n" scheme="http://plmsmile.github.io/tags/cs224n/"/>
+    
+      <category term="assignment" scheme="http://plmsmile.github.io/tags/assignment/"/>
+    
       <category term="word2vec" scheme="http://plmsmile.github.io/tags/word2vec/"/>
     
       <category term="cbow" scheme="http://plmsmile.github.io/tags/cbow/"/>
     
       <category term="skip-gram" scheme="http://plmsmile.github.io/tags/skip-gram/"/>
-    
-      <category term="cs224n" scheme="http://plmsmile.github.io/tags/cs224n/"/>
-    
-      <category term="assignment" scheme="http://plmsmile.github.io/tags/assignment/"/>
     
   </entry>
   
