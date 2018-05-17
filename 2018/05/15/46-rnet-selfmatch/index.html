@@ -13,26 +13,29 @@
     
     
     
-    <title>RNet Gated Self-Matching Networks | PLM&#39;s Notes | 好好学习，天天笔记</title>
+    <title>R-Net (Gated Self-Matching Networks) | PLM&#39;s Notes | 好好学习，天天笔记</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="论文笔记,机器阅读">
+    <meta name="keywords" content="论文笔记,机器阅读,Gated Attention RNN,Self-Matching,RNet,Pointer Network">
     <meta name="description" content="Gated Attention-based RNN 来获得question-aware passage representation，即编码P Self-matching Attention来修正编码P，即P与自己做match，有效从全文中编码信息 Pointer Network预测开始和结束位置   论文地">
-<meta name="keywords" content="论文笔记,机器阅读">
+<meta name="keywords" content="论文笔记,机器阅读,Gated Attention RNN,Self-Matching,RNet,Pointer Network">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RNet Gated Self-Matching Networks">
+<meta property="og:title" content="R-Net (Gated Self-Matching Networks)">
 <meta property="og:url" content="http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/index.html">
 <meta property="og:site_name" content="PLM&#39;s Notes">
 <meta property="og:description" content="Gated Attention-based RNN 来获得question-aware passage representation，即编码P Self-matching Attention来修正编码P，即P与自己做match，有效从全文中编码信息 Pointer Network预测开始和结束位置   论文地址：  Gated Self-Matching Networks f">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/rnet.png">
 <meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/gan-selfmatch.png">
-<meta property="og:updated_time" content="2018-05-16T03:34:28.776Z">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/results.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/gating-match.png">
+<meta property="og:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/question-passage-analysis.png">
+<meta property="og:updated_time" content="2018-05-17T04:42:59.632Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RNet Gated Self-Matching Networks">
+<meta name="twitter:title" content="R-Net (Gated Self-Matching Networks)">
 <meta name="twitter:description" content="Gated Attention-based RNN 来获得question-aware passage representation，即编码P Self-matching Attention来修正编码P，即P与自己做match，有效从全文中编码信息 Pointer Network预测开始和结束位置   论文地址：  Gated Self-Matching Networks f">
 <meta name="twitter:image" content="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/rnet.png">
     
@@ -122,7 +125,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">RNet Gated Self-Matching Networks</div>
+        <div class="flex-col header-title ellipsis">R-Net (Gated Self-Matching Networks)</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -144,7 +147,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">RNet Gated Self-Matching Networks</h1>
+        <h1 class="title">R-Net (Gated Self-Matching Networks)</h1>
         <h5 class="subtitle">
             
                 <time datetime="2018-05-15T02:46:49.000Z" itemprop="datePublished" class="page-time">
@@ -169,7 +172,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#introduction"><span class="post-toc-number">1.</span> <span class="post-toc-text">Introduction</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#经典模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">经典模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本文模型概要"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">本文模型概要</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#模型"><span class="post-toc-number">2.</span> <span class="post-toc-text">模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#birnn编码q和p"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">BiRNN编码Q和P</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gated-attention-based-rnn"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Gated Attention-based RNN</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#self-matching-attention"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Self-Matching Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#output-layer"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Output Layer</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#introduction"><span class="post-toc-number">1.</span> <span class="post-toc-text">Introduction</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#经典模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">经典模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本文模型概要"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">本文模型概要</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#模型"><span class="post-toc-number">2.</span> <span class="post-toc-text">模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#birnn编码q和p"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">BiRNN编码Q和P</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gated-attention-based-rnn"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Gated Attention-based RNN</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#self-matching-attention"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Self-Matching Attention</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#output-layer"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Output Layer</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#实验"><span class="post-toc-number">3.</span> <span class="post-toc-text">实验</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现细节"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">实现细节</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#效果"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">效果</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对比分析"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">对比分析</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -177,7 +180,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">RNet Gated Self-Matching Networks</h1>
+        <h1 class="post-card-title">R-Net (Gated Self-Matching Networks)</h1>
         <div class="post-meta">
             <time class="post-time" title="2018-05-15 10:46:49" datetime="2018-05-15T02:46:49.000Z"  itemprop="datePublished">2018-05-15</time>
 
@@ -232,16 +235,16 @@
 <p>解决方法：<strong>对P做self-match</strong>。使用Gated Attention-based RNN对P和P自己做match。</p>
 <p><strong>4. pointer-network</strong></p>
 <h1 id="模型">模型</h1>
-<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/rnet.png" style="display:block; margin:auto" width="60%"></p>
-<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/gan-selfmatch.png" style="display:block; margin:auto" width="60%"></p>
 <p>BiRNN，GARNN（P+Q），GARNN-Selfmatch（P+P），Pointer Network</p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/rnet.png" style="display:block; margin:auto" width="80%"></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/gan-selfmatch.png" style="display:block; margin:auto" width="80%"></p>
 <h2 id="birnn编码q和p">BiRNN编码Q和P</h2>
 <p><span class="math inline">\(Q=\{w_t^Q\}_{t=1}^m\)</span>，<span class="math inline">\(P=\{w_t^P\}_{t=1}^n\)</span>。 P是n个单词，Q是m个单词。</p>
 <p><strong>词向量和字符向量</strong></p>
 <p><code>词向量</code>：<span class="math inline">\(\{e_t^Q\}_{t=1}^m\)</span>、<span class="math inline">\(\{e_t^P\}_{t=1}^n\)</span></p>
 <p><code>字符向量</code>：<span class="math inline">\(\{c_t^Q\}_{t=1}^m\)</span>、<span class="math inline">\(\{c_t^P\}_{t=1}^n\)</span></p>
 <p>字符向量，使用RNN，用每个单词的最后时刻的隐状态，作为字符向量。有助于处理OOV词汇。</p>
-<p><strong>编码</strong> <span class="math display">\[
+<p><strong>编码Question和Passage</strong> <span class="math display">\[
 \mathbf u_t^Q = \rm{BiRNN }(u_{t-1}^Q, [e_t^Q, c_t^Q])
 \]</span></p>
 <p><span class="math display">\[
@@ -301,7 +304,60 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
 \mathbf h_t^P = \rm{BiRNN}(\mathbf h_{t-1}^P, [\mathbf v_t^P, \mathbf c_t]^*)
 \]</span> Self-Matching根据当前p单词、Q，从整个Passage中提取信息。<strong>最终得到Passage的表达<span class="math inline">\(H^P\)</span></strong>。</p>
 <h2 id="output-layer">Output Layer</h2>
-<p>其实就是个<a href="https://plmsmile.github.io/2018/05/09/45-match-lstm/#answer-pointer%E5%B1%82">Pointer Network的边界模型</a>，预测起始和结束位置。</p>
+<p>其实就是个<a href="https://plmsmile.github.io/2018/05/09/45-match-lstm/#answer-pointer%E5%B1%82">Pointer Network的边界模型</a>，预测起始位置<span class="math inline">\(p^1\)</span>和结束位置<span class="math inline">\(p^2\)</span>。用RNN计算两次。</p>
+<p><strong>1. 基于Q计算初始隐状态</strong></p>
+<p>初始<code>hidden state</code>是Question的<code>attention-pooling vector</code> <span class="math display">\[
+\mathbf h_{t-1}^Q = \mathbf r^Q 
+\]</span> 基于Q的编码和一组参数<span class="math inline">\(V_r^Q\)</span>，利用注意力机制计算<span class="math inline">\(\mathbf r^Q\)</span> <span class="math display">\[
+\mathbf r^Q = \rm{attn}(U^Q, V_r^Q)
+\]</span></p>
+<p><span class="math display">\[
+s_j = \mathbf v^T \tanh(W_u^Q \mathbf u_j^Q + W_v^Q V_r^Q), \quad j = 1, \cdots, m
+\]</span></p>
+<p><span class="math display">\[
+\alpha_i = \rm{softmax}(s_i) = \frac{\exp(s_i)}{\sum_{j=1}^m \exp(s_j)}
+\]</span></p>
+<p><span class="math display">\[
+\mathbf r^Q = \sum_{i=1}^m \alpha_i  \mathbf u_i^Q
+\]</span></p>
+<p><strong>2. RNN计算开始位置和结束位置</strong></p>
+<p>计算t时刻的<code>attention-pooling passage</code> （<strong>注意力<span class="math inline">\(\mathbf c_t\)</span></strong>） <span class="math display">\[
+s_j^t = \mathbf v^T \tanh(W_h^P\mathbf h_j^P + W_h^a \mathbf h_{t-1}^a)
+\]</span></p>
+<p><span class="math display">\[
+\alpha_i^t = \rm{softmax}(s_j^t)
+\]</span></p>
+<p><span class="math display">\[
+\mathbf c_t = \sum_{i=1}^n \alpha_i^t \mathbf h_i^P
+\]</span></p>
+<p>RNN前向计算 <span class="math display">\[
+\mathbf h_t^a = \rm{RNN} (\mathbf h_{t-1}^a, \mathbf c_t)
+\]</span> 基于注意力权值去选择位置 <span class="math display">\[
+p^t = \arg \max_{i}(a_i^t)
+\]</span></p>
+<h1 id="实验">实验</h1>
+<h2 id="实现细节">实现细节</h2>
+<p><strong>数据集</strong></p>
+<p>训练集80%，验证集10%，测试10%</p>
+<p><strong>分词</strong></p>
+<p>斯坦福的CoreNLP中的tokenizer</p>
+<p><strong>词向量</strong></p>
+<p>预训练好的Glove Vectors。训练中保持不变。</p>
+<p><strong>字符向量</strong></p>
+<p>单层的双向GRU，末尾隐状态作为该单词的字符向量</p>
+<p><strong>BiRNN编码Question和Passage</strong></p>
+<p>3层的双向GRU</p>
+<p><strong>Hidden Size大小</strong></p>
+<p>所有都是75</p>
+<p><strong>Dropout</strong></p>
+<p>每层之间的DropOut比例是0.2</p>
+<p><strong>优化器</strong></p>
+<p><a href="https://plmsmile.github.io/2018/03/30/35-nerual-network-optim/#%E5%AD%A6%E4%B9%A0%E7%8E%87%E9%80%92%E5%87%8F">AdaDelta</a>。初始学习率为1，衰减率<span class="math inline">\(\beta = 0.95\)</span>，<span class="math inline">\(\epsilon = 1e^{-6}\)</span></p>
+<h2 id="效果">效果</h2>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/results.png" style="display:block; margin:auto" width="80%"></p>
+<h2 id="对比分析">对比分析</h2>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/gating-match.png" style="display:block; margin:auto" width="60%"></p>
+<p><img src="http://otafnwsmg.bkt.clouddn.com/img/dl/papers/question-passage-analysis.png" style="display:block; margin:auto" width="80%"></p>
 
         </div>
 
@@ -309,7 +365,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-05-16T03:34:28.776Z" itemprop="dateUpdated">2018-05-16 11:34:28</time>
+    最后更新时间：<time datetime="2018-05-17T04:42:59.632Z" itemprop="dateUpdated">2018-05-17 12:42:59</time>
 </span><br>
 
 
@@ -334,7 +390,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器阅读/">机器阅读</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gated-Attention-RNN/">Gated Attention RNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pointer-Network/">Pointer Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RNet/">RNet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Self-Matching/">Self-Matching</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器阅读/">机器阅读</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
 
 
             
@@ -344,7 +400,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《RNet Gated Self-Matching Networks》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《R-Net (Gated Self-Matching Networks)》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -354,7 +410,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《RNet Gated Self-Matching Networks》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《R-Net (Gated Self-Matching Networks)》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -364,7 +420,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RNet Gated Self-Matching Networks》 — PLM's Notes&url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《R-Net (Gated Self-Matching Networks)》 — PLM's Notes&url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -490,7 +546,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《RNet Gated Self-Matching Networks》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《R-Net (Gated Self-Matching Networks)》 — PLM's Notes&pic=http://plmsmile.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -500,7 +556,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《RNet Gated Self-Matching Networks》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&title=《R-Net (Gated Self-Matching Networks)》 — PLM's Notes&source=NLP，DL，ML，Leetcode，Java/C++你学了吗？" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -510,7 +566,7 @@ s_j^t = v^T \tanh (W_v^P \mathbf v_j^P + W_v^{\bar P} \mathbf v_t^P), \quad j = 
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《RNet Gated Self-Matching Networks》 — PLM's Notes&url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&via=http://plmsmile.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《R-Net (Gated Self-Matching Networks)》 — PLM's Notes&url=http://plmsmile.github.io/2018/05/15/46-rnet-selfmatch/&via=http://plmsmile.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
